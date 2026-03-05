@@ -8,6 +8,7 @@ import FAQ from "../components/FAQ";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
 import TextRotator from "../components/TextRotator";
+import About from "../components/About";
 
 const selectedWork = [
   {
@@ -121,6 +122,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* About Section */}
+      <About />
 
       {/* Experience Section */}
       <Experience />

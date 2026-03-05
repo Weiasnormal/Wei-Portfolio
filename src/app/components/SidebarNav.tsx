@@ -41,6 +41,17 @@ const navItems: NavItem[] = [
     ),
   },
   {
+    label: "About",
+    href: "/app#about",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={iconClass}>
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 16v-4" />
+        <path d="M12 8h.01" />
+      </svg>
+    ),
+  },
+  {
     label: "Experience",
     href: "/app#experience",
     icon: (
@@ -57,6 +68,17 @@ const navItems: NavItem[] = [
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={iconClass}>
         <path d="M12 2v20" />
         <path d="M17 6c0-2.2-2.2-4-5-4S7 3.8 7 6s2.2 4 5 4 5 1.8 5 4-2.2 4-5 4-5-1.8-5-4" />
+      </svg>
+    ),
+  },
+  {
+    label: "FAQ",
+    href: "/app#faq",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={iconClass}>
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+        <path d="M12 17h.01" />
       </svg>
     ),
   },

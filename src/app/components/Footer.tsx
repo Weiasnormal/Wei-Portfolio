@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Instagram, Mail, Calendar } from "lucide-react";
+import { Github, Linkedin, Facebook, Instagram, Mail, Calendar, Youtube } from "lucide-react";
 
 type SocialLink = {
   name: string;
@@ -17,22 +17,27 @@ const socialLinks: SocialLink[] = [
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com",
+    href: "https://linkedin.com/in/wincel-crusit-284364305",
     icon: <Linkedin className="h-5 w-5" />,
   },
   {
-    name: "Twitter",
-    href: "https://twitter.com",
-    icon: <Twitter className="h-5 w-5" />,
+    name: "Facebook",
+    href: "https://facebook.com/WincelCrusit",
+    icon: <Facebook className="h-5 w-5" />,
   },
   {
     name: "Instagram",
-    href: "https://instagram.com",
+    href: "https://instagram.com/wnclasusual_",
     icon: <Instagram className="h-5 w-5" />,
   },
   {
+    name: "YouTube",
+    href: "https://youtube.com/@wnclasusual",
+    icon: <Youtube className="h-5 w-5" />,
+  },
+  {
     name: "Email",
-    href: "mailto:hello@example.com",
+    href: "mailto:crusitwincel@gmail.com",
     icon: <Mail className="h-5 w-5" />,
   },
 ];
@@ -99,7 +104,7 @@ export default function Footer() {
           className="border-t border-white/10 pt-8 text-center"
         >
           <p className="text-sm text-white/60">
-            © {new Date().getFullYear()} Jayden Jones. All rights reserved.
+            © {new Date().getFullYear()} Wincel Crusit. All rights reserved.
           </p>
         </motion.div>
       </div>
