@@ -7,6 +7,7 @@ import Pricing from "../components/Pricing";
 import FAQ from "../components/FAQ";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
+import TextRotator from "../components/TextRotator";
 
 const selectedWork = [
   {
@@ -40,7 +41,19 @@ export default function HomePage() {
             Personal Portfolio
           </p>
           <h1 className="text-4xl font-bold leading-tight text-white md:text-6xl">
-            Hi, I’m Jayden Jones, Working as Web-designer and Developer.
+            Hi, I'm Wincel Crusit, Working as a{" "}
+            <TextRotator
+              texts={[
+                "Web Designer",
+                "Frontend Developer",
+                "Machine Learning Engineer",
+                "Data Engineer",
+                "Mobile App Developer",
+                "Web Developer",
+              ]}
+              className="text-[#C1FF72]"
+            />
+            .
           </h1>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
