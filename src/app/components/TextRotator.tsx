@@ -1,43 +1,67 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
 type TextRotatorProps = {
   texts: string[];
-  interval?: number;
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  pauseDuration?: number;
   className?: string;
 };
 
 export default function TextRotator({ 
   texts, 
-  interval = 2500,
+  typingSpeed = 100,
+  deletingSpeed = 50,
+  pauseDuration = 2000,
   className = "" 
 }: TextRotatorProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
-    }, interval);
+    const currentFullText = texts[currentIndex];
 
-    return () => clearInterval(timer);
-  }, [texts.length, interval]);
+    if (isPaused) {
+      const pauseTimer = setTimeout(() => {
+        setIsPaused(false);
+        setIsDeleting(true);
+      }, pauseDuration);
+      return () => clearTimeout(pauseTimer);
+    }
+
+    if (!isDeleting && currentText === currentFullText) {
+      setIsPaused(true);
+      return;
+    }
+
+    if (isDeleting && currentText === "") {
+      setIsDeleting(false);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+      return;
+    }
+
+    const timeout = setTimeout(
+      () => {
+        if (isDeleting) {
+          setCurrentText(currentFullText.substring(0, currentText.length - 1));
+        } else {
+          setCurrentText(currentFullText.substring(0, currentText.length + 1));
+        }
+      },
+      isDeleting ? deletingSpeed : typingSpeed
+    );
+
+    return () => clearTimeout(timeout);
+  }, [currentText, isDeleting, isPaused, currentIndex, texts, typingSpeed, deletingSpeed, pauseDuration]);
 
   return (
     <span className={`inline-block ${className}`}>
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={currentIndex}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5 }}
-          className="inline-block"
-        >
-          {texts[currentIndex]}
-        </motion.span>
-      </AnimatePresence>
+      {currentText}
+      <span className="animate-pulse">|</span>
     </span>
   );
 }
