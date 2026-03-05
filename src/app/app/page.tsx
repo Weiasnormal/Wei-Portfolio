@@ -1,4 +1,12 @@
 import React from "react";
+import Experience from "../components/Experience";
+import Services from "../components/Services";
+import TechMarquee from "../components/TechMarquee";
+import ClientsMarquee from "../components/ClientsMarquee";
+import Pricing from "../components/Pricing";
+import FAQ from "../components/FAQ";
+import ContactForm from "../components/ContactForm";
+import Footer from "../components/Footer";
 
 const selectedWork = [
   {
@@ -101,21 +109,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="services" className="pb-14">
-        <h2 className="text-2xl font-semibold text-white">Services</h2>
-      </section>
+      {/* Experience Section */}
+      <Experience />
 
-      <section id="about" className="pb-14">
-        <h2 className="text-2xl font-semibold text-white">About</h2>
-      </section>
+      {/* Services Section */}
+      <Services />
 
-      <section id="pricing" className="pb-14">
-        <h2 className="text-2xl font-semibold text-white">Pricing</h2>
-      </section>
+      {/* Tech Stack Marquee */}
+      <TechMarquee />
 
-      <section id="contact" className="pb-8">
-        <h2 className="text-2xl font-semibold text-white">Contact</h2>
-      </section>
+      {/* Clients Marquee */}
+      <ClientsMarquee />
+
+      {/* Pricing Section */}
+      <Pricing />
+
+      {/* FAQ Section */}
+      <FAQ />
+
+      {/* Contact Form */}
+      <ContactForm />
+
+      {/* Footer */}
+      <Footer />
     </main>
   );
 }
