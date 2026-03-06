@@ -2,12 +2,15 @@
 
 import { useState, useEffect } from "react";
 
+type TextItem = string | { prefix: string; title: string };
+
 type TextRotatorProps = {
-  texts: string[];
+  texts: TextItem[];
   typingSpeed?: number;
   deletingSpeed?: number;
   pauseDuration?: number;
   className?: string;
+  titleClassName?: string;
 };
 
 export default function TextRotator({ 
@@ -15,7 +18,8 @@ export default function TextRotator({
   typingSpeed = 100,
   deletingSpeed = 50,
   pauseDuration = 2000,
-  className = "" 
+  className = "",
+  titleClassName = ""
 }: TextRotatorProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
@@ -23,7 +27,21 @@ export default function TextRotator({
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    const currentFullText = texts[currentIndex];
+    const currentItem = texts[currentIndex];
+    const currentFullText = typeof currentItem === 'string' 
+      ? currentItem 
+      : currentItem.prefix + currentItem.title;
+
+    // Get next item to check if prefixes match
+    const nextIndex = (currentIndex + 1) % texts.length;
+    const nextItem = texts[nextIndex];
+    
+    const currentPrefix = typeof currentItem === 'object' ? currentItem.prefix : '';
+    const nextPrefix = typeof nextItem === 'object' ? nextItem.prefix : '';
+    const hasSamePrefix = currentPrefix === nextPrefix && currentPrefix !== '';
+    
+    // Minimum length to delete to (prefix length if same, 0 otherwise)
+    const minLength = hasSamePrefix ? currentPrefix.length : 0;
 
     if (isPaused) {
       const pauseTimer = setTimeout(() => {
@@ -38,9 +56,9 @@ export default function TextRotator({
       return;
     }
 
-    if (isDeleting && currentText === "") {
+    if (isDeleting && currentText.length === minLength) {
       setIsDeleting(false);
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+      setCurrentIndex(nextIndex);
       return;
     }
 
@@ -58,9 +76,26 @@ export default function TextRotator({
     return () => clearTimeout(timeout);
   }, [currentText, isDeleting, isPaused, currentIndex, texts, typingSpeed, deletingSpeed, pauseDuration]);
 
+  const currentItem = texts[currentIndex];
+  
+  if (typeof currentItem === 'string') {
+    return (
+      <span className={`inline-block ${className}`}>
+        {currentText}
+        <span className="animate-pulse">|</span>
+      </span>
+    );
+  }
+
+  const fullText = currentItem.prefix + currentItem.title;
+  const prefixLength = currentItem.prefix.length;
+  const displayedPrefix = currentText.substring(0, Math.min(currentText.length, prefixLength));
+  const displayedTitle = currentText.substring(prefixLength);
+
   return (
     <span className={`inline-block ${className}`}>
-      {currentText}
+      <span>{displayedPrefix}</span>
+      <span className={titleClassName}>{displayedTitle}</span>
       <span className="animate-pulse">|</span>
     </span>
   );

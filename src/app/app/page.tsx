@@ -8,143 +8,164 @@ import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
 import TextRotator from "../components/TextRotator";
 import About from "../components/About";
+import SelectedWorkStickyStack from "../components/SelectedWorkStickyStack";
 
 const selectedWork = [
   {
     category: "Mobile App Design",
-    title: "FinFlow Banking Experience",
-    date: "Jan 2026",
-  },
-  {
-    category: "Web Platform",
-    title: "Creative Studio Portfolio",
-    date: "Nov 2025",
+    title: "X-direct Mobile",
+    date: "May 2025",
+    image:
+      "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=1920&auto=format&fit=crop",
   },
   {
     category: "SaaS Dashboard",
     title: "TeamPulse Analytics",
     date: "Aug 2025",
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1920&auto=format&fit=crop",
   },
   {
-    category: "E-commerce UI",
+    category: "Web Platform",
+    title: "Creative Studio Portfolio",
+    date: "Nov 2025",
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1920&auto=format&fit=crop",
+  },
+  {
+    category: "E-commerce App",
     title: "Moda Cart Redesign",
-    date: "May 2025",
+    date: "Jan 2026",
+    image:
+      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1920&auto=format&fit=crop",
   },
 ];
 
 export default function HomePage() {
   return (
-    <main className="mx-auto max-w-6xl px-6 py-12 md:px-12 md:py-16 pt-20">
-      <section id="home" className="grid gap-10 pb-16 md:grid-cols-12 md:items-center">
-        <div className="md:col-span-7">
-          <p className="mb-4 inline-flex items-center rounded-full border border-white/15 px-4 py-1 text-sm text-white/80">
-            Personal Portfolio
-          </p>
-          <h1 className="text-4xl font-bold leading-tight text-white md:text-6xl">
-            Hi, I&apos;m Wincel Crusit, Working as a{" "}
-            <TextRotator
-              texts={[
-                "Web Designer",
-                "Frontend Developer",
-                "Machine Learning Engineer",
-                "Data Engineer",
-                "Mobile App Developer",
-                "Web Developer",
-              ]}
-              className="text-[#C1FF72]"
-            />
-            .
-          </h1>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href="#works"
-              className="rounded-full bg-[#C1FF72] px-6 py-3 font-semibold text-black transition hover:opacity-90"
-            >
-              Get Started
-            </a>
-            <a
-              href="#works"
-              className="rounded-full border border-[#C1FF72] px-6 py-3 font-semibold text-[#C1FF72] transition hover:bg-[#C1FF72] hover:text-black"
-            >
-              View My Work
-            </a>
-          </div>
-        </div>
-
-        <div className="relative md:col-span-5">
-          <div className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full border border-[#C1FF72]/30 bg-black/70 px-4 py-2 text-sm text-white">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C1FF72] opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#C1FF72]" />
-            </span>
-            Available for projects
+    <main className="w-full px-4 pt-2 md:px-10">
+      <section id="home" className="snap-start min-h-screen flex items-start pt-12">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 md:grid-cols-12 md:items-center">
+          <div className="md:col-span-7">
+            <p className="mb-4 inline-flex items-center rounded-full border border-white/15 px-4 py-1 text-sm text-white/80">
+              Personal Portfolio
+            </p>
+            <h1 className="text-4xl font-bold leading-tight text-white md:text-6xl">
+              <span className="block">Hi, I am Wincel Crusit,</span>
+              <span className="block text-2xl md:text-4xl">
+                <TextRotator
+                  texts={[
+                    { prefix: "I am a ", title: "Web Designer" },
+                    { prefix: "I am a  ", title: "Frontend Developer" },
+                    { prefix: "I am a ", title: "Mobile App Developer" },
+                    { prefix: "I am a ", title: "Web Developer" },
+                    { prefix: "Soon to be ", title: "Machine Learning Engineer" },
+                    { prefix: "Soon to be ", title: "Data Engineer" },
+                    
+                  ]}
+                  titleClassName="text-[#C1FF72]"
+                />
+                .
+              </span>
+            </h1>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href="#works"
+                className="rounded-full bg-[#C1FF72] px-6 py-3 font-semibold text-black transition hover:opacity-90"
+              >
+                Get Started
+              </a>
+              <a
+                href="#works"
+                className="rounded-full border border-[#C1FF72] px-6 py-3 font-semibold text-[#C1FF72] transition hover:bg-[#C1FF72] hover:text-black"
+              >
+                View My Work
+              </a>
+            </div>
           </div>
 
-          <div className="flex aspect-[4/5] items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/0 p-8">
-            <svg
-              viewBox="0 0 400 460"
-              role="img"
-              aria-label="Developer illustration placeholder"
-              className="h-full w-full"
-            >
-              <rect x="0" y="0" width="400" height="460" rx="24" fill="#101010" />
-              <circle cx="200" cy="145" r="62" fill="#1d1d1d" stroke="#C1FF72" strokeWidth="3" />
-              <rect x="125" y="220" width="150" height="140" rx="22" fill="#1a1a1a" stroke="#2a2a2a" />
-              <rect x="70" y="265" width="260" height="24" rx="12" fill="#171717" />
-              <rect x="92" y="302" width="220" height="14" rx="7" fill="#262626" />
-              <rect x="92" y="328" width="180" height="14" rx="7" fill="#262626" />
-            </svg>
+          <div className="relative md:col-span-5 mt-15">
+            <div className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full border border-[#C1FF72]/30 bg-black/70 px-4 py-2 text-sm text-white">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C1FF72] opacity-75" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#C1FF72]" />
+              </span>
+              Available for projects
+            </div>
+
+            <div className="flex aspect-[4/5] items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/0 p-8">
+              <svg
+                viewBox="0 0 400 460"
+                role="img"
+                aria-label="Developer illustration placeholder"
+                className="h-full w-full"
+              >
+                <rect x="0" y="0" width="400" height="460" rx="24" fill="#101010" />
+                <circle cx="200" cy="145" r="62" fill="#1d1d1d" stroke="#C1FF72" strokeWidth="3" />
+                <rect x="125" y="220" width="150" height="140" rx="22" fill="#1a1a1a" stroke="#2a2a2a" />
+                <rect x="70" y="265" width="260" height="24" rx="12" fill="#171717" />
+                <rect x="92" y="302" width="220" height="14" rx="7" fill="#262626" />
+                <rect x="92" y="328" width="180" height="14" rx="7" fill="#262626" />
+              </svg>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="works" className="pb-16">
-        <h2 className="mb-8 text-3xl font-bold text-white md:text-4xl">Selected Work</h2>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {selectedWork.map((project) => (
-            <article
-              key={project.title}
-              className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5"
-            >
-              <div className="relative overflow-hidden">
-                <div className="aspect-[16/10] bg-gradient-to-br from-[#1b1b1b] via-[#131313] to-[#0f0f0f] transition duration-300 group-hover:scale-105" />
-                <span className="absolute right-4 top-4 translate-y-1 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 text-[#C1FF72]">
-                  ↗ view project
-                </span>
-              </div>
-              <div className="space-y-2 p-5">
-                <p className="text-xs uppercase tracking-wide text-[#C1FF72]">{project.category}</p>
-                <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-                <p className="text-sm text-white/60">{project.date}</p>
-              </div>
-            </article>
-          ))}
+      <section id="works" className="snap-none h-screen pt-6">
+        <div className="mx-auto flex h-full w-full max-w-7xl flex-col">
+          <h2 className="mb-4 shrink-0 text-3xl font-bold text-white md:text-4xl">Selected Work</h2>
+          <SelectedWorkStickyStack projects={selectedWork} />
         </div>
       </section>
 
-      {/* About Section */}
-      <About />
+      <section id="about" className="snap-start min-h-screen flex items-center">
+        <div className="mx-auto w-full max-w-7xl">
+          <About />
+        </div>
+      </section>
 
-      {/* Experience Section */}
-      <Experience />
+      <section id="experience" className="snap-start min-h-screen flex items-center">
+        <div className="mx-auto w-full max-w-7xl">
+          <Experience />
+        </div>
+      </section>
 
-      {/* Services Section */}
-      <Services />
+      <section id="services" className="snap-start min-h-screen flex items-center">
+        <div className="mx-auto w-full max-w-7xl">
+          <Services />
+        </div>
+      </section>
 
-      {/* Tech Stack Marquee */}
-      <TechMarquee />
+      <section id="tech" className="snap-start min-h-screen flex items-center">
+        <div className="mx-auto w-full max-w-7xl">
+          <TechMarquee />
+        </div>
+      </section>
 
-      {/* Clients Marquee */}
-      <ClientsMarquee />
+      <section id="clients" className="snap-start min-h-screen flex items-center">
+        <div className="mx-auto w-full max-w-7xl">
+          <ClientsMarquee />
+        </div>
+      </section>
 
-      {/* FAQ Section */}
-      <FAQ />
+      <section id="faq" className="snap-start min-h-screen flex items-center">
+        <div className="mx-auto w-full max-w-7xl">
+          <FAQ />
+        </div>
+      </section>
 
-      {/* Contact Form */}
-      <ContactForm />
+      <section id="contact" className="snap-start min-h-screen flex items-center">
+        <div className="mx-auto w-full max-w-7xl">
+          <ContactForm />
+        </div>
+      </section>
 
-      {/* Footer */}
-      <Footer />
+      <section id="footer" className="snap-start min-h-screen flex items-center">
+        <div className="mx-auto w-full max-w-7xl">
+          <Footer />
+        </div>
+      </section>
     </main>
   );
 }
