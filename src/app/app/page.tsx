@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import TextRotator from "../components/TextRotator";
 import About from "../components/About";
 import SelectedWorkStickyStack from "../components/SelectedWorkStickyStack";
+import { Github, Linkedin, Facebook, Instagram, Mail, Youtube } from "lucide-react";
 
 const selectedWork = [
   {
@@ -41,6 +42,39 @@ const selectedWork = [
   },
 ];
 
+const socialLinks = [
+  {
+    name: "GitHub",
+    href: "https://github.com",
+    icon: <Github className="h-5 w-5" />,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://linkedin.com/in/wincel-crusit-284364305",
+    icon: <Linkedin className="h-5 w-5" />,
+  },
+  {
+    name: "Facebook",
+    href: "https://facebook.com/WincelCrusit",
+    icon: <Facebook className="h-5 w-5" />,
+  },
+  {
+    name: "Instagram",
+    href: "https://instagram.com/wnclasusual_",
+    icon: <Instagram className="h-5 w-5" />,
+  },
+  {
+    name: "YouTube",
+    href: "https://youtube.com/@wnclasusual",
+    icon: <Youtube className="h-5 w-5" />,
+  },
+  {
+    name: "Email",
+    href: "mailto:crusitwincel@gmail.com",
+    icon: <Mail className="h-5 w-5" />,
+  },
+];
+
 export default function HomePage() {
   return (
     <main className="w-full px-4 pt-2 md:px-10">
@@ -70,17 +104,25 @@ export default function HomePage() {
             </h1>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
-                href="#works"
+                href="/resume.pdf"
                 className="rounded-full bg-[#C1FF72] px-6 py-3 font-semibold text-black transition hover:opacity-90"
               >
-                Get Started
+                Download Resume
               </a>
-              <a
-                href="#works"
-                className="rounded-full border border-[#C1FF72] px-6 py-3 font-semibold text-[#C1FF72] transition hover:bg-[#C1FF72] hover:text-black"
-              >
-                View My Work
-              </a>
+              <div className="flex gap-3">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-[#C1FF72] hover:bg-white/10 hover:text-[#C1FF72]"
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 

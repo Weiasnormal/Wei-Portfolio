@@ -23,7 +23,7 @@ const TopHeader: React.FC = () => {
       isVisible ? 'translate-y-0' : '-translate-y-full'
     }`}>
       <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-        {/* Logo and Name */}
+        {/* Logo */}
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-full overflow-hidden">
             <Image
@@ -33,13 +33,6 @@ const TopHeader: React.FC = () => {
               height={56}
               className="w-full h-full"
             />
-          </div>
-          <div className="ml-2 flex items-center gap-2 px-5 py-2 rounded-full border border-[#C1FF72]/30 bg-black/50">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C1FF72] opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#C1FF72]" />
-            </span>
-            <span className="text-base text-gray-300">Available for 3 projects</span>
           </div>
         </div>
 

@@ -1,4 +1,6 @@
-import React from "react";
+'use client';
+
+import React, { useState } from "react";
 
 type NavItem = {
   label: string;
@@ -95,23 +97,63 @@ const navItems: NavItem[] = [
 ];
 
 export default function SidebarNav() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <aside className="fixed right-6 top-1/2 z-50 -translate-y-1/2 rounded-3xl border border-white/10 bg-white/5 px-3 py-4 backdrop-blur-md">
-      <nav aria-label="Sidebar navigation">
-        <ul className="flex flex-col items-center gap-4">
-          {navItems.map((item) => (
-            <li key={item.label}>
-              <a
-                href={item.href}
-                aria-label={item.label}
-                className="flex h-9 w-9 items-center justify-center rounded-full text-white/75 transition hover:bg-white/10 hover:text-[#C1FF72]"
-              >
-                {item.icon}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </aside>
+    <>
+      {/* Desktop Sidebar */}
+      <aside className="fixed right-15 top-1/2 z-50 -translate-y-1/2 rounded-3xl border border-white/10 bg-white/5 px-3 py-4 backdrop-blur-md hidden md:block">
+        <nav aria-label="Sidebar navigation">
+          <ul className="flex flex-col items-center gap-4">
+            {navItems.map((item) => (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  aria-label={item.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full text-white/75 transition hover:bg-white/10 hover:text-[#C1FF72]"
+                >
+                  {item.icon}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden fixed right-6 bottom-6 z-50 flex flex-col items-center justify-center gap-1.5 h-14 w-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-md"
+        aria-label="Toggle navigation menu"
+      >
+        <span className={`w-6 h-0.5 bg-white transition-all ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
+        <span className={`w-6 h-0.5 bg-white transition-all ${isOpen ? 'opacity-0' : ''}`} />
+        <span className={`w-6 h-0.5 bg-white transition-all ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+      </button>
+
+      {/* Mobile Menu Overlay */}
+      {isOpen && (
+        <div className="md:hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-lg">
+          <nav className="flex items-center justify-center h-full">
+            <ul className="flex flex-col items-center gap-8">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="flex flex-col items-center gap-2 text-white/75 transition hover:text-[#C1FF72]"
+                  >
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5">
+                      {item.icon}
+                    </span>
+                    <span className="text-sm">{item.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      )}
+    </>
   );
 }
