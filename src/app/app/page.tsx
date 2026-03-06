@@ -3,7 +3,6 @@ import Experience from "../components/Experience";
 import Services from "../components/Services";
 import TechMarquee from "../components/TechMarquee";
 import ClientsMarquee from "../components/ClientsMarquee";
-import Pricing from "../components/Pricing";
 import FAQ from "../components/FAQ";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
@@ -35,7 +34,7 @@ const selectedWork = [
 
 export default function HomePage() {
   return (
-    <main className="mx-auto max-w-6xl px-6 py-12 md:px-12 md:py-16">
+    <main className="mx-auto max-w-6xl px-6 py-12 md:px-12 md:py-16 pt-20">
       <section id="home" className="grid gap-10 pb-16 md:grid-cols-12 md:items-center">
         <div className="md:col-span-7">
           <p className="mb-4 inline-flex items-center rounded-full border border-white/15 px-4 py-1 text-sm text-white/80">
@@ -137,9 +136,6 @@ export default function HomePage() {
 
       {/* Clients Marquee */}
       <ClientsMarquee />
-
-      {/* Pricing Section */}
-      <Pricing />
 
       {/* FAQ Section */}
       <FAQ />
