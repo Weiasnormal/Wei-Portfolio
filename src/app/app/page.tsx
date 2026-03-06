@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Experience from "../components/Experience";
 import Services from "../components/Services";
 import TechMarquee from "../components/TechMarquee";
@@ -10,6 +9,9 @@ import Footer from "../components/Footer";
 import TextRotator from "../components/TextRotator";
 import About from "../components/About";
 import SelectedWorkStickyStack from "../components/SelectedWorkStickyStack";
+import TopHeader from "../components/TopHeader";
+import SidebarNav from "../components/SidebarNav";
+import HeroSpline from "../components/HeroSpline";
 import { Github, Linkedin, Facebook, Instagram, Mail, Youtube, Download } from "lucide-react";
 
 const selectedWork = [
@@ -78,7 +80,10 @@ const socialLinks = [
 
 export default function HomePage() {
   return (
-    <main className="w-full px-4 pt-2 md:px-10">
+    <>
+      <TopHeader />
+      <SidebarNav />
+      <main className="w-full px-4 pt-2 md:px-10">
       <section id="home" className="snap-start min-h-screen flex items-start pt-32">
         <div className="mx-auto grid w-full max-w-7xl gap-10 md:grid-cols-12">
           <div className="md:col-span-7 md:self-start md:mt-15 md:pl-8 text-center md:text-left">
@@ -130,24 +135,8 @@ export default function HomePage() {
           </div>
 
           <div className="md:col-span-5 md:self-start mt-2 md:mt-0 flex items-center justify-center md:justify-end md:pr-8">
-            <div className="relative w-full max-w-xs md:w-auto md:max-w-none">
-            <div className="absolute right-2 top-2 md:right-4 md:top-4 inline-flex items-center gap-1 md:gap-2 rounded-full border border-[#C1FF72]/30 bg-black/70 px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm text-white">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C1FF72] opacity-75" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#C1FF72]" />
-              </span>
-              Available for projects
-            </div>
-
-            <div className="flex aspect-[4/5] items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/0 p-4 md:p-8 overflow-hidden">
-              <Image
-                src="/profile.jpg"
-                alt="Wincel Crusit Profile"
-                width={400}
-                height={500}
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <div className="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden bg-gradient-to-b from-white/10 to-white/0">
+              <HeroSpline />
             </div>
           </div>
         </div>
@@ -207,6 +196,7 @@ export default function HomePage() {
           <Footer />
         </div>
       </section>
-    </main>
+      </main>
+    </>
   );
 }

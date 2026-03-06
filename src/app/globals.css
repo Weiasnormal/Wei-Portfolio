@@ -44,3 +44,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #a8e05f;
 }
+
+/* Hide Spline watermark */
+.spline-container #logo,
+.spline-container a[href*="spline.design"],
+.spline-container [id*="watermark"],
+.spline-container canvas + div {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
