@@ -42,7 +42,7 @@ export default function HomePage() {
             Personal Portfolio
           </p>
           <h1 className="text-4xl font-bold leading-tight text-white md:text-6xl">
-            Hi, I'm Wincel Crusit, Working as a{" "}
+            Hi, I&apos;m Wincel Crusit, Working as a{" "}
             <TextRotator
               texts={[
                 "Web Designer",
