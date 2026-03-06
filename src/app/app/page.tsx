@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import Experience from "../components/Experience";
 import Services from "../components/Services";
 import TechMarquee from "../components/TechMarquee";
@@ -9,7 +10,7 @@ import Footer from "../components/Footer";
 import TextRotator from "../components/TextRotator";
 import About from "../components/About";
 import SelectedWorkStickyStack from "../components/SelectedWorkStickyStack";
-import { Github, Linkedin, Facebook, Instagram, Mail, Youtube } from "lucide-react";
+import { Github, Linkedin, Facebook, Instagram, Mail, Youtube, Download } from "lucide-react";
 
 const selectedWork = [
   {
@@ -78,15 +79,16 @@ const socialLinks = [
 export default function HomePage() {
   return (
     <main className="w-full px-4 pt-2 md:px-10">
-      <section id="home" className="snap-start min-h-screen flex items-start pt-12">
-        <div className="mx-auto grid w-full max-w-7xl gap-10 md:grid-cols-12 md:items-center">
-          <div className="md:col-span-7">
-            <p className="mb-4 inline-flex items-center rounded-full border border-white/15 px-4 py-1 text-sm text-white/80">
+      <section id="home" className="snap-start min-h-screen flex items-start pt-32">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 md:grid-cols-12">
+          <div className="md:col-span-7 md:self-start md:mt-15 md:pl-8 text-center md:text-left">
+            <p className="mb-4 inline-flex items-center rounded-full border border-white/15 px-3 py-1 text-xs md:text-sm text-white/80">
               Personal Portfolio
             </p>
-            <h1 className="text-4xl font-bold leading-tight text-white md:text-6xl">
-              <span className="block">Hi, I am Wincel Crusit,</span>
-              <span className="block text-2xl md:text-4xl">
+            <h1 className="text-2xl font-bold leading-tight text-white md:text-6xl">
+              <span className="block">Hi, I am</span>
+              <span className="block">Wincel Crusit,</span>
+              <span className="block text-lg md:text-4xl">
                 <TextRotator
                   texts={[
                     { prefix: "I am a ", title: "Web Designer" },
@@ -102,14 +104,15 @@ export default function HomePage() {
                 .
               </span>
             </h1>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
               <a
                 href="/resume.pdf"
-                className="rounded-full bg-[#C1FF72] px-6 py-3 font-semibold text-black transition hover:opacity-90"
+                className="flex items-center gap-2 rounded-full bg-[#C1FF72] px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-semibold text-black transition hover:opacity-90"
               >
+                <Download className="h-4 w-4 md:h-5 md:w-5" />
                 Download Resume
               </a>
-              <div className="flex gap-3">
+              <div className="flex justify-center gap-3">
                 {socialLinks.map((social) => (
                   <a
                     key={social.name}
@@ -117,17 +120,18 @@ export default function HomePage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.name}
-                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-[#C1FF72] hover:bg-white/10 hover:text-[#C1FF72]"
+                    className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-[#C1FF72] hover:bg-white/10 hover:text-[#C1FF72]"
                   >
-                    {social.icon}
+                    <span className="h-4 w-4 md:h-5 md:w-5 flex items-center justify-center">{social.icon}</span>
                   </a>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="relative md:col-span-5 mt-15">
-            <div className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full border border-[#C1FF72]/30 bg-black/70 px-4 py-2 text-sm text-white">
+          <div className="md:col-span-5 md:self-start mt-2 md:mt-0 flex items-center justify-center md:justify-end md:pr-8">
+            <div className="relative w-full max-w-xs md:w-auto md:max-w-none">
+            <div className="absolute right-2 top-2 md:right-4 md:top-4 inline-flex items-center gap-1 md:gap-2 rounded-full border border-[#C1FF72]/30 bg-black/70 px-2 py-1 md:px-4 md:py-2 text-xs md:text-sm text-white">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C1FF72] opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#C1FF72]" />
@@ -135,20 +139,15 @@ export default function HomePage() {
               Available for projects
             </div>
 
-            <div className="flex aspect-[4/5] items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/0 p-8">
-              <svg
-                viewBox="0 0 400 460"
-                role="img"
-                aria-label="Developer illustration placeholder"
-                className="h-full w-full"
-              >
-                <rect x="0" y="0" width="400" height="460" rx="24" fill="#101010" />
-                <circle cx="200" cy="145" r="62" fill="#1d1d1d" stroke="#C1FF72" strokeWidth="3" />
-                <rect x="125" y="220" width="150" height="140" rx="22" fill="#1a1a1a" stroke="#2a2a2a" />
-                <rect x="70" y="265" width="260" height="24" rx="12" fill="#171717" />
-                <rect x="92" y="302" width="220" height="14" rx="7" fill="#262626" />
-                <rect x="92" y="328" width="180" height="14" rx="7" fill="#262626" />
-              </svg>
+            <div className="flex aspect-[4/5] items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/0 p-4 md:p-8 overflow-hidden">
+              <Image
+                src="/profile.jpg"
+                alt="Wincel Crusit Profile"
+                width={400}
+                height={500}
+                className="h-full w-full object-cover"
+              />
+            </div>
             </div>
           </div>
         </div>
@@ -156,7 +155,7 @@ export default function HomePage() {
 
       <section id="works" className="snap-none h-screen pt-6">
         <div className="mx-auto flex h-full w-full max-w-7xl flex-col">
-          <h2 className="mb-4 shrink-0 text-3xl font-bold text-white md:text-4xl">Selected Work</h2>
+          <h2 className="mb-4 shrink-0 text-2xl font-bold text-white md:text-4xl">Selected Work</h2>
           <SelectedWorkStickyStack projects={selectedWork} />
         </div>
       </section>

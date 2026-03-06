@@ -35,25 +35,25 @@ function StickyProjectCard({
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/85" />
 
-        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 rounded-[24px] border border-white/10 bg-black/55 p-6 backdrop-blur-xl">
+        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-2 md:gap-4 rounded-[24px] border border-white/10 bg-black/55 p-3 md:p-6 backdrop-blur-xl">
           <div className="space-y-3">
-            <p className="text-lg font-medium tracking-wide text-gray-300">
+            <p className="text-sm md:text-lg font-medium tracking-wide text-gray-300">
               {project.category}
             </p>
-            <h3 className="text-4xl font-semibold leading-tight text-[#ff5b1a] md:text-5xl">
+            <h3 className="text-2xl md:text-5xl font-semibold leading-tight text-[#ff5b1a]">
               {project.title}
             </h3>
-            <span className="inline-flex items-center rounded-full bg-white/12 px-5 py-2 text-2xl text-gray-200 md:text-3xl">
+            <span className="inline-flex items-center rounded-full bg-white/12 px-3 py-1 md:px-5 md:py-2 text-sm md:text-3xl text-gray-200">
               {project.date}
             </span>
           </div>
 
           <button
             type="button"
-            className="grid h-28 w-28 place-items-center rounded-3xl border border-[#ff5b1a] text-[#ff5b1a] transition hover:bg-[#ff5b1a]/10"
+            className="grid h-16 w-16 md:h-28 md:w-28 place-items-center rounded-3xl border border-[#ff5b1a] text-[#ff5b1a] transition hover:bg-[#ff5b1a]/10"
             aria-label="View project"
           >
-            <ArrowUpRight size={44} strokeWidth={1.8} />
+            <ArrowUpRight size={24} className="md:w-11 md:h-11" strokeWidth={1.8} />
           </button>
         </div>
       </article>

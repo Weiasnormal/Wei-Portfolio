@@ -22,7 +22,7 @@ const TopHeader: React.FC = () => {
     <header className={`fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ease-in-out ${
       isVisible ? 'translate-y-0' : '-translate-y-full'
     }`}>
-      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 py-5 pb-8 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-full overflow-hidden">
