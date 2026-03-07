@@ -46,13 +46,13 @@ export default function FAQ() {
   return (
     <section id="faq" className="pb-16">
       <div className="mb-12 text-center md:text-left">
-        <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
+        <h2 className="mb-4 text-2xl font-bold text-white md:text-4xl">
           Frequently Asked Questions
         </h2>
-        <p className="text-white/70">Everything you need to know about working with me</p>
+        <p className="text-sm md:text-base text-white/70">Everything you need to know about working with me</p>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-3 md:space-y-4 px-4 md:px-0">
         {faqs.map((faq, index) => (
           <motion.div
             key={index}
@@ -60,20 +60,20 @@ export default function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+            className="overflow-hidden rounded-xl md:rounded-2xl border border-white/10 bg-black/40 md:bg-white/5"
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="flex w-full items-center justify-between p-6 text-left transition hover:bg-white/5"
+              className="flex w-full items-center justify-between p-4 md:p-6 text-left transition hover:bg-white/5"
               suppressHydrationWarning
             >
-              <h3 className="pr-4 text-lg font-semibold text-white">{faq.question}</h3>
+              <h3 className="pr-3 md:pr-4 text-base md:text-xl font-semibold text-white">{faq.question}</h3>
               
               <div className="flex-shrink-0">
                 {openIndex === index ? (
-                  <Minus className="h-5 w-5 text-[#ff5b1a]" />
+                  <Minus className="h-4 w-4 md:h-5 md:w-5 text-[#ff5b1a]" />
                 ) : (
-                  <Plus className="h-5 w-5 text-white/70" />
+                  <Plus className="h-4 w-4 md:h-5 md:w-5 text-white/70" />
                 )}
               </div>
             </button>
@@ -87,8 +87,8 @@ export default function FAQ() {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <div className="border-t border-white/10 px-6 pb-6 pt-4">
-                    <p className="text-white/70">{faq.answer}</p>
+                  <div className="border-t border-white/10 px-4 pb-4 pt-3 md:px-6 md:pb-6 md:pt-4">
+                    <p className="text-xs md:text-base text-white/70">{faq.answer}</p>
                   </div>
                 </motion.div>
               )}

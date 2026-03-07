@@ -39,11 +39,11 @@ const experiences: ExperienceItem[] = [
 export default function Experience() {
   return (
     <section id="experience" className="pb-16">
-      <h2 className="mb-12 text-center md:text-left text-3xl font-bold text-white md:text-4xl">Experience</h2>
+      <h2 className="mb-12 text-center md:text-left text-2xl font-bold text-white md:text-4xl">Experience</h2>
       
-      <div className="relative">
+      <div className="relative px-4 md:px-0">
         {/* Timeline line */}
-        <div className="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-[#ff5b1a] via-white/20 to-transparent md:left-8" />
+        <div className="absolute left-4 top-0 h-full w-0.5 bg-gradient-to-b from-[#ff5b1a] via-white/20 to-transparent md:left-8" />
         
         <div className="space-y-8">
           {experiences.map((experience, index) => (
@@ -53,19 +53,19 @@ export default function Experience() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative pl-8 md:pl-20"
+              className="relative pl-12 md:pl-20"
             >
               {/* Timeline dot */}
-              <div className="absolute left-[-4px] top-2 h-3 w-3 rounded-full border-2 border-[#ff5b1a] bg-black md:left-[28px]" />
+              <div className="absolute left-[12px] top-2 h-3 w-3 rounded-full border-2 border-[#ff5b1a] bg-black md:left-[28px]" />
               
               <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-white">{experience.role}</h3>
+                  <h3 className="text-lg md:text-xl font-semibold text-white">{experience.role}</h3>
                   <p className="text-lg text-[#ff5b1a]">{experience.company}</p>
-                  <p className="mt-2 text-white/70">{experience.description}</p>
+                  <p className="mt-2 text-xs md:text-base text-white/70">{experience.description}</p>
                 </div>
                 
-                <div className="rounded-full border border-white/10 bg-white/5 px-4 py-1 text-sm text-white/80 md:ml-4">
+                <div className="rounded-full border border-white/10 bg-black/40 md:bg-white/5 px-4 py-1 text-sm text-white/80 md:ml-4">
                   {experience.period}
                 </div>
               </div>

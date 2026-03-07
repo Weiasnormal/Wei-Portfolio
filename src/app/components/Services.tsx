@@ -52,9 +52,9 @@ export default function Services() {
 
   return (
     <section id="services" className="pb-16">
-      <h2 className="mb-12 text-center md:text-left text-3xl font-bold text-white md:text-4xl">Services</h2>
+      <h2 className="mb-12 text-center md:text-left text-2xl font-bold text-white md:text-4xl">Services</h2>
       
-      <div className="space-y-4">
+      <div className="space-y-4 px-4 md:px-0">
         {services.map((service, index) => (
           <motion.div
             key={index}
@@ -62,7 +62,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+            className="overflow-hidden rounded-2xl border border-white/10 bg-black/40 md:bg-white/5"
           >
             <button
               onClick={() => toggleAccordion(index)}
@@ -73,7 +73,7 @@ export default function Services() {
                 <span className="text-2xl font-bold text-[#ff5b1a] md:text-3xl">
                   {service.number}
                 </span>
-                <h3 className="text-xl font-semibold text-white md:text-2xl">
+                <h3 className="text-lg font-semibold text-white md:text-2xl">
                   {service.title}
                 </h3>
               </div>
@@ -98,7 +98,7 @@ export default function Services() {
                   <div className="border-t border-white/10 px-6 pb-6 pt-4">
                     <ul className="space-y-2">
                       {service.deliverables.map((deliverable, i) => (
-                        <li key={i} className="flex items-start gap-3 text-white/80">
+                        <li key={i} className="flex items-start gap-3 text-xs md:text-base text-white/80">
                           <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#ff5b1a]" />
                           {deliverable}
                         </li>

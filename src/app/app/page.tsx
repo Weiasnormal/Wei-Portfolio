@@ -95,7 +95,7 @@ export default function HomePage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.name}
-                    className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-[#ff5b1a] hover:bg-white/10 hover:text-[#ff5b1a]"
+                    className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/10 bg-black/40 md:bg-white/5 text-white/70 transition hover:border-[#ff5b1a] hover:bg-white/10 hover:text-[#ff5b1a]"
                   >
                     <span className="h-4 w-4 md:h-5 md:w-5 flex items-center justify-center">{social.icon}</span>
                   </a>

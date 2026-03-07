@@ -64,5 +64,7 @@ export default function VantaBackground() {
     document.body.appendChild(threeScript);    
   }, []);
 
-  return <div ref={containerRef} className="fixed inset-0 -z-10 h-full w-full pointer-events-none" />;
+  return (
+    <div ref={containerRef} className="fixed inset-0 -z-10 h-full w-full pointer-events-none blur-xl" />
+  );
 }

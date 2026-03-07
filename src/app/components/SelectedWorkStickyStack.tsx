@@ -29,7 +29,7 @@ function StickyProjectCard({
 
   return (
     <article
-      className={`sticky ${topClass} mx-auto mb-[18vh] md:mb-[40vh] h-[35vh] md:h-[68vh] w-[80%] md:w-full max-w-5xl overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl`}
+      className={`sticky ${topClass} mx-auto mb-[18vh] md:mb-[40vh] h-[35vh] md:h-[68vh] w-full max-w-5xl overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl`}
       style={{
         zIndex: index + 1,
       }}

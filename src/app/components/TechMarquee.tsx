@@ -109,7 +109,7 @@ export default function TechMarquee() {
           {duplicatedTech.map((tech, index) => (
             <div
               key={index}
-              className="flex flex-shrink-0 items-center gap-4 rounded-xl border border-white/10 bg-white/5 px-8 py-4 backdrop-blur-sm"
+              className="flex flex-shrink-0 items-center gap-4 rounded-xl border border-white/10 bg-black/40 md:bg-white/5 px-8 py-4 backdrop-blur-sm"
             >
               <div className="text-white/80">{tech.icon}</div>
               <span className="text-lg font-medium text-white">{tech.name}</span>

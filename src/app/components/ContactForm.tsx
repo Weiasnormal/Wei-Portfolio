@@ -9,7 +9,6 @@ export default function ContactForm() {
     email: "",
     phone: "",
     message: "",
-    budget: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -29,7 +28,7 @@ export default function ContactForm() {
 
   return (
     <section id="contact" className="pb-16">
-      <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+      <div className="grid gap-12 px-4 md:px-0 md:grid-cols-2 md:gap-16">
         {/* Left side - Heading */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -38,12 +37,12 @@ export default function ContactForm() {
           viewport={{ once: true }}
           className="flex flex-col justify-center text-center md:text-left"
         >
-          <h2 className="mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+          <h2 className="mb-4 text-2xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
             Contact
             <br />
             For Work
           </h2>
-          <p className="text-lg text-white/70">
+          <p className="text-sm md:text-base text-white/70">
             Let's create something amazing together. Fill out the form and I'll get back to you
             within 24 hours.
           </p>
@@ -86,40 +85,9 @@ export default function ContactForm() {
               value={formData.phone}
               onChange={handleChange}
               className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#ff5b1a]"
-              placeholder="+1 (555) 000-0000"
+              placeholder="+63 000-000-0000"
               suppressHydrationWarning
             />
-          </div>
-
-          <div>
-            <label htmlFor="budget" className="mb-2 block text-sm text-white/70">
-              Budget Range
-            </label>
-            <select
-              id="budget"
-              name="budget"
-              value={formData.budget}
-              onChange={handleChange}
-              required
-              className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white outline-none transition focus:border-[#ff5b1a]"
-              suppressHydrationWarning
-            >
-              <option value="" disabled className="bg-black">
-                Select your budget
-              </option>
-              <option value="1k-5k" className="bg-black">
-                $1k - $5k
-              </option>
-              <option value="5k-10k" className="bg-black">
-                $5k - $10k
-              </option>
-              <option value="10k-25k" className="bg-black">
-                $10k - $25k
-              </option>
-              <option value="25k+" className="bg-black">
-                $25k+
-              </option>
-            </select>
           </div>
 
           <div>

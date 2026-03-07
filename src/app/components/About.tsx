@@ -41,13 +41,13 @@ export default function About() {
   return (
     <section id="about" className="pb-16">
       <div className="mb-12 text-center md:text-left">
-        <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">About Me</h2>
-        <p className="text-lg text-white/70">
+        <h2 className="mb-4 text-2xl font-bold text-white md:text-4xl">About Me</h2>
+        <p className="text-sm md:text-base text-white/70">
           A passionate developer focused on creating innovative solutions and continuous learning.
         </p>
       </div>
 
-      <div className="grid gap-6 px-4 md:px-0 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-6 px-4 md:px-0 md:grid-cols-2 lg:grid-cols-3">
         {aboutItems.map((item, index) => (
           <motion.div
             key={index}
@@ -55,7 +55,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="group rounded-2xl border border-white/10 bg-white/5 p-4 md:p-6 transition hover:bg-white/10 flex flex-col"
+            className={`group rounded-2xl border border-white/10 bg-black/40 md:bg-white/5 p-4 md:p-6 transition hover:bg-white/10 flex flex-col items-center md:items-start text-center md:text-left ${index === 4 ? 'col-span-2 md:col-span-1' : ''}`}
           >
             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#ff5b1a]/10 text-[#ff5b1a]">
               {item.icon}
