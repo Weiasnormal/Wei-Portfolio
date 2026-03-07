@@ -71,6 +71,7 @@ export default function ContactForm() {
               required
               className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#C1FF72]"
               placeholder="your@email.com"
+              suppressHydrationWarning
             />
           </div>
 
@@ -86,6 +87,7 @@ export default function ContactForm() {
               onChange={handleChange}
               className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#C1FF72]"
               placeholder="+1 (555) 000-0000"
+              suppressHydrationWarning
             />
           </div>
 
@@ -100,6 +102,7 @@ export default function ContactForm() {
               onChange={handleChange}
               required
               className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white outline-none transition focus:border-[#C1FF72]"
+              suppressHydrationWarning
             >
               <option value="" disabled className="bg-black">
                 Select your budget
@@ -132,12 +135,14 @@ export default function ContactForm() {
               rows={4}
               className="w-full resize-none border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#C1FF72]"
               placeholder="Tell me about your project..."
+              suppressHydrationWarning
             />
           </div>
 
           <button
             type="submit"
             className="flex items-center gap-2 rounded-full bg-[#C1FF72] px-8 py-4 font-semibold text-black transition hover:opacity-90"
+            suppressHydrationWarning
           >
             Send Message
             <Send className="h-4 w-4" />

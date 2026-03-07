@@ -67,6 +67,7 @@ export default function Services() {
             <button
               onClick={() => toggleAccordion(index)}
               className="flex w-full items-center justify-between p-6 text-left transition hover:bg-white/5"
+              suppressHydrationWarning
             >
               <div className="flex items-center gap-4">
                 <span className="text-2xl font-bold text-[#C1FF72] md:text-3xl">

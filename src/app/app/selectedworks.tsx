@@ -2,32 +2,45 @@ import SelectedWorkStickyStack from "../components/SelectedWorkStickyStack";
 
 const selectedWork = [
   {
-    category: "Mobile App Design",
-    title: "X-direct Mobile",
-    date: "May 2025",
-    image:
-      "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=1920&auto=format&fit=crop",
+    category: "Mobile App Platform (React + Expo)",
+    title: "ResqLine",
+    date: "Dec 2025",
+    image: "/Works/ResqLine.svg",
   },
   {
-    category: "SaaS Dashboard",
-    title: "TeamPulse Analytics",
-    date: "Aug 2025",
+    category: "Mobile App Platform (React + Expo)",
+    title: "Statera",
+    date: "Feb 2026",
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1920&auto=format&fit=crop",
+      "/Works/Statera.svg",
   },
   {
     category: "Web Platform",
-    title: "Creative Studio Portfolio",
-    date: "Nov 2025",
+    title: "Sona Music",
+    date: "June 2025",
     image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1920&auto=format&fit=crop",
+      "/Works/SonaB.svg",
+    hoverImage: "/Works/SonaW.svg",
   },
   {
-    category: "E-commerce App",
-    title: "Moda Cart Redesign",
-    date: "Jan 2026",
+    category: "Web Design",
+    title: "OCTA Organization",
+    date: "Nov 2025",
     image:
-      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1920&auto=format&fit=crop",
+      "/Works/octaB.svg",
+    hoverImage: "/Works/octaW.svg",
+  },
+  {
+    category: "Collaboration Platform",
+    title: "WorkHive",
+    date: "June 2024",
+    image: "/Works/WorkHive.svg",
+  },
+  {
+    category: "Learning Platform",
+    title: "LEARN",
+    date: "Jan 2026",
+    image: "/Works/LEARN.svg",
   },
 ];
 

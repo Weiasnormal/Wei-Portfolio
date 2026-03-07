@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
 type WorkProject = {
@@ -7,6 +8,7 @@ type WorkProject = {
   title: string;
   date: string;
   image: string;
+  hoverImage?: string;
 };
 
 type SelectedWorkStickyStackProps = {
@@ -20,18 +22,23 @@ function StickyProjectCard({
   project: WorkProject;
   index: number;
 }) {
+  const [isHovered, setIsHovered] = useState(false);
   const topClass = ["top-14 md:top-20", "top-16 md:top-24", "top-20 md:top-28", "top-24 md:top-32"][index] ?? "top-14 md:top-20";
+
+  const displayImage = isHovered && project.hoverImage ? project.hoverImage : project.image;
 
   return (
     <article
-      className={`sticky ${topClass} mx-auto mb-[28vh] md:mb-[40vh] h-[52vh] md:h-[68vh] w-full max-w-5xl overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl`}
+      className={`sticky ${topClass} mx-auto mb-[18vh] md:mb-[40vh] h-[35vh] md:h-[68vh] w-[80%] md:w-full max-w-5xl overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl`}
       style={{
         zIndex: index + 1,
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${project.image})` }}
+        className="absolute inset-0 bg-cover bg-center transition-all duration-300"
+        style={{ backgroundImage: `url(${displayImage})` }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/85" />
 
@@ -52,6 +59,7 @@ function StickyProjectCard({
           type="button"
           className="grid h-12 w-12 md:h-28 md:w-28 place-items-center rounded-2xl md:rounded-3xl border border-[#ff5b1a] text-[#ff5b1a] transition hover:bg-[#ff5b1a]/10"
           aria-label="View project"
+          suppressHydrationWarning
         >
           <ArrowUpRight size={18} className="md:w-11 md:h-11" strokeWidth={1.8} />
         </button>

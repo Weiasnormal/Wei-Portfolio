@@ -21,12 +21,19 @@ export default function TextRotator({
   className = "",
   titleClassName = ""
 }: TextRotatorProps) {
+  const [mounted, setMounted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
+  // Handle mounting to avoid hydration mismatch
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     const currentItem = texts[currentIndex];
     const currentFullText = typeof currentItem === 'string' 
       ? currentItem 
@@ -74,9 +81,27 @@ export default function TextRotator({
     );
 
     return () => clearTimeout(timeout);
-  }, [currentText, isDeleting, isPaused, currentIndex, texts, typingSpeed, deletingSpeed, pauseDuration]);
+  }, [mounted, currentText, isDeleting, isPaused, currentIndex, texts, typingSpeed, deletingSpeed, pauseDuration]);
 
   const currentItem = texts[currentIndex];
+  
+  // Show the first full text during SSR to avoid hydration mismatch
+  if (!mounted) {
+    const firstItem = texts[0];
+    if (typeof firstItem === 'string') {
+      return (
+        <span className={`inline-block ${className}`}>
+          {firstItem}
+        </span>
+      );
+    }
+    return (
+      <span className={`inline-block ${className}`}>
+        <span>{firstItem.prefix}</span>
+        <span className={titleClassName}>{firstItem.title}</span>
+      </span>
+    );
+  }
   
   if (typeof currentItem === 'string') {
     return (

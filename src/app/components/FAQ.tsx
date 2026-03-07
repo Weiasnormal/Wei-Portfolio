@@ -65,6 +65,7 @@ export default function FAQ() {
             <button
               onClick={() => toggleFAQ(index)}
               className="flex w-full items-center justify-between p-6 text-left transition hover:bg-white/5"
+              suppressHydrationWarning
             >
               <h3 className="pr-4 text-lg font-semibold text-white">{faq.question}</h3>
               
