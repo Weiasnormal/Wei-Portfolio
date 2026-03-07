@@ -64,16 +64,6 @@ const navItems: NavItem[] = [
     ),
   },
   {
-    label: "Pricing",
-    href: "/app#pricing",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={iconClass}>
-        <path d="M12 2v20" />
-        <path d="M17 6c0-2.2-2.2-4-5-4S7 3.8 7 6s2.2 4 5 4 5 1.8 5 4-2.2 4-5 4-5-1.8-5-4" />
-      </svg>
-    ),
-  },
-  {
     label: "FAQ",
     href: "/app#faq",
     icon: (

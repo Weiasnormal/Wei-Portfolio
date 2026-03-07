@@ -47,7 +47,7 @@ export default function About() {
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 px-4 md:px-0 md:grid-cols-2 lg:grid-cols-3">
         {aboutItems.map((item, index) => (
           <motion.div
             key={index}
@@ -55,13 +55,13 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
+            className="group rounded-2xl border border-white/10 bg-white/5 p-4 md:p-6 transition hover:bg-white/10 flex flex-col"
           >
-            <div className="mb-4 inline-flex rounded-full bg-[#ff5b1a]/10 p-3 text-[#ff5b1a]">
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#ff5b1a]/10 text-[#ff5b1a]">
               {item.icon}
             </div>
-            <h3 className="mb-3 text-xl font-semibold text-white">{item.title}</h3>
-            <p className="text-white/70">{item.description}</p>
+            <h3 className="mb-2 text-lg md:text-xl font-semibold text-white">{item.title}</h3>
+            <p className="text-white/70 text-xs md:text-base leading-relaxed">{item.description}</p>
           </motion.div>
         ))}
       </div>
