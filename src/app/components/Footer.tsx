@@ -53,6 +53,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
+            className="text-center md:text-left"
           >
             <h3 className="mb-2 text-2xl font-bold text-white">Lets Work Together</h3>
             <p className="text-white/70">Ready to start your next project?</p>

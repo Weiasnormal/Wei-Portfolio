@@ -49,7 +49,7 @@ const pricingTiers: PricingTier[] = [
 export default function Pricing() {
   return (
     <section id="pricing" className="pb-16">
-      <div className="mb-12 text-center">
+      <div className="mb-12 text-center md:text-left">
         <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">Pricing</h2>
         <p className="text-white/70">Choose the plan that fits your needs</p>
       </div>

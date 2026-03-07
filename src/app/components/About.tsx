@@ -40,7 +40,7 @@ const aboutItems: AboutItem[] = [
 export default function About() {
   return (
     <section id="about" className="pb-16">
-      <div className="mb-12">
+      <div className="mb-12 text-center md:text-left">
         <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">About Me</h2>
         <p className="text-lg text-white/70">
           A passionate developer focused on creating innovative solutions and continuous learning.

@@ -2,7 +2,6 @@ import React from "react";
 import Experience from "../components/Experience";
 import Services from "../components/Services";
 import TechMarquee from "../components/TechMarquee";
-import ClientsMarquee from "../components/ClientsMarquee";
 import FAQ from "../components/FAQ";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
@@ -115,6 +114,12 @@ export default function HomePage() {
 
       <SelectedWorks />
 
+      <section id="services" className="snap-start min-h-screen flex items-center">
+        <div className="mx-auto w-full max-w-7xl">
+          <Services />
+        </div>
+      </section>
+
       <section id="about" className="snap-start min-h-screen flex items-center">
         <div className="mx-auto w-full max-w-7xl">
           <About />
@@ -127,21 +132,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="services" className="snap-start min-h-screen flex items-center">
-        <div className="mx-auto w-full max-w-7xl">
-          <Services />
-        </div>
-      </section>
-
       <section id="tech" className="snap-start min-h-screen flex items-center">
         <div className="mx-auto w-full max-w-7xl">
           <TechMarquee />
-        </div>
-      </section>
-
-      <section id="clients" className="snap-start min-h-screen flex items-center">
-        <div className="mx-auto w-full max-w-7xl">
-          <ClientsMarquee />
         </div>
       </section>
 

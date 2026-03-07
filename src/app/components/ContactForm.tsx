@@ -36,7 +36,7 @@ export default function ContactForm() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="flex flex-col justify-center"
+          className="flex flex-col justify-center text-center md:text-left"
         >
           <h2 className="mb-4 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
             Contact

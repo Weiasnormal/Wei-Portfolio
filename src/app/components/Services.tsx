@@ -52,7 +52,7 @@ export default function Services() {
 
   return (
     <section id="services" className="pb-16">
-      <h2 className="mb-12 text-3xl font-bold text-white md:text-4xl">Services</h2>
+      <h2 className="mb-12 text-center md:text-left text-3xl font-bold text-white md:text-4xl">Services</h2>
       
       <div className="space-y-4">
         {services.map((service, index) => (

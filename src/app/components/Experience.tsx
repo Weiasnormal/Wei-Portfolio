@@ -39,7 +39,7 @@ const experiences: ExperienceItem[] = [
 export default function Experience() {
   return (
     <section id="experience" className="pb-16">
-      <h2 className="mb-12 text-3xl font-bold text-white md:text-4xl">Experience</h2>
+      <h2 className="mb-12 text-center md:text-left text-3xl font-bold text-white md:text-4xl">Experience</h2>
       
       <div className="relative">
         {/* Timeline line */}
