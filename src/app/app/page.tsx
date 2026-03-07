@@ -12,6 +12,7 @@ import SelectedWorkStickyStack from "../components/SelectedWorkStickyStack";
 import TopHeader from "../components/TopHeader";
 import SidebarNav from "../components/SidebarNav";
 import HeroSpline from "../components/HeroSpline";
+import VantaBackground from "../components/VantaBackground";
 import { Github, Linkedin, Facebook, Instagram, Mail, Youtube, Download } from "lucide-react";
 
 const selectedWork = [
@@ -81,9 +82,10 @@ const socialLinks = [
 export default function HomePage() {
   return (
     <>
+      <VantaBackground />
       <TopHeader />
       <SidebarNav />
-      <main className="w-full px-4 pt-2 md:px-10">
+      <main className="relative z-10 w-full px-4 pt-2 md:px-10">
       <section id="home" className="snap-start min-h-screen flex items-start pt-32">
         <div className="mx-auto grid w-full max-w-7xl gap-10 md:grid-cols-12">
           <div className="md:col-span-7 md:self-start md:mt-15 md:pl-8 text-center md:text-left">
