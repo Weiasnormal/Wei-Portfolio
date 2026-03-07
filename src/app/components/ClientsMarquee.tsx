@@ -54,7 +54,7 @@ export default function ClientsMarquee() {
                 transform: hoveredIndex === index ? "scale(1.05)" : "scale(1)",
               }}
             >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#C1FF72] via-[#7FD1AE] to-[#4DA3FF] text-2xl font-bold text-black">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#ff5b1a] via-[#7FD1AE] to-[#4DA3FF] text-2xl font-bold text-black">
                 {client.logo}
               </div>
             </div>

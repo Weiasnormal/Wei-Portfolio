@@ -71,7 +71,7 @@ export default function FAQ() {
               
               <div className="flex-shrink-0">
                 {openIndex === index ? (
-                  <Minus className="h-5 w-5 text-[#C1FF72]" />
+                  <Minus className="h-5 w-5 text-[#ff5b1a]" />
                 ) : (
                   <Plus className="h-5 w-5 text-white/70" />
                 )}

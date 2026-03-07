@@ -64,12 +64,12 @@ export default function Pricing() {
             viewport={{ once: true }}
             className={`relative overflow-hidden rounded-3xl border ${
               tier.highlighted
-                ? "border-[#C1FF72]/50 bg-gradient-to-br from-white/10 to-white/5"
+                ? "border-[#ff5b1a]/50 bg-gradient-to-br from-white/10 to-white/5"
                 : "border-white/10 bg-white/5"
             } p-8 backdrop-blur-md`}
           >
             {tier.highlighted && (
-              <div className="absolute right-6 top-6 rounded-full bg-[#C1FF72] px-3 py-1 text-xs font-semibold text-black">
+              <div className="absolute right-6 top-6 rounded-full bg-[#ff5b1a] px-3 py-1 text-xs font-semibold text-black">
                 Popular
               </div>
             )}
@@ -89,7 +89,7 @@ export default function Pricing() {
             <ul className="mb-8 space-y-3">
               {tier.features.map((feature, i) => (
                 <li key={i} className="flex items-start gap-3 text-white/80">
-                  <Check className="h-5 w-5 flex-shrink-0 text-[#C1FF72]" />
+                  <Check className="h-5 w-5 flex-shrink-0 text-[#ff5b1a]" />
                   <span>{feature}</span>
                 </li>
               ))}
@@ -98,8 +98,8 @@ export default function Pricing() {
             <button
               className={`w-full rounded-full py-3 font-semibold transition ${
                 tier.highlighted
-                  ? "bg-[#C1FF72] text-black hover:opacity-90"
-                  : "border border-[#C1FF72] text-[#C1FF72] hover:bg-[#C1FF72] hover:text-black"
+                  ? "bg-[#ff5b1a] text-black hover:opacity-90"
+                  : "border border-[#ff5b1a] text-[#ff5b1a] hover:bg-[#ff5b1a] hover:text-black"
               }`}
             >
               Get Started

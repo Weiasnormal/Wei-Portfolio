@@ -69,7 +69,7 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#C1FF72]"
+              className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#ff5b1a]"
               placeholder="your@email.com"
               suppressHydrationWarning
             />
@@ -85,7 +85,7 @@ export default function ContactForm() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#C1FF72]"
+              className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#ff5b1a]"
               placeholder="+1 (555) 000-0000"
               suppressHydrationWarning
             />
@@ -101,7 +101,7 @@ export default function ContactForm() {
               value={formData.budget}
               onChange={handleChange}
               required
-              className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white outline-none transition focus:border-[#C1FF72]"
+              className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white outline-none transition focus:border-[#ff5b1a]"
               suppressHydrationWarning
             >
               <option value="" disabled className="bg-black">
@@ -133,7 +133,7 @@ export default function ContactForm() {
               onChange={handleChange}
               required
               rows={4}
-              className="w-full resize-none border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#C1FF72]"
+              className="w-full resize-none border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#ff5b1a]"
               placeholder="Tell me about your project..."
               suppressHydrationWarning
             />
@@ -141,7 +141,7 @@ export default function ContactForm() {
 
           <button
             type="submit"
-            className="flex items-center gap-2 rounded-full bg-[#C1FF72] px-8 py-4 font-semibold text-black transition hover:opacity-90"
+            className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-8 py-4 font-semibold text-black transition hover:opacity-90"
             suppressHydrationWarning
           >
             Send Message

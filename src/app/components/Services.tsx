@@ -70,7 +70,7 @@ export default function Services() {
               suppressHydrationWarning
             >
               <div className="flex items-center gap-4">
-                <span className="text-2xl font-bold text-[#C1FF72] md:text-3xl">
+                <span className="text-2xl font-bold text-[#ff5b1a] md:text-3xl">
                   {service.number}
                 </span>
                 <h3 className="text-xl font-semibold text-white md:text-2xl">
@@ -99,7 +99,7 @@ export default function Services() {
                     <ul className="space-y-2">
                       {service.deliverables.map((deliverable, i) => (
                         <li key={i} className="flex items-start gap-3 text-white/80">
-                          <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#C1FF72]" />
+                          <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#ff5b1a]" />
                           {deliverable}
                         </li>
                       ))}

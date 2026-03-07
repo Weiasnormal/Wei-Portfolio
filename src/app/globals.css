@@ -3,7 +3,7 @@
 :root {
   --background: #0a0a0a;
   --foreground: #f4f4f4;
-  --accent: #c1ff72;
+  --accent: #ff5b1a;
 }
 
 @theme inline {
@@ -25,24 +25,6 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   min-height: 100vh;
-}
-
-/* Custom scrollbar styling */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #c1ff72;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a8e05f;
 }
 
 /* Hide Spline watermark */

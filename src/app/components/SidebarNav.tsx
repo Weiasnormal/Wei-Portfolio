@@ -110,7 +110,7 @@ export default function SidebarNav() {
                 <a
                   href={item.href}
                   aria-label={item.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full text-white/75 transition hover:bg-white/10 hover:text-[#C1FF72]"
+                  className="flex h-9 w-9 items-center justify-center rounded-full text-white/75 transition hover:bg-white/10 hover:text-[#ff5b1a]"
                 >
                   {item.icon}
                 </a>
@@ -141,7 +141,7 @@ export default function SidebarNav() {
                   <a
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="flex flex-col items-center gap-2 text-white/75 transition hover:text-[#C1FF72]"
+                    className="flex flex-col items-center gap-2 text-white/75 transition hover:text-[#ff5b1a]"
                   >
                     <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5">
                       {item.icon}

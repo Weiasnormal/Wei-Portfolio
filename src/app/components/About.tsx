@@ -57,7 +57,7 @@ export default function About() {
             viewport={{ once: true }}
             className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:bg-white/10"
           >
-            <div className="mb-4 inline-flex rounded-full bg-[#C1FF72]/10 p-3 text-[#C1FF72]">
+            <div className="mb-4 inline-flex rounded-full bg-[#ff5b1a]/10 p-3 text-[#ff5b1a]">
               {item.icon}
             </div>
             <h3 className="mb-3 text-xl font-semibold text-white">{item.title}</h3>

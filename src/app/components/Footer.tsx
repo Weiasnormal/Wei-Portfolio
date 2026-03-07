@@ -66,7 +66,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="flex items-center gap-2 rounded-full bg-[#C1FF72] px-8 py-4 font-semibold text-black transition hover:opacity-90"
+            className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-8 py-4 font-semibold text-black transition hover:opacity-90"
           >
             <Calendar className="h-5 w-5" />
             Book A Call
@@ -88,7 +88,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.name}
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-[#C1FF72] hover:bg-white/10 hover:text-[#C1FF72]"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-[#ff5b1a] hover:bg-white/10 hover:text-[#ff5b1a]"
             >
               {social.icon}
             </a>

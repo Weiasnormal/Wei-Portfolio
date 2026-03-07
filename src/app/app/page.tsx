@@ -75,7 +75,7 @@ export default function HomePage() {
                     { prefix: "Soon to be ", title: "Data Engineer" },
                     
                   ]}
-                  titleClassName="text-[#C1FF72]"
+                  titleClassName="text-[#ff5b1a]"
                 />
                 .
               </span>
@@ -83,7 +83,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
               <a
                 href="/resume.pdf"
-                className="flex items-center gap-2 rounded-full bg-[#C1FF72] px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-semibold text-black transition hover:opacity-90"
+                className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-semibold text-white transition hover:opacity-90"
               >
                 <Download className="h-4 w-4 md:h-5 md:w-5" />
                 Download Resume
@@ -96,7 +96,7 @@ export default function HomePage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.name}
-                    className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-[#C1FF72] hover:bg-white/10 hover:text-[#C1FF72]"
+                    className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-[#ff5b1a] hover:bg-white/10 hover:text-[#ff5b1a]"
                   >
                     <span className="h-4 w-4 md:h-5 md:w-5 flex items-center justify-center">{social.icon}</span>
                   </a>

@@ -43,7 +43,7 @@ export default function Experience() {
       
       <div className="relative">
         {/* Timeline line */}
-        <div className="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-[#C1FF72] via-white/20 to-transparent md:left-8" />
+        <div className="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-[#ff5b1a] via-white/20 to-transparent md:left-8" />
         
         <div className="space-y-8">
           {experiences.map((experience, index) => (
@@ -56,12 +56,12 @@ export default function Experience() {
               className="relative pl-8 md:pl-20"
             >
               {/* Timeline dot */}
-              <div className="absolute left-[-4px] top-2 h-3 w-3 rounded-full border-2 border-[#C1FF72] bg-black md:left-[28px]" />
+              <div className="absolute left-[-4px] top-2 h-3 w-3 rounded-full border-2 border-[#ff5b1a] bg-black md:left-[28px]" />
               
               <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold text-white">{experience.role}</h3>
-                  <p className="text-lg text-[#C1FF72]">{experience.company}</p>
+                  <p className="text-lg text-[#ff5b1a]">{experience.company}</p>
                   <p className="mt-2 text-white/70">{experience.description}</p>
                 </div>
                 
