@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -95,10 +96,12 @@ export default function TechMarquee() {
                 key={index}
                 className="flex flex-shrink-0 items-center gap-3 md:gap-6 rounded-xl md:rounded-2xl border border-white/10 bg-black/40 md:bg-white/5 px-6 py-3 md:px-12 md:py-6 backdrop-blur-sm"
               >
-                <img 
+                <Image 
                   src={tech.icon} 
-                  alt={tech.name} 
-                  className="w-8 h-8 md:w-12 md:h-12 object-contain text-white/80"
+                  alt={tech.name}
+                  width={48}
+                  height={48}
+                  className="w-8 h-8 md:w-12 md:h-12 object-contain"
                 />
                 <span className="text-lg md:text-2xl font-medium text-white whitespace-nowrap">{tech.name}</span>
               </div>
@@ -126,10 +129,12 @@ export default function TechMarquee() {
                 key={`reverse-${index}`}
                 className="flex flex-shrink-0 items-center gap-3 md:gap-6 rounded-xl md:rounded-2xl border border-white/10 bg-black/40 md:bg-white/5 px-6 py-3 md:px-12 md:py-6 backdrop-blur-sm"
               >
-                <img 
+                <Image 
                   src={tech.icon} 
-                  alt={tech.name} 
-                  className="w-8 h-8 md:w-12 md:h-12 object-contain text-white/80"
+                  alt={tech.name}
+                  width={48}
+                  height={48}
+                  className="w-8 h-8 md:w-12 md:h-12 object-contain"
                 />
                 <span className="text-lg md:text-2xl font-medium text-white whitespace-nowrap">{tech.name}</span>
               </div>

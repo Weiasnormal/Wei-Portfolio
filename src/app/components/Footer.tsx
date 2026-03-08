@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Facebook, Instagram, Calendar, Youtube } from "lucide-react";
 
@@ -38,7 +39,7 @@ const socialLinks: SocialLink[] = [
   {
     name: "TikTok",
     href: "https://www.tiktok.com/@wiwotech",
-    icon: <img src="/tiktok.svg" alt="TikTok" className="h-5 w-5" />,
+    icon: <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} className="h-5 w-5" />,
   },
 ];
 

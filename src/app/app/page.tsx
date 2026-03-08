@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Experience from "../components/Experience";
 import Services from "../components/Services";
@@ -47,7 +48,7 @@ const socialLinks = [
   {
     name: "TikTok",
     href: "https://tiktok.com/@wiwotech",
-    icon: <img src="/tiktok.svg" alt="TikTok" className="h-5 w-5" />,
+    icon: <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} className="h-5 w-5" />,
   },
 ];
 
