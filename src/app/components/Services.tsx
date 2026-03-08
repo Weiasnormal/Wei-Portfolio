@@ -33,12 +33,41 @@ const services: Service[] = [
   },
   {
     number: "03",
-    title: "Development",
+    title: "Frontend Development",
     deliverables: [
-      "Front-end Development",
-      "Responsive Web Design",
-      "Interactive Animations",
-      "Performance Optimization",
+      "Next.js & React Architecture",
+      "Tailwind CSS Implementation",
+      "High-Performance Optimization",
+      "Scalable & Responsive Codebases",
+    ],
+  },
+  {
+    number: "04",
+    title: "Mobile App Development",
+    deliverables: [
+      "React Native & Expo",
+      "Cross-Platform Solutions",
+      "Smooth Animations & Transitions",
+      "Offline-First Design",
+    ],
+  },
+  {
+    number: "05",
+    title: "Machine Learning",
+    deliverables: [
+      "Predictive Modeling & Forecasting",
+      "Scalable ML Pipelines",
+      "AI-Powered Decision Support",
+    ],
+  },
+  {
+    number: "06",
+    title: "Desktop Development",
+    deliverables: [
+      "C# & WinForms Applications",
+      "Java Desktop Solutions",
+      "Offline-First Architecture",
+      "Legacy System Integration",
     ],
   },
 ];

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
 type WorkProject = {
@@ -25,9 +25,10 @@ function StickyProjectCard({
   index: number;
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isCardHovered, setIsCardHovered] = useState(false);
   const topClass = ["top-14 md:top-20", "top-16 md:top-24", "top-20 md:top-28", "top-24 md:top-32"][index] ?? "top-14 md:top-20";
 
-  const displayImage = isHovered && project.hoverImage ? project.hoverImage : project.image;
+  const displayImage = isCardHovered && project.hoverImage ? project.hoverImage : project.image;
 
   return (
     <article
@@ -35,8 +36,8 @@ function StickyProjectCard({
       style={{
         zIndex: index + 1,
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => setIsCardHovered(true)}
+      onMouseLeave={() => setIsCardHovered(false)}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-all duration-300"
@@ -44,12 +45,18 @@ function StickyProjectCard({
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/85" />
 
-      <div className="absolute inset-x-3 bottom-3 md:inset-x-4 md:bottom-4 flex items-end justify-between gap-2 md:gap-4 rounded-2xl md:rounded-[24px] border border-white/10 bg-black/55 p-2.5 md:p-6 backdrop-blur-xl">
+      <div 
+        className="absolute inset-x-3 bottom-3 md:inset-x-4 md:bottom-4 flex items-end justify-between gap-2 md:gap-4 rounded-2xl md:rounded-[24px] border border-white/10 bg-black/55 p-2.5 md:p-6 backdrop-blur-xl"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <div className="space-y-2 md:space-y-3">
           <p className="text-sm md:text-lg font-medium tracking-wide text-gray-300">
             {project.category}
           </p>
-          <h3 className="text-xl md:text-5xl font-semibold leading-tight text-[#ff5b1a]">
+          <h3 className={`text-xl md:text-5xl font-semibold leading-tight transition-colors duration-300 ${
+            isHovered ? 'text-[#ff5b1a]' : 'text-white'
+          }`}>
             {project.title}
           </h3>
           <span className="inline-flex items-center rounded-full bg-white/12 px-2.5 py-1 md:px-5 md:py-2 text-xs md:text-3xl text-gray-200">
@@ -63,12 +70,39 @@ function StickyProjectCard({
           rel="noopener noreferrer"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          onHoverStart={() => console.log('hover started!')}
-          className="grid h-12 w-12 md:h-28 md:w-28 place-items-center rounded-2xl md:rounded-3xl border border-[#ff5b1a] text-[#ff5b1a] transition hover:bg-[#ff5b1a]/10"
+          animate={{
+            borderColor: isHovered ? '#ff5b1a' : '#ffffff',
+            backgroundColor: isHovered ? 'rgba(255, 91, 26, 0.1)' : 'rgba(0, 0, 0, 0)',
+          }}
+          transition={{ duration: 0.3 }}
+          className="grid h-12 w-12 md:h-28 md:w-28 place-items-center rounded-2xl md:rounded-3xl border overflow-hidden relative"
           aria-label="View project"
           suppressHydrationWarning
         >
-          <ArrowUpRight size={18} className="md:w-11 md:h-11" strokeWidth={1.8} />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={isHovered ? 'orange' : 'white'}
+              initial={{ 
+                opacity: 0,
+                x: -40,
+                y: 40,
+              }}
+              animate={{ 
+                opacity: 1,
+                x: 0,
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                x: 40,
+                y: -40,
+              }}
+              transition={{ duration: 0.15 }}
+              className={isHovered ? 'text-[#ff5b1a]' : 'text-white'}
+            >
+              <ArrowUpRight size={18} className="md:w-11 md:h-11" strokeWidth={1.8} />
+            </motion.div>
+          </AnimatePresence>
         </motion.a>
       </div>
     </article>
