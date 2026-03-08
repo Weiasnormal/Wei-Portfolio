@@ -6,6 +6,7 @@ const selectedWork = [
     title: "ResqLine",
     date: "Dec 2025",
     image: "/Works/ResqLine.svg",
+    link: "https://github.com/Weiasnormal/ResqLine_Frontend.git",
   },
   {
     category: "Mobile App Platform (React + Expo)",
@@ -13,6 +14,7 @@ const selectedWork = [
     date: "Feb 2026",
     image:
       "/Works/Statera.svg",
+    link: "https://github.com/Weiasnormal/Statera_App.git",
   },
   {
     category: "Web Platform",
@@ -21,6 +23,7 @@ const selectedWork = [
     image:
       "/Works/SonaB.svg",
     hoverImage: "/Works/SonaW.svg",
+    link: "https://sona-ten.vercel.app/mbti-selection",
   },
   {
     category: "Web Design",
@@ -29,18 +32,21 @@ const selectedWork = [
     image:
       "/Works/octaB.svg",
     hoverImage: "/Works/octaW.svg",
+    link: "https://ccs-octa.com/home",
   },
   {
-    category: "Collaboration Platform",
+    category: "WinForms Desktop App (C#)",
     title: "WorkHive",
     date: "June 2024",
     image: "/Works/WorkHive.svg",
+    link: "https://github.com/recca383/WorkHive.git",
   },
   {
-    category: "Learning Platform",
+    category: "WinForms Desktop App (JAVA)",
     title: "LEARN",
     date: "Jan 2026",
     image: "/Works/LEARN.svg",
+    link: "https://github.com/Joko2005/L.E.A.R.N.-An-Interactive-Java-Based-Learning-System.git",
   },
 ];
 

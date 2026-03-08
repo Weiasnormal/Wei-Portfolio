@@ -10,6 +10,7 @@ type WorkProject = {
   date: string;
   image: string;
   hoverImage?: string;
+  link?: string;
 };
 
 type SelectedWorkStickyStackProps = {
@@ -56,8 +57,10 @@ function StickyProjectCard({
           </span>
         </div>
 
-        <motion.button
-          type="button"
+        <motion.a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           onHoverStart={() => console.log('hover started!')}
@@ -66,7 +69,7 @@ function StickyProjectCard({
           suppressHydrationWarning
         >
           <ArrowUpRight size={18} className="md:w-11 md:h-11" strokeWidth={1.8} />
-        </motion.button>
+        </motion.a>
       </div>
     </article>
   );
