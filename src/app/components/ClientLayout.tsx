@@ -15,8 +15,9 @@ export default function ClientLayout({
     setIsClient(true);
     
     // Check if this is a fresh page load (not client-side navigation)
-    const isPageLoad = performance.navigation.type === 1 || 
-                       performance.getEntriesByType("navigation")[0]?.type === "reload" ||
+    const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
+    const isPageLoad = performance.navigation?.type === 1 || 
+                       navEntry?.type === "reload" ||
                        !sessionStorage.getItem("hasNavigated");
     
     if (isPageLoad) {

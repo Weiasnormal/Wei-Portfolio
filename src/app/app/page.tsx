@@ -16,7 +16,7 @@ import HeroSpline from "../components/HeroSpline";
 import VantaBackground from "../components/VantaBackground";
 import FooterSplineBackground from "../components/FooterSplineBackground";
 import SelectedWorks from "./selectedworks";
-import { Github, Linkedin, Facebook, Instagram, Mail, Youtube, Download } from "lucide-react";
+import { Github, Linkedin, Facebook, Instagram, Youtube, Download } from "lucide-react";
 
 const socialLinks = [
   {

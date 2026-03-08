@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import DOMPurify from "dompurify";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -83,16 +84,19 @@ export default function ContactForm() {
       const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
+      // Sanitize all inputs to prevent XSS attacks
+      const sanitizedData = {
+        from_name: DOMPurify.sanitize(formData.name.trim()),
+        from_email: DOMPurify.sanitize(formData.email.trim()),
+        phone: DOMPurify.sanitize(formData.phone.trim()),
+        message: DOMPurify.sanitize(formData.message.trim()),
+        to_name: "Wincel Crusit",
+      };
+
       await emailjs.send(
         serviceID,
         templateID,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-          to_name: "Wincel Crusit",
-        },
+        sanitizedData,
         publicKey
       );
 
@@ -165,7 +169,7 @@ export default function ContactForm() {
             For Work
           </h2>
           <p className="text-sm md:text-base text-white/70">
-            Let's create something amazing together. Fill out the form and I'll get back to you
+            Let&apos;s create something amazing together. Fill out the form and I&apos;ll get back to you
             within 24 hours.
           </p>
         </motion.div>

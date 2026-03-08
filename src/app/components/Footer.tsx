@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Facebook, Instagram, Mail, Calendar, Youtube } from "lucide-react";
+import { Github, Linkedin, Facebook, Instagram, Calendar, Youtube } from "lucide-react";
 
 type SocialLink = {
   name: string;

@@ -1,7 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/app',
+        permanent: true,
+      },
+    ];
+  },
+  images: {
+    domains: ['prod.spline.design'],
+    formats: ['image/avif', 'image/webp'],
+  },
 };
 
 export default nextConfig;

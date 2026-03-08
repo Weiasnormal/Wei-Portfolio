@@ -112,7 +112,6 @@ export default function TextRotator({
     );
   }
 
-  const fullText = currentItem.prefix + currentItem.title;
   const prefixLength = currentItem.prefix.length;
   const displayedPrefix = currentText.substring(0, Math.min(currentText.length, prefixLength));
   const displayedTitle = currentText.substring(prefixLength);
