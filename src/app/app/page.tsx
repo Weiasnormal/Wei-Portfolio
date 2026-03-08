@@ -11,6 +11,7 @@ import TopHeader from "../components/TopHeader";
 import SidebarNav from "../components/SidebarNav";
 import HeroSpline from "../components/HeroSpline";
 import VantaBackground from "../components/VantaBackground";
+import FooterSplineBackground from "../components/FooterSplineBackground";
 import SelectedWorks from "./selectedworks";
 import { Github, Linkedin, Facebook, Instagram, Mail, Youtube, Download } from "lucide-react";
 
@@ -53,10 +54,10 @@ export default function HomePage() {
       <VantaBackground />
       <TopHeader />
       <SidebarNav />
-      <main className="relative z-10 w-full px-4 pt-2 md:px-10">
+      <main className="relative z-10 w-full px-4 pt-2 md:px-10 lg:pr-24">
       <section id="home" className="snap-start min-h-screen flex items-start pt-32">
-        <div className="mx-auto grid w-full max-w-7xl gap-10 md:grid-cols-12">
-          <div className="md:col-span-7 md:self-start md:mt-15 md:pl-8 text-center md:text-left">
+        <div className="mx-auto grid w-full max-w-7xl gap-6 sm:gap-8 lg:gap-10 md:grid-cols-12">
+          <div className="md:col-span-7 md:self-start md:mt-15 md:pl-8 text-center md:text-left px-2 sm:px-0">
             <p className="mb-4 inline-flex items-center rounded-full border border-white/15 px-3 py-1 text-xs md:text-sm text-white/80">
               Open to Hire
             </p>
@@ -104,8 +105,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="md:col-span-5 md:self-start mt-2 md:mt-0 flex items-center justify-center md:justify-end md:pr-8">
-            <div className="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden bg-gradient-to-b from-white/10 to-white/0">
+          <div className="md:col-span-5 md:self-start mt-2 md:mt-0 flex items-center justify-center md:justify-end px-2 sm:px-4 md:pr-8 lg:pr-4">
+            <div className="relative w-full max-w-md md:max-w-none h-[350px] sm:h-[400px] md:h-[500px] rounded-3xl overflow-hidden bg-gradient-to-b from-white/10 to-white/0">
               <HeroSpline />
             </div>
           </div>
@@ -150,8 +151,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="footer" className="snap-start min-h-screen flex items-center">
-        <div className="mx-auto w-full max-w-7xl">
+      <section id="footer" className="snap-start min-h-screen flex items-center relative overflow-hidden">
+        <FooterSplineBackground />
+        <div className="mx-auto w-full max-w-7xl relative z-10">
           <Footer />
         </div>
       </section>
