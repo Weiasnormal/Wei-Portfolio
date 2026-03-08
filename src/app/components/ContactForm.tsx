@@ -34,7 +34,7 @@ export default function ContactForm() {
     let isValid = true;
 
     if (!formData.name.trim()) {
-      newErrors.name = "Hey, I'd love to know your name!";
+      newErrors.name = "Hey, I'd love to know your name! ";
       isValid = false;
     }
 
@@ -42,13 +42,21 @@ export default function ContactForm() {
       newErrors.email = "Don't forget your email so I can reach you!";
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Hmm, that doesn't look like a valid email";
+      newErrors.email = "Please include @ in your email address";
       isValid = false;
     }
 
     if (!formData.phone.trim()) {
       newErrors.phone = "Your phone number would be great!";
       isValid = false;
+    } else if (formData.phone.trim().toUpperCase() !== "N/A") {
+      const cleanPhone = formData.phone.replace(/[\s\-]/g, '');
+      const phoneRegex = /^(\+639|09|9)\d{9}$/;
+      
+      if (!phoneRegex.test(cleanPhone)) {
+        newErrors.phone = "Please enter a valid 11-digit PH number (09xxxxxxxxx) or type N/A ";
+        isValid = false;
+      }
     }
 
     if (!formData.message.trim()) {
@@ -109,9 +117,28 @@ export default function ContactForm() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+    
+    let processedValue = value;
+    
+    if (name === "phone" && value.trim().toUpperCase() !== "N/A") {
+      // Remove all non-digit characters except for leading +
+      const cleanValue = value.replace(/[^\d+]/g, '');
+      
+      if (/^0?9\d{0,9}$/.test(cleanValue)) {
+        const digits = cleanValue.replace(/^0/, ''); 
+        processedValue = `+63${digits}`;
+      } else if (cleanValue.startsWith('+63')) {
+        processedValue = cleanValue;
+      } else if (value.trim() === '') {
+        processedValue = '';
+      } else {
+        processedValue = value; 
+      }
+    }
+    
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: processedValue,
     });
     // Clear error for this field when user starts typing
     if (errors[name as keyof typeof errors]) {
@@ -149,6 +176,7 @@ export default function ContactForm() {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
           onSubmit={handleSubmit}
+          noValidate
           className="space-y-8"
         >
           {status.type && (
@@ -228,7 +256,7 @@ export default function ContactForm() {
 
           <div>
             <label htmlFor="phone" className="mb-2 block text-sm text-white/70">
-              Phone
+              Phone (PH Number or N/A)
             </label>
             <input
               type="tel"
@@ -239,7 +267,7 @@ export default function ContactForm() {
               className={`w-full border-0 border-b-2 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition ${
                 errors.phone ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
               }`}
-              placeholder="+63 000-000-0000"
+              placeholder="09xxxxxxxxx or N/A"
               suppressHydrationWarning
             />
             {errors.phone && (

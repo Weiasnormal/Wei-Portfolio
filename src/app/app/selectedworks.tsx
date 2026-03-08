@@ -48,7 +48,7 @@ export default function SelectedWorks() {
   return (
     <section id="works" className="snap-start py-10 md:py-16">
       <div className="mx-auto flex w-full max-w-7xl flex-col px-4 md:px-0">
-        <h2 className="mb-4 shrink-0 text-center md:text-left text-2xl font-bold text-white md:text-4xl">Selected Work</h2>
+        <h2 className="mb-4 shrink-0 text-center md:text-left text-2xl font-bold text-white md:text-4xl">Recent Projects</h2>
         <SelectedWorkStickyStack projects={selectedWork} />
       </div>
     </section>
