@@ -282,15 +282,18 @@ export default function ContactForm() {
             )}
           </div>
 
-          <button
+          <motion.button
             type="submit"
             disabled={isLoading}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onHoverStart={() => console.log('hover started!')}
             className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-8 py-4 font-semibold text-black transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
             suppressHydrationWarning
           >
             {isLoading ? "Sending..." : "Send Message"}
             <Send className="h-4 w-4" />
-          </button>
+          </motion.button>
         </motion.form>
       </div>
     </section>

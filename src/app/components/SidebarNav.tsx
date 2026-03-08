@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 type NavItem = {
   label: string;
@@ -97,13 +98,16 @@ export default function SidebarNav() {
           <ul className="flex flex-col items-center gap-4">
             {navItems.map((item) => (
               <li key={item.label}>
-                <a
+                <motion.a
                   href={item.href}
                   aria-label={item.label}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  onHoverStart={() => console.log('hover started!')}
                   className="flex h-9 w-9 items-center justify-center rounded-full text-white/75 transition hover:bg-white/10 hover:text-[#ff5b1a]"
                 >
                   {item.icon}
-                </a>
+                </motion.a>
               </li>
             ))}
           </ul>
@@ -111,15 +115,18 @@ export default function SidebarNav() {
       </aside>
 
       {/* Mobile Menu Button */}
-      <button
+      <motion.button
         onClick={() => setIsOpen(!isOpen)}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        onHoverStart={() => console.log('hover started!')}
         className="md:hidden fixed right-6 bottom-6 z-50 flex flex-col items-center justify-center gap-1.5 h-14 w-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-md"
         aria-label="Toggle navigation menu"
       >
         <span className={`w-6 h-0.5 bg-white transition-all ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
         <span className={`w-6 h-0.5 bg-white transition-all ${isOpen ? 'opacity-0' : ''}`} />
         <span className={`w-6 h-0.5 bg-white transition-all ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-      </button>
+      </motion.button>
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
@@ -128,16 +135,19 @@ export default function SidebarNav() {
             <ul className="flex flex-col items-center gap-8">
               {navItems.map((item) => (
                 <li key={item.label}>
-                  <a
+                  <motion.a
                     href={item.href}
                     onClick={() => setIsOpen(false)}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onHoverStart={() => console.log('hover started!')}
                     className="flex flex-col items-center gap-2 text-white/75 transition hover:text-[#ff5b1a]"
                   >
                     <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5">
                       {item.icon}
                     </span>
                     <span className="text-sm">{item.label}</span>
-                  </a>
+                  </motion.a>
                 </li>
               ))}
             </ul>

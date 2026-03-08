@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 import Experience from "../components/Experience";
 import Services from "../components/Services";
 import TechMarquee from "../components/TechMarquee";
@@ -81,25 +84,31 @@ export default function HomePage() {
               </span>
             </h1>
             <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
-              <a
+              <motion.a
                 href="/resume.pdf"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onHoverStart={() => console.log('hover started!')}
                 className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-semibold text-white transition hover:opacity-90"
               >
                 <Download className="h-4 w-4 md:h-5 md:w-5" />
                 Download Resume
-              </a>
+              </motion.a>
               <div className="flex justify-center gap-3">
                 {socialLinks.map((social) => (
-                  <a
+                  <motion.a
                     key={social.name}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.name}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onHoverStart={() => console.log('hover started!')}
                     className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/10 bg-black/40 md:bg-white/5 text-white/70 transition hover:border-[#ff5b1a] hover:bg-white/10 hover:text-[#ff5b1a]"
                   >
                     <span className="h-4 w-4 md:h-5 md:w-5 flex items-center justify-center">{social.icon}</span>
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </div>

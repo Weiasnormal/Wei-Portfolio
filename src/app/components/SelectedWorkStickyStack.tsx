@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
 type WorkProject = {
@@ -55,14 +56,17 @@ function StickyProjectCard({
           </span>
         </div>
 
-        <button
+        <motion.button
           type="button"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          onHoverStart={() => console.log('hover started!')}
           className="grid h-12 w-12 md:h-28 md:w-28 place-items-center rounded-2xl md:rounded-3xl border border-[#ff5b1a] text-[#ff5b1a] transition hover:bg-[#ff5b1a]/10"
           aria-label="View project"
           suppressHydrationWarning
         >
           <ArrowUpRight size={18} className="md:w-11 md:h-11" strokeWidth={1.8} />
-        </button>
+        </motion.button>
       </div>
     </article>
   );

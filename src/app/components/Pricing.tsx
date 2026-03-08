@@ -95,7 +95,10 @@ export default function Pricing() {
               ))}
             </ul>
             
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onHoverStart={() => console.log('hover started!')}
               className={`w-full rounded-full py-3 font-semibold transition ${
                 tier.highlighted
                   ? "bg-[#ff5b1a] text-black hover:opacity-90"
@@ -103,7 +106,7 @@ export default function Pricing() {
               }`}
             >
               Get Started
-            </button>
+            </motion.button>
           </motion.div>
         ))}
       </div>

@@ -65,6 +65,9 @@ export default function Footer() {
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onHoverStart={() => console.log('hover started!')}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
             className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-8 py-4 font-semibold text-black transition hover:opacity-90"
@@ -83,16 +86,19 @@ export default function Footer() {
           className="mb-12 flex justify-center gap-6"
         >
           {socialLinks.map((social) => (
-            <a
+            <motion.a
               key={social.name}
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.name}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onHoverStart={() => console.log('hover started!')}
               className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/40 md:bg-white/5 text-white/70 transition hover:border-[#ff5b1a] hover:bg-white/10 hover:text-[#ff5b1a]"
             >
               {social.icon}
-            </a>
+            </motion.a>
           ))}
         </motion.div>
 
