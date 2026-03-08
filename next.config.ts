@@ -11,7 +11,12 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    domains: ['prod.spline.design'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'prod.spline.design',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
 };
