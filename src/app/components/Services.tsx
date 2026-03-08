@@ -98,14 +98,20 @@ export default function Services() {
               className="flex w-full items-center justify-between p-6 text-left transition hover:bg-white/5"
               suppressHydrationWarning
             >
-              <div className="flex items-center gap-4">
+              <motion.div 
+                className="flex items-center gap-4"
+                animate={{ 
+                  x: openIndex === index ? 20 : 0 
+                }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
                 <span className="text-2xl font-bold text-[#ff5b1a] md:text-3xl">
                   {service.number}
                 </span>
                 <h3 className="text-lg font-semibold text-white md:text-2xl">
                   {service.title}
                 </h3>
-              </div>
+              </motion.div>
               
               <motion.div
                 animate={{ rotate: openIndex === index ? 180 : 0 }}
@@ -125,14 +131,40 @@ export default function Services() {
                   className="overflow-hidden"
                 >
                   <div className="border-t border-white/10 px-6 pb-6 pt-4">
-                    <ul className="space-y-2">
+                    <motion.ul 
+                      className="space-y-2"
+                      initial="hidden"
+                      animate="visible"
+                      variants={{
+                        visible: {
+                          transition: {
+                            staggerChildren: 0.08,
+                            delayChildren: 0.1
+                          }
+                        }
+                      }}
+                    >
                       {service.deliverables.map((deliverable, i) => (
-                        <li key={i} className="flex items-start gap-3 text-xs md:text-base text-white/80">
+                        <motion.li 
+                          key={i} 
+                          className="flex items-start gap-3 text-xs md:text-base text-white/80"
+                          variants={{
+                            hidden: { opacity: 0, y: -10 },
+                            visible: { 
+                              opacity: 1, 
+                              y: 0,
+                              transition: {
+                                duration: 0.3,
+                                ease: "easeOut"
+                              }
+                            }
+                          }}
+                        >
                           <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#ff5b1a]" />
                           {deliverable}
-                        </li>
+                        </motion.li>
                       ))}
-                    </ul>
+                    </motion.ul>
                   </div>
                 </motion.div>
               )}
