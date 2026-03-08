@@ -17,11 +17,58 @@ export default function ContactForm() {
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const validateForm = () => {
+    const newErrors = {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    };
+    let isValid = true;
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Hey, I'd love to know your name!";
+      isValid = false;
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Don't forget your email so I can reach you!";
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Hmm, that doesn't look like a valid email";
+      isValid = false;
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Your phone number would be great!";
+      isValid = false;
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Tell me about your project! I'm all ears";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setStatus({ type: null, message: "" });
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
       const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
@@ -46,11 +93,12 @@ export default function ContactForm() {
         message: "Message sent successfully! I'll get back to you soon.",
       });
       setFormData({ name: "", email: "", phone: "", message: "" });
+      setErrors({ name: "", email: "", phone: "", message: "" });
     } catch (error) {
       console.error("EmailJS error:", error);
       setStatus({
         type: "error",
-        message: "Failed to send message. Please try again or contact me directly.",
+        message: "Oops! Something went wrong. Please try again or reach out to me directly.",
       });
     } finally {
       setIsLoading(false);
@@ -60,10 +108,18 @@ export default function ContactForm() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+    // Clear error for this field when user starts typing
+    if (errors[name as keyof typeof errors]) {
+      setErrors({
+        ...errors,
+        [name]: "",
+      });
+    }
   };
 
   return (
@@ -95,13 +151,14 @@ export default function ContactForm() {
           onSubmit={handleSubmit}
           className="space-y-8"
         >
-
           {status.type && (
-            <div
-              className={`flex items-center gap-2 rounded-lg p-4 ${
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`flex items-center gap-3 rounded-xl p-4 backdrop-blur-sm border ${
                 status.type === "success"
-                  ? "bg-green-500/10 text-green-500"
-                  : "bg-red-500/10 text-red-500"
+                  ? "bg-green-500/10 border-green-500/20 text-green-400"
+                  : "bg-red-500/10 border-red-500/20 text-red-400"
               }`}
             >
               {status.type === "success" ? (
@@ -109,8 +166,8 @@ export default function ContactForm() {
               ) : (
                 <AlertCircle className="h-5 w-5 flex-shrink-0" />
               )}
-              <p className="text-sm">{status.message}</p>
-            </div>
+              <p className="text-sm font-medium">{status.message}</p>
+            </motion.div>
           )}
 
           <div>
@@ -123,11 +180,22 @@ export default function ContactForm() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              required
-              className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#ff5b1a]"
+              className={`w-full border-0 border-b-2 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition ${
+                errors.name ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
+              }`}
               placeholder="Your Name"
               suppressHydrationWarning
             />
+            {errors.name && (
+              <motion.p
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-1.5 text-xs text-[#ff5b1a] flex items-center gap-1"
+              >
+                <span className="inline-block w-1 h-1 rounded-full bg-[#ff5b1a]"></span>
+                {errors.name}
+              </motion.p>
+            )}
           </div>
 
           <div>
@@ -140,28 +208,50 @@ export default function ContactForm() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              required
-              className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#ff5b1a]"
+              className={`w-full border-0 border-b-2 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition ${
+                errors.email ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
+              }`}
               placeholder="your@email.com"
               suppressHydrationWarning
             />
+            {errors.email && (
+              <motion.p
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-1.5 text-xs text-[#ff5b1a] flex items-center gap-1"
+              >
+                <span className="inline-block w-1 h-1 rounded-full bg-[#ff5b1a]"></span>
+                {errors.email}
+              </motion.p>
+            )}
           </div>
 
-          <ddisabled={isLoading}
-            className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-8 py-4 font-semibold text-black transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-            suppressHydrationWarning
-          >
-            {isLoading ? "Sending..." : "Send Message"}
+          <div>
+            <label htmlFor="phone" className="mb-2 block text-sm text-white/70">
+              Phone
+            </label>
             <input
               type="tel"
               id="phone"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#ff5b1a]"
+              className={`w-full border-0 border-b-2 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition ${
+                errors.phone ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
+              }`}
               placeholder="+63 000-000-0000"
               suppressHydrationWarning
             />
+            {errors.phone && (
+              <motion.p
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-1.5 text-xs text-[#ff5b1a] flex items-center gap-1"
+              >
+                <span className="inline-block w-1 h-1 rounded-full bg-[#ff5b1a]"></span>
+                {errors.phone}
+              </motion.p>
+            )}
           </div>
 
           <div>
@@ -173,20 +263,32 @@ export default function ContactForm() {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              required
               rows={4}
-              className="w-full resize-none border-0 border-b-2 border-white/20 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition focus:border-[#ff5b1a]"
+              className={`w-full resize-none border-0 border-b-2 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition ${
+                errors.message ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
+              }`}
               placeholder="Tell me about your project..."
               suppressHydrationWarning
             />
+            {errors.message && (
+              <motion.p
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-1.5 text-xs text-[#ff5b1a] flex items-center gap-1"
+              >
+                <span className="inline-block w-1 h-1 rounded-full bg-[#ff5b1a]"></span>
+                {errors.message}
+              </motion.p>
+            )}
           </div>
 
           <button
             type="submit"
-            className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-8 py-4 font-semibold text-black transition hover:opacity-90"
+            disabled={isLoading}
+            className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-8 py-4 font-semibold text-black transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
             suppressHydrationWarning
           >
-            Send Message
+            {isLoading ? "Sending..." : "Send Message"}
             <Send className="h-4 w-4" />
           </button>
         </motion.form>
