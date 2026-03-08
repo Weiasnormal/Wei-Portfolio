@@ -58,7 +58,7 @@ export default function HomePage() {
         <div className="mx-auto grid w-full max-w-7xl gap-10 md:grid-cols-12">
           <div className="md:col-span-7 md:self-start md:mt-15 md:pl-8 text-center md:text-left">
             <p className="mb-4 inline-flex items-center rounded-full border border-white/15 px-3 py-1 text-xs md:text-sm text-white/80">
-              Personal Portfolio
+              Open to Hire
             </p>
             <h1 className="text-2xl font-bold leading-tight text-white md:text-6xl">
               <span className="block">Hi, I am</span>
