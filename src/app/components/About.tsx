@@ -53,7 +53,9 @@ export default function About() {
             key={index}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ scale: 0.95 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2, delay: index * 0.1 }}
             viewport={{ once: true }}
             className={`group rounded-2xl border border-white/10 bg-black/40 md:bg-white/5 p-4 md:p-6 transition hover:bg-white/10 flex flex-col items-center md:items-start text-center md:text-left ${index === 4 ? 'col-span-2 md:col-span-1' : ''}`}
           >

@@ -67,7 +67,17 @@ export default function FAQ() {
               className="flex w-full items-center justify-between p-4 md:p-6 text-left transition hover:bg-white/5"
               suppressHydrationWarning
             >
-              <h3 className="pr-3 md:pr-4 text-base md:text-xl font-semibold text-white">{faq.question}</h3>
+              <motion.h3 
+                className={`pr-3 md:pr-4 text-base md:text-xl font-semibold transition-colors duration-300 ${
+                  openIndex === index ? 'text-[#ff5b1a]' : 'text-white'
+                }`}
+                animate={{ 
+                  x: openIndex === index ? 20 : 0 
+                }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                {faq.question}
+              </motion.h3>
               
               <div className="flex-shrink-0">
                 {openIndex === index ? (
