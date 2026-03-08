@@ -150,8 +150,8 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="pb-16">
-      <div className="grid gap-12 px-4 md:px-0 md:grid-cols-2 md:gap-16">
+    <section id="contact" className="pb-12 md:pb-16">
+      <div className="grid gap-8 px-4 md:px-0 md:grid-cols-2 md:gap-16">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -159,9 +159,9 @@ export default function ContactForm() {
           viewport={{ once: true }}
           className="flex flex-col justify-center text-center md:text-left"
         >
-          <h2 className="mb-4 text-2xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+          <h2 className="mb-2 md:mb-4 text-2xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
             Contact
-            <br />
+            <br className="hidden md:block" />
             For Work
           </h2>
           <p className="text-sm md:text-base text-white/70">
@@ -177,7 +177,7 @@ export default function ContactForm() {
           viewport={{ once: true }}
           onSubmit={handleSubmit}
           noValidate
-          className="space-y-8"
+          className="space-y-4 md:space-y-8"
         >
           {status.type && (
             <motion.div
@@ -208,7 +208,7 @@ export default function ContactForm() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full border-0 border-b-2 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition ${
+              className={`w-full border-0 border-b-2 bg-transparent px-0 py-2 md:py-3 text-white placeholder-white/40 outline-none transition ${
                 errors.name ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
               }`}
               placeholder="Your Name"
@@ -236,7 +236,7 @@ export default function ContactForm() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full border-0 border-b-2 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition ${
+              className={`w-full border-0 border-b-2 bg-transparent px-0 py-2 md:py-3 text-white placeholder-white/40 outline-none transition ${
                 errors.email ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
               }`}
               placeholder="your@email.com"
@@ -264,7 +264,7 @@ export default function ContactForm() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className={`w-full border-0 border-b-2 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition ${
+              className={`w-full border-0 border-b-2 bg-transparent px-0 py-2 md:py-3 text-white placeholder-white/40 outline-none transition ${
                 errors.phone ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
               }`}
               placeholder="09xxxxxxxxx or N/A"
@@ -291,8 +291,8 @@ export default function ContactForm() {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              rows={4}
-              className={`w-full resize-none border-0 border-b-2 bg-transparent px-0 py-3 text-white placeholder-white/40 outline-none transition ${
+              rows={3}
+              className={`w-full resize-none border-0 border-b-2 bg-transparent px-0 py-2 md:py-3 text-white placeholder-white/40 outline-none transition ${
                 errors.message ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
               }`}
               placeholder="Tell me about your project..."
@@ -316,7 +316,7 @@ export default function ContactForm() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onHoverStart={() => console.log('hover started!')}
-            className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-8 py-4 font-semibold text-black transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-6 py-3 md:px-8 md:py-4 font-semibold text-black transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
             suppressHydrationWarning
           >
             {isLoading ? "Sending..." : "Send Message"}

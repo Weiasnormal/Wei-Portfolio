@@ -12,27 +12,27 @@ type FAQItem = {
 const faqs: FAQItem[] = [
   {
     question: "What is your typical project timeline?",
-    answer: "Project timelines vary depending on complexity. Standard projects typically take 2-3 weeks, while premium projects can be completed in 1-2 weeks with priority support. We'll provide a detailed timeline during our initial consultation.",
+    answer: "Timelines depend on the scope of the solution. Standard web or desktop projects typically take 2-3 weeks, while complex Machine Learning integrations or cross-platform mobile apps may require a more detailed phased approach.",
   },
   {
     question: "Do you offer revisions?",
-    answer: "Yes! Standard packages include 3 revision rounds, while Premium packages offer unlimited revisions. We work closely with you to ensure the final product exceeds your expectations.",
+    answer: "Yes! I provide structured revision rounds to ensure the final technical architecture and UI/UX design align perfectly with your requirements, maintaining a focus on high-performance and scalable code.",
   },
   {
     question: "What tools and technologies do you use?",
-    answer: "I primarily work with Figma for design, and develop using React, Next.js, and Framer Motion for animations. I also use Tailwind CSS for styling and ensure all projects are responsive and optimized for performance.",
+    answer: "I architect scalable solutions across web, mobile, and desktop platforms using Next.js, React Native, and WinForms, powered by a robust stack including TypeScript, Python, and C#. To deliver advanced functionality, I design and deploy intelligent Machine Learning models using TensorFlow and PyTorch to transform complex data into actionable insights." ,
   },
   {
-    question: "Can you work with existing brand guidelines?",
-    answer: "Absolutely! I can work within your existing brand guidelines to ensure consistency across all touchpoints. If you don't have guidelines yet, I can help create a comprehensive design system for your brand.",
+    question: "Can you work with existing technical documentation?",
+    answer: "Absolutely. I can integrate with existing brand guidelines, API documentations (like PayMongo), or hardware setups like Raspberry Pi to ensure your project fits seamlessly into your current ecosystem.",
   },
   {
     question: "What is your payment structure?",
-    answer: "I typically require a 50% deposit upfront to begin work, with the remaining 50% due upon project completion. For larger projects, we can discuss milestone-based payments that work for both parties.",
+    answer: "I typically follow a 50% upfront deposit and 50% upon completion model. For larger-scale research or development projects, we can establish milestone-based payments tied to specific deliverables like model training or beta releases.",
   },
   {
-    question: "Do you provide post-launch support?",
-    answer: "Premium packages include post-launch support. For Standard packages, ongoing support and maintenance can be arranged separately. I'm committed to ensuring your project's long-term success.",
+    question: "Do you provide post-launch technical support?",
+    answer: "Yes, I offer support to ensure long-term stability. This includes performance optimization for web apps and fine-tuning for Machine Learning models as new data becomes available to maintain high predictive accuracy.",
   },
 ];
 

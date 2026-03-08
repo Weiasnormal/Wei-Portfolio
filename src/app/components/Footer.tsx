@@ -36,9 +36,9 @@ const socialLinks: SocialLink[] = [
     icon: <Youtube className="h-5 w-5" />,
   },
   {
-    name: "Email",
-    href: "mailto:crusitwincel@gmail.com",
-    icon: <Mail className="h-5 w-5" />,
+    name: "TikTok",
+    href: "https://www.tiktok.com/@wiwotech",
+    icon: <img src="/tiktok.svg" alt="TikTok" className="h-5 w-5" />,
   },
 ];
 
@@ -73,7 +73,7 @@ export default function Footer() {
             className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-8 py-4 font-semibold text-black transition hover:opacity-90"
           >
             <Calendar className="h-5 w-5" />
-            Book A Call
+            Book A Meeting
           </motion.a>
         </div>
 

@@ -45,9 +45,9 @@ const socialLinks = [
     icon: <Youtube className="h-5 w-5" />,
   },
   {
-    name: "Email",
-    href: "mailto:crusitwincel@gmail.com",
-    icon: <Mail className="h-5 w-5" />,
+    name: "TikTok",
+    href: "https://tiktok.com/@wiwotech",
+    icon: <img src="/tiktok.svg" alt="TikTok" className="h-5 w-5" />,
   },
 ];
 
@@ -85,7 +85,8 @@ export default function HomePage() {
             </h1>
             <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
               <motion.a
-                href="/resume.pdf"
+                href="/Resume/Crusit_Wincel_HARVARD_RESUME.pdf"
+                download
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onHoverStart={() => console.log('hover started!')}
