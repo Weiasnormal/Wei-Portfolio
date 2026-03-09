@@ -122,6 +122,7 @@ export default function SidebarNav() {
         onHoverStart={() => console.log('hover started!')}
         className="md:hidden fixed right-6 bottom-6 z-50 flex flex-col items-center justify-center gap-1.5 h-14 w-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-md"
         aria-label="Toggle navigation menu"
+        suppressHydrationWarning
       >
         <span className={`w-6 h-0.5 bg-white transition-all ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
         <span className={`w-6 h-0.5 bg-white transition-all ${isOpen ? 'opacity-0' : ''}`} />

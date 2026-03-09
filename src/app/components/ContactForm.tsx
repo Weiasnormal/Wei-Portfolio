@@ -210,6 +210,7 @@ export default function ContactForm() {
               type="text"
               id="name"
               name="name"
+              autoComplete="name"
               value={formData.name}
               onChange={handleChange}
               className={`w-full border-0 border-b-2 bg-transparent px-0 py-2 md:py-3 text-white placeholder-white/40 outline-none transition ${
@@ -238,6 +239,7 @@ export default function ContactForm() {
               type="email"
               id="email"
               name="email"
+              autoComplete="email"
               value={formData.email}
               onChange={handleChange}
               className={`w-full border-0 border-b-2 bg-transparent px-0 py-2 md:py-3 text-white placeholder-white/40 outline-none transition ${
@@ -266,6 +268,7 @@ export default function ContactForm() {
               type="tel"
               id="phone"
               name="phone"
+              autoComplete="tel"
               value={formData.phone}
               onChange={handleChange}
               className={`w-full border-0 border-b-2 bg-transparent px-0 py-2 md:py-3 text-white placeholder-white/40 outline-none transition ${
