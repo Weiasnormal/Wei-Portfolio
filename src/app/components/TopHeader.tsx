@@ -65,6 +65,7 @@ const TopHeader: React.FC = () => {
               alt="Wincel Logo"
               width={56}
               height={56}
+              priority
               className="w-full h-full"
             />
           </div>
