@@ -1,11 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
-
 type Client = {
   name: string;
-  logo: string; // We'll use text logos for simplicity
+  logo: string;
 };
 
 const clients: Client[] = [
@@ -19,47 +16,37 @@ const clients: Client[] = [
   { name: "Spotify", logo: "S" },
 ];
 
-export default function ClientsMarquee() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  
-  // Duplicate the array to create seamless loop
-  const duplicatedClients = [...clients, ...clients];
+const duplicatedClients = [...clients, ...clients];
 
+export default function ClientsMarquee() {
   return (
     <div className="overflow-hidden py-12">
+      <style>{`
+        @keyframes clients-left {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        .clients-marquee { animation: clients-left 25s linear infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .clients-marquee { animation: none; }
+        }
+      `}</style>
+
       <h3 className="mb-8 text-center text-2xl font-bold text-white/80">Trusted By</h3>
-      
-      <div className="relative">
-        <motion.div
-          className="flex gap-12"
-          animate={{
-            x: [0, -50 * clients.length * 12], // Adjusted for gap
-          }}
-          transition={{
-            x: {
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear",
-            },
-          }}
-        >
+
+      <div className="relative overflow-hidden">
+        <div className="clients-marquee flex gap-12 w-max will-change-transform">
           {duplicatedClients.map((client, index) => (
             <div
               key={index}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="flex h-24 w-32 flex-shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300"
-              style={{
-                filter: hoveredIndex === index ? "grayscale(0%)" : "grayscale(100%)",
-                transform: hoveredIndex === index ? "scale(1.05)" : "scale(1)",
-              }}
+              className="flex h-24 w-32 flex-shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm grayscale hover:grayscale-0 transition-[filter,transform] duration-300 hover:scale-105"
             >
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#ff5b1a] via-[#7FD1AE] to-[#4DA3FF] text-2xl font-bold text-black">
                 {client.logo}
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   );

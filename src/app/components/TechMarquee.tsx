@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 
 type TechItem = {
   name: string;
@@ -52,94 +50,69 @@ const techStack: TechItem[] = [
   { name: "Raspberry Pi", icon: "/Teckstack/Raspberrypi.svg" },
 ];
 
+// Duplicate once for a seamless CSS loop
+const duplicatedTech = [...techStack, ...techStack];
+
+function TechCard({ tech, prefix }: { tech: TechItem; prefix?: string }) {
+  return (
+    <div className="flex flex-shrink-0 items-center gap-3 md:gap-6 rounded-xl md:rounded-2xl border border-white/10 bg-black/40 md:bg-white/5 px-6 py-3 md:px-12 md:py-6">
+      <Image
+        src={tech.icon}
+        alt={tech.name}
+        width={48}
+        height={48}
+        className="w-8 h-8 md:w-12 md:h-12 object-contain"
+        loading="lazy"
+      />
+      <span className="text-lg md:text-2xl font-medium text-white whitespace-nowrap">
+        {prefix}{tech.name}
+      </span>
+    </div>
+  );
+}
+
 export default function TechMarquee() {
-  const duplicatedTech = [...techStack, ...techStack];
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsMobile(e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  const duration = isMobile ? 150 : 60; //adjust both duration and distance
-  const distance = isMobile ? 50 * techStack.length * 6 : 50 * techStack.length * 10; 
-
   return (
     <div className="overflow-hidden pt-2 pb-60 md:pt-4 md:pb-70">
+      <style>{`
+        @keyframes marquee-left {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        @keyframes marquee-right {
+          from { transform: translateX(-50%); }
+          to   { transform: translateX(0); }
+        }
+        .marquee-left  { animation: marquee-left  60s linear infinite; }
+        .marquee-right { animation: marquee-right 60s linear infinite; }
+        @media (max-width: 768px) {
+          .marquee-left  { animation-duration: 150s; }
+          .marquee-right { animation-duration: 150s; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-left, .marquee-right { animation: none; }
+        }
+      `}</style>
+
       <h2 className="mb-6 md:mb-12 text-center text-2xl font-bold text-white md:text-4xl">Tech Stack</h2>
-      
+
       <div className="space-y-4 md:space-y-8">
-        {/* First Row - Moving Left */}
-        <div className="relative">
-          <motion.div
-            className="flex gap-8 md:gap-16"
-            animate={{
-              x: [0, -distance], 
-            }}
-            transition={{
-              x: {
-                duration: duration,
-                repeat: Infinity,
-                ease: "linear",
-              },
-            }}
-          >
+        {/* First Row — scrolls left */}
+        <div className="relative overflow-hidden">
+          <div className="marquee-left flex gap-8 md:gap-16 w-max will-change-transform">
             {duplicatedTech.map((tech, index) => (
-              <div
-                key={index}
-                className="flex flex-shrink-0 items-center gap-3 md:gap-6 rounded-xl md:rounded-2xl border border-white/10 bg-black/40 md:bg-white/5 px-6 py-3 md:px-12 md:py-6 backdrop-blur-sm"
-              >
-                <Image 
-                  src={tech.icon} 
-                  alt={tech.name}
-                  width={48}
-                  height={48}
-                  className="w-8 h-8 md:w-12 md:h-12 object-contain"
-                />
-                <span className="text-lg md:text-2xl font-medium text-white whitespace-nowrap">{tech.name}</span>
-              </div>
+              <TechCard key={index} tech={tech} />
             ))}
-          </motion.div>
+          </div>
         </div>
 
-        {/* Second Row - Moving Right (Reverse) */}
-        <div className="relative">
-          <motion.div
-            className="flex gap-8 md:gap-16"
-            animate={{
-              x: [-distance, 0], 
-            }}
-            transition={{
-              x: {
-                duration: duration,
-                repeat: Infinity,
-                ease: "linear",
-              },
-            }}
-          >
+        {/* Second Row — scrolls right */}
+        <div className="relative overflow-hidden">
+          <div className="marquee-right flex gap-8 md:gap-16 w-max will-change-transform">
             {duplicatedTech.map((tech, index) => (
-              <div
-                key={`reverse-${index}`}
-                className="flex flex-shrink-0 items-center gap-3 md:gap-6 rounded-xl md:rounded-2xl border border-white/10 bg-black/40 md:bg-white/5 px-6 py-3 md:px-12 md:py-6 backdrop-blur-sm"
-              >
-                <Image 
-                  src={tech.icon} 
-                  alt={tech.name}
-                  width={48}
-                  height={48}
-                  className="w-8 h-8 md:w-12 md:h-12 object-contain"
-                />
-                <span className="text-lg md:text-2xl font-medium text-white whitespace-nowrap">{tech.name}</span>
-              </div>
+              <TechCard key={`r-${index}`} tech={tech} />
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>

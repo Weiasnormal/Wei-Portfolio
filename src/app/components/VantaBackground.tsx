@@ -2,23 +2,12 @@
 
 import { useEffect, useRef } from "react";
 
-interface VantaConfig {
-  el: HTMLElement | null;
-  mouseControls: boolean;
-  touchControls: boolean;
-  gyroControls: boolean;
-  minHeight: number;
-  minWidth: number;
-  backgroundColor: number;
-  baseColor: number;
-  size: number;
-  amplitudeFactor: number;
-  xOffset: number;
-  yOffset: number;
+interface VantaInstance {
+  destroy: () => void;
 }
 
 interface VantaEffect {
-  HALO: (config: VantaConfig) => void;
+  HALO: (config: Record<string, unknown>) => VantaInstance;
 }
 
 declare global {
@@ -30,38 +19,62 @@ declare global {
 
 export default function VantaBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const vantaRef = useRef<VantaInstance | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Load Three.js
-    const threeScript = document.createElement("script");
-    threeScript.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
-    threeScript.onload = () => {
-      // Load Vanta.js after Three.js
-      const vantaScript = document.createElement("script");
-      vantaScript.src = "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js";
-      vantaScript.onload = () => {
-        if (window.VANTA) {
-          window.VANTA.HALO({
-            el: containerRef.current,
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.0,
-            minWidth: 200.0,
-            backgroundColor: 0x0a0a0a,
-            baseColor: 0x1a59,
-            size: 1,
-            amplitudeFactor: 1,
-            xOffset: 0,
-            yOffset: 0,
-          });
-        }
-      };
-      document.body.appendChild(vantaScript);
+    // Respect reduced-motion preference
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    function initVanta() {
+      if (window.VANTA && containerRef.current && !vantaRef.current) {
+        vantaRef.current = window.VANTA.HALO({
+          el: containerRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          backgroundColor: 0x0a0a0a,
+          baseColor: 0x1a59,
+          size: 1,
+          amplitudeFactor: 1,
+          xOffset: 0,
+          yOffset: 0,
+        });
+      }
+    }
+
+    // Avoid adding duplicate scripts
+    const loadScript = (src: string, id: string, onLoad: () => void) => {
+      if (document.getElementById(id)) {
+        onLoad();
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = src;
+      script.id = id;
+      script.onload = onLoad;
+      document.body.appendChild(script);
     };
-    document.body.appendChild(threeScript);    
+
+    loadScript(
+      "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js",
+      "vanta-three-js",
+      () => {
+        loadScript(
+          "https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.halo.min.js",
+          "vanta-halo-js",
+          initVanta
+        );
+      }
+    );
+
+    return () => {
+      vantaRef.current?.destroy();
+      vantaRef.current = null;
+    };
   }, []);
 
   return (

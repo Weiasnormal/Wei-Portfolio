@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
@@ -67,17 +67,13 @@ export default function FAQ() {
               className="flex w-full items-center justify-between p-4 md:p-6 text-left transition hover:bg-white/5"
               suppressHydrationWarning
             >
-              <motion.h3 
-                className={`pr-3 md:pr-4 text-base md:text-xl font-semibold transition-colors duration-300 ${
-                  openIndex === index ? 'text-[#ff5b1a]' : 'text-white'
+              <h3
+                className={`pr-3 md:pr-4 text-base md:text-xl font-semibold transition-[color,transform] duration-300 ease-out ${
+                  openIndex === index ? 'text-[#ff5b1a] translate-x-5' : 'text-white translate-x-0'
                 }`}
-                animate={{ 
-                  x: openIndex === index ? 20 : 0 
-                }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 {faq.question}
-              </motion.h3>
+              </h3>
               
               <div className="flex-shrink-0">
                 {openIndex === index ? (
@@ -88,21 +84,17 @@ export default function FAQ() {
               </div>
             </button>
             
-            <AnimatePresence>
-              {openIndex === index && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <div className="border-t border-white/10 px-4 pb-4 pt-3 md:px-6 md:pb-6 md:pt-4">
-                    <p className="text-xs md:text-base text-white/70">{faq.answer}</p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div
+              className="overflow-hidden transition-[max-height,opacity] duration-300 ease-out"
+              style={{
+                maxHeight: openIndex === index ? "200px" : "0px",
+                opacity: openIndex === index ? 1 : 0,
+              }}
+            >
+              <div className="border-t border-white/10 px-4 pb-4 pt-3 md:px-6 md:pb-6 md:pt-4">
+                <p className="text-xs md:text-base text-white/70">{faq.answer}</p>
+              </div>
+            </div>
           </motion.div>
         ))}
       </div>
