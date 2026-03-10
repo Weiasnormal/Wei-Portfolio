@@ -103,9 +103,11 @@ export default function SidebarNav() {
                   aria-label={item.label}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  onHoverStart={() => console.log('hover started!')}
-                  className="flex h-9 w-9 items-center justify-center rounded-full text-white/75 transition hover:bg-white/10 hover:text-[#ff5b1a]"
+                  className="group relative flex h-9 w-9 items-center justify-center rounded-full text-white/75 transition hover:bg-white/10 hover:text-[#ff5b1a]"
                 >
+                  <span className="pointer-events-none absolute right-full mr-2 rounded-md border border-white/10 bg-black/80 px-2 py-1 text-xs text-white opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+                    {item.label}
+                  </span>
                   {item.icon}
                 </motion.a>
               </li>
@@ -119,7 +121,6 @@ export default function SidebarNav() {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        onHoverStart={() => console.log('hover started!')}
         className="md:hidden fixed right-6 bottom-6 z-50 flex flex-col items-center justify-center gap-1.5 h-14 w-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-md"
         aria-label="Toggle navigation menu"
         suppressHydrationWarning
@@ -141,7 +142,6 @@ export default function SidebarNav() {
                     onClick={() => setIsOpen(false)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    onHoverStart={() => console.log('hover started!')}
                     className="flex flex-col items-center gap-2 text-white/75 transition hover:text-[#ff5b1a]"
                   >
                     <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5">
