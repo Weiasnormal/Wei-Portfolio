@@ -39,7 +39,7 @@ const socialLinks: SocialLink[] = [
   {
     name: "TikTok",
     href: "https://www.tiktok.com/@wiwotech",
-    icon: <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} className="h-full w-full" />,
+    icon: <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} loading="eager" className="h-full w-full"/>,
   },
 ];
 
@@ -98,7 +98,7 @@ export default function Footer() {
               onHoverStart={() => console.log('hover started!')}
               className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/40 md:bg-white/5 text-white/70 transition hover:border-[#ff5b1a] hover:bg-white/10 hover:text-[#ff5b1a]"
             >
-              {social.icon}
+              <span className="h-5 w-5 flex items-center justify-center">{social.icon}</span>
             </motion.a>
           ))}
         </motion.div>
