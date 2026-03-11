@@ -39,7 +39,7 @@ const socialLinks: SocialLink[] = [
   {
     name: "TikTok",
     href: "https://www.tiktok.com/@wiwotech",
-    icon: <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} loading="eager" className="h-full w-full"/>,
+    icon: <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} loading="lazy" className="h-full w-full"/>,
   },
 ];
 

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
 type WorkProject = {
   category: string;
@@ -39,10 +40,18 @@ function StickyProjectCard({
       onMouseEnter={() => setIsCardHovered(true)}
       onMouseLeave={() => setIsCardHovered(false)}
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-300"
-        style={{ backgroundImage: `url(${displayImage})` }}
-      />
+      {/* Background Image with lazy loading */}
+      <div className="absolute inset-0">
+        <Image
+          src={displayImage}
+          alt={project.title}
+          fill
+          sizes="(max-width: 768px) 100vw, 1200px"
+          className="object-cover object-center transition-all duration-300"
+          loading="lazy"
+          quality={85}
+        />
+      </div>
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/85" />
 
       <div 
