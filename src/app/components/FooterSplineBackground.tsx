@@ -7,8 +7,24 @@ const Spline = React.lazy(() => import("@splinetool/react-spline"));
 export default function FooterSplineBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check if mobile on mount
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    // Don't load on mobile
+    if (isMobile) return;
+    
     const el = containerRef.current;
     if (!el) return;
 
@@ -24,11 +40,11 @@ export default function FooterSplineBackground() {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
   return (
     <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-      {shouldLoad && (
+      {!isMobile && shouldLoad && (
         <Suspense fallback={null}>
           <div
             className="absolute pointer-events-auto"
