@@ -117,7 +117,7 @@ export default function SidebarNav() {
       </aside>
 
       {/* Mobile Nav — single oval pill containing nav items + toggle button */}
-      <div className="md:hidden fixed right-6 bottom-6 z-50 flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 px-3 py-3 backdrop-blur-md gap-3">
+      <div className="md:hidden fixed right-6 bottom-6 z-50 flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 p-1.5 backdrop-blur-md gap-2">
         {/* Nav items — animate height/opacity in/out */}
         <motion.nav
           aria-label="Mobile navigation"
@@ -152,13 +152,13 @@ export default function SidebarNav() {
           onClick={() => setIsOpen(!isOpen)}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="flex flex-col items-center justify-center gap-1.5 h-9 w-9 rounded-full text-white/75 transition hover:bg-white/10 hover:text-[#ff5b1a]"
+          className="relative flex items-center justify-center h-9 w-9 rounded-full text-white/75 transition hover:bg-white/10 hover:text-[#ff5b1a]"
           aria-label="Toggle navigation menu"
           suppressHydrationWarning
         >
-          <span className={`w-5 h-0.5 bg-current transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-          <span className={`w-5 h-0.5 bg-current transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`} />
-          <span className={`w-5 h-0.5 bg-current transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
+          <span className={`absolute w-5 h-0.5 bg-current transition-all duration-300 ${isOpen ? 'rotate-45' : '-translate-y-1.5'}`} />
+          <span className={`absolute w-5 h-0.5 bg-current transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`} />
+          <span className={`absolute w-5 h-0.5 bg-current transition-all duration-300 ${isOpen ? '-rotate-45' : 'translate-y-1.5'}`} />
         </motion.button>
       </div>
     </>
