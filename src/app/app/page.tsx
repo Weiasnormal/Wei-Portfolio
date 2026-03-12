@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Experience from "../components/Experience";
@@ -53,6 +53,19 @@ const socialLinks = [
 ];
 
 export default function HomePage() {
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    window.history.replaceState(null, "", `${window.location.pathname}#home`);
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   return (
     <>
       <VantaBackground />
@@ -148,7 +161,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="faq" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
+      <section id="faq" className="snap-start min-h-screen flex items-start pt-10 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
           <FAQ />
         </div>
