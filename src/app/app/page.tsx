@@ -124,19 +124,19 @@ export default function HomePage() {
 
       <SelectedWorks />
 
-      <section id="services" className="snap-start min-h-screen flex items-center">
+      <section id="services" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
           <Services />
         </div>
       </section>
 
-      <section id="about" className="snap-start min-h-screen flex items-center">
+      <section id="about" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
           <About />
         </div>
       </section>
 
-      <section id="experience" className="snap-start min-h-screen flex items-center">
+      <section id="experience" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
           <Experience />
         </div>
@@ -148,13 +148,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="faq" className="snap-start min-h-screen flex items-center">
+      <section id="faq" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
           <FAQ />
         </div>
       </section>
 
-      <section id="contact" className="snap-start min-h-screen flex items-center">
+      <section id="contact" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
           <ContactForm />
         </div>
