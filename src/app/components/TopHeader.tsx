@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -8,16 +8,23 @@ const TopHeader: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [showLocation, setShowLocation] = useState(true);
   const [uptime, setUptime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const tickingRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      if (tickingRef.current) return;
 
-      // Show only at the top; once scrolled down, keep it hidden.
-      setIsVisible(currentScrollY <= 8);
+      tickingRef.current = true;
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+
+        // Show only at the top; once scrolled down, keep it hidden.
+        setIsVisible(currentScrollY <= 8);
+        tickingRef.current = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

@@ -6,8 +6,7 @@ import * as THREE from "three";
 export default function VantaBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const vantaRef = useRef<{ destroy(): void; pause?(): void; play?(): void } | null>(null);
-  const [isVisible, setIsVisible] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
     // Check if mobile on mount
@@ -23,6 +22,7 @@ export default function VantaBackground() {
 
   useEffect(() => {
     if (!containerRef.current || vantaRef.current) return;
+    if (isMobile === null || isMobile) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let cancelled = false;
@@ -67,8 +67,6 @@ export default function VantaBackground() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-        
         // Pause/play animation based on visibility
         if (vantaRef.current) {
           if (entry.isIntersecting) {

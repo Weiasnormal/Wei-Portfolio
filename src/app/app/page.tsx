@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Experience from "../components/Experience";
 import Services from "../components/Services";
@@ -13,11 +14,56 @@ import TextRotator from "../components/TextRotator";
 import About from "../components/About";
 import TopHeader from "../components/TopHeader";
 import SidebarNav from "../components/SidebarNav";
-import HeroSpline from "../components/HeroSpline";
-import VantaBackground from "../components/VantaBackground";
-import FooterSplineBackground from "../components/FooterSplineBackground";
 import SelectedWorks from "./selectedworks";
 import { Github, Linkedin, Facebook, Instagram, Youtube, Download } from "lucide-react";
+
+const HeroSpline = dynamic(() => import("../components/HeroSpline"), {
+  ssr: false,
+  loading: () => <div className="h-full w-full" />,
+});
+
+const VantaBackground = dynamic(() => import("../components/VantaBackground"), {
+  ssr: false,
+  loading: () => null,
+});
+
+const FooterSplineBackground = dynamic(() => import("../components/FooterSplineBackground"), {
+  ssr: false,
+  loading: () => null,
+});
+
+function DeferredRender({
+  children,
+  rootMargin = "300px",
+  placeholderClassName,
+}: {
+  children: React.ReactNode;
+  rootMargin?: string;
+  placeholderClassName?: string;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [rootMargin]);
+
+  return <div ref={containerRef}>{shouldRender ? children : <div className={placeholderClassName} />}</div>;
+}
 
 const socialLinks = [
   {
@@ -135,48 +181,66 @@ export default function HomePage() {
         </div>
       </section>
 
-      <SelectedWorks />
+      <DeferredRender placeholderClassName="h-[120vh]" rootMargin="450px">
+        <SelectedWorks />
+      </DeferredRender>
 
       <section id="services" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
-          <Services />
+          <DeferredRender placeholderClassName="h-[40vh]" rootMargin="350px">
+            <Services />
+          </DeferredRender>
         </div>
       </section>
 
       <section id="about" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
-          <About />
+          <DeferredRender placeholderClassName="h-[40vh]" rootMargin="350px">
+            <About />
+          </DeferredRender>
         </div>
       </section>
 
       <section id="experience" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
-          <Experience />
+          <DeferredRender placeholderClassName="h-[40vh]" rootMargin="350px">
+            <Experience />
+          </DeferredRender>
         </div>
       </section>
 
       <section id="tech" className="snap-start min-h-screen flex items-center">
         <div className="mx-auto w-full max-w-7xl">
-          <TechMarquee />
+          <DeferredRender placeholderClassName="h-[20vh]" rootMargin="350px">
+            <TechMarquee />
+          </DeferredRender>
         </div>
       </section>
 
       <section id="faq" className="snap-start min-h-screen flex items-start pt-10 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
-          <FAQ />
+          <DeferredRender placeholderClassName="h-[30vh]" rootMargin="300px">
+            <FAQ />
+          </DeferredRender>
         </div>
       </section>
 
       <section id="contact" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
         <div className="mx-auto w-full max-w-7xl">
-          <ContactForm />
+          <DeferredRender placeholderClassName="h-[30vh]" rootMargin="300px">
+            <ContactForm />
+          </DeferredRender>
         </div>
       </section>
 
       <section id="footer" className="snap-start min-h-screen flex items-center relative overflow-hidden">
-        <FooterSplineBackground />
+        <DeferredRender rootMargin="300px">
+          <FooterSplineBackground />
+        </DeferredRender>
         <div className="mx-auto w-full max-w-7xl relative z-10">
-          <Footer />
+          <DeferredRender placeholderClassName="h-[25vh]" rootMargin="300px">
+            <Footer />
+          </DeferredRender>
         </div>
       </section>
       </main>
