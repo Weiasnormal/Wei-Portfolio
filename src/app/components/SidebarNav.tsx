@@ -9,6 +9,8 @@ import {
   House,
   Mail,
   Menu,
+  NotepadTextDashed,
+  Toolbox,
   UserRound,
   UserRoundCog,
   X,
@@ -47,7 +49,7 @@ const navItems: NavItem[] = [
   {
     label: "Experience",
     href: "/app#experience",
-    icon: UserRoundCog,
+    icon: NotepadTextDashed
   },
   {
     label: "FAQ",
