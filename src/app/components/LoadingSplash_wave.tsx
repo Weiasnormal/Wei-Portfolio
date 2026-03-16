@@ -15,8 +15,8 @@ const WAVE2_PATH =
 const SPLASH_VISIBLE_MS = 4500;
 const WAVE_RISE_DURATION = 3.3;
 const WAVE_SWAY_DURATION = 2.8;
-const PROGRESS_DELAY = 3.8;
-const PROGRESS_DURATION = 1;
+//const PROGRESS_DELAY = 3.8;
+//const PROGRESS_DURATION = 1;
 
 export default function LoadingSplashWave() {
   const [isVisible, setIsVisible] = useState(false);
@@ -139,7 +139,7 @@ export default function LoadingSplashWave() {
           </svg>
 
    
-          <motion.div
+          {/* <motion.div
             className="absolute bottom-10 sm:bottom-16 h-px w-32 sm:w-44 overflow-hidden rounded-full bg-white/10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -151,7 +151,7 @@ export default function LoadingSplashWave() {
               animate={{ width: "100%" }}
               transition={{ duration: PROGRESS_DURATION, delay: PROGRESS_DELAY, ease: "easeInOut" }}
             />
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       )}
     </AnimatePresence>
