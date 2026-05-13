@@ -11,3 +11,5 @@ declare module "vanta/dist/vanta.halo.min" {
   function HALO(options: VantaOptions): VantaEffect;
   export default HALO;
 }
+
+declare module "*.css";
