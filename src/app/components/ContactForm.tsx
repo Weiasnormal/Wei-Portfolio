@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import DOMPurify from "dompurify";
+import { normalizePhInput, isValidPhPhone } from "../lib/phone";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -35,7 +36,7 @@ export default function ContactForm() {
     let isValid = true;
 
     if (!formData.name.trim()) {
-      newErrors.name = "Hey, I'd love to know your name! ";
+      newErrors.name = "Hey, I'd love to know your name!";
       isValid = false;
     }
 
@@ -47,17 +48,9 @@ export default function ContactForm() {
       isValid = false;
     }
 
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Your phone number would be great!";
+    if (formData.phone.trim() && !isValidPhPhone(formData.phone)) {
+      newErrors.phone = "Please enter a valid PH number (09xxxxxxxxx), or leave it blank";
       isValid = false;
-    } else if (formData.phone.trim().toUpperCase() !== "N/A") {
-      const cleanPhone = formData.phone.replace(/[\s\-]/g, '');
-      const phoneRegex = /^(\+639|09|9)\d{9}$/;
-      
-      if (!phoneRegex.test(cleanPhone)) {
-        newErrors.phone = "Please enter a valid 11-digit PH number (09xxxxxxxxx) or type N/A ";
-        isValid = false;
-      }
     }
 
     if (!formData.message.trim()) {
@@ -84,21 +77,15 @@ export default function ContactForm() {
       const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
-      // Sanitize all inputs to prevent XSS attacks
       const sanitizedData = {
         from_name: DOMPurify.sanitize(formData.name.trim()),
         from_email: DOMPurify.sanitize(formData.email.trim()),
-        phone: DOMPurify.sanitize(formData.phone.trim()),
+        phone: DOMPurify.sanitize(formData.phone.trim() || "Not provided"),
         message: DOMPurify.sanitize(formData.message.trim()),
         to_name: "Wincel Crusit",
       };
 
-      await emailjs.send(
-        serviceID,
-        templateID,
-        sanitizedData,
-        publicKey
-      );
+      await emailjs.send(serviceID, templateID, sanitizedData, publicKey);
 
       setStatus({
         type: "success",
@@ -121,30 +108,14 @@ export default function ContactForm() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    
-    let processedValue = value;
-    
-    if (name === "phone" && value.trim().toUpperCase() !== "N/A") {
-      // Remove all non-digit characters except for leading +
-      const cleanValue = value.replace(/[^\d+]/g, '');
-      
-      if (/^0?9\d{0,9}$/.test(cleanValue)) {
-        const digits = cleanValue.replace(/^0/, ''); 
-        processedValue = `+63${digits}`;
-      } else if (cleanValue.startsWith('+63')) {
-        processedValue = cleanValue;
-      } else if (value.trim() === '') {
-        processedValue = '';
-      } else {
-        processedValue = value; 
-      }
-    }
-    
+
+    const processedValue = name === "phone" ? normalizePhInput(value) : value;
+
     setFormData({
       ...formData,
       [name]: processedValue,
     });
-    // Clear error for this field when user starts typing
+
     if (errors[name as keyof typeof errors]) {
       setErrors({
         ...errors,
@@ -217,7 +188,6 @@ export default function ContactForm() {
                 errors.name ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
               }`}
               placeholder="Your Name"
-              suppressHydrationWarning
             />
             {errors.name && (
               <motion.p
@@ -246,7 +216,6 @@ export default function ContactForm() {
                 errors.email ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
               }`}
               placeholder="your@email.com"
-              suppressHydrationWarning
             />
             {errors.email && (
               <motion.p
@@ -262,7 +231,7 @@ export default function ContactForm() {
 
           <div>
             <label htmlFor="phone" className="mb-2 block text-sm text-white/70">
-              Phone (PH Number or N/A)
+              Phone (optional)
             </label>
             <input
               type="tel"
@@ -274,8 +243,7 @@ export default function ContactForm() {
               className={`w-full border-0 border-b-2 bg-transparent px-0 py-2 md:py-3 text-white placeholder-white/40 outline-none transition ${
                 errors.phone ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
               }`}
-              placeholder="09xxxxxxxxx or N/A"
-              suppressHydrationWarning
+              placeholder="09xxxxxxxxx"
             />
             {errors.phone && (
               <motion.p
@@ -303,7 +271,6 @@ export default function ContactForm() {
                 errors.message ? "border-[#ff5b1a]" : "border-white/20 focus:border-[#ff5b1a]"
               }`}
               placeholder="Tell me about your project..."
-              suppressHydrationWarning
             />
             {errors.message && (
               <motion.p
@@ -322,9 +289,7 @@ export default function ContactForm() {
             disabled={isLoading}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            onHoverStart={() => console.log('hover started!')}
             className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-6 py-3 md:px-8 md:py-4 font-semibold text-black transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-            suppressHydrationWarning
           >
             {isLoading ? "Sending..." : "Send Message"}
             <Send className="h-4 w-4" />
