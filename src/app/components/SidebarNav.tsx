@@ -10,9 +10,7 @@ import {
   Mail,
   Menu,
   NotepadTextDashed,
-  Toolbox,
   UserRound,
-  UserRoundCog,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -26,41 +24,13 @@ type NavItem = {
 const iconClass = "h-4 w-4";
 
 const navItems: NavItem[] = [
-  {
-    label: "Home",
-    href: "/app#home",
-    icon: House,
-  },
-  {
-    label: "Works",
-    href: "/app#works",
-    icon: Briefcase,
-  },
-  {
-    label: "Services",
-    href: "/app#services",
-    icon: Handshake,
-  },
-  {
-    label: "About",
-    href: "/app#about",
-    icon: UserRound,
-  },
-  {
-    label: "Experience",
-    href: "/app#experience",
-    icon: NotepadTextDashed
-  },
-  {
-    label: "FAQ",
-    href: "/app#faq",
-    icon: CircleHelp,
-  },
-  {
-    label: "Contact",
-    href: "/app#contact",
-    icon: Mail,
-  },
+  { label: "Home", href: "#home", icon: House },
+  { label: "Works", href: "#works", icon: Briefcase },
+  { label: "Services", href: "#services", icon: Handshake },
+  { label: "About", href: "#about", icon: UserRound },
+  { label: "Experience", href: "#experience", icon: NotepadTextDashed },
+  { label: "FAQ", href: "#faq", icon: CircleHelp },
+  { label: "Contact", href: "#contact", icon: Mail },
 ];
 
 export default function SidebarNav() {
@@ -94,7 +64,6 @@ export default function SidebarNav() {
 
       {/* Mobile Nav — single oval pill containing nav items + toggle button */}
       <div className="md:hidden fixed right-6 bottom-6 z-50 flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 p-1.5 backdrop-blur-md gap-2">
-        {/* Nav items — animate height/opacity in/out */}
         <motion.nav
           aria-label="Mobile navigation"
           initial={false}
@@ -123,14 +92,12 @@ export default function SidebarNav() {
           </ul>
         </motion.nav>
 
-        {/* Toggle button — always visible at the bottom of the pill */}
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           className="relative flex items-center justify-center h-9 w-9 rounded-full text-white/75 transition hover:bg-white/10 hover:text-[#ff5b1a]"
           aria-label="Toggle navigation menu"
-          suppressHydrationWarning
         >
           {isOpen ? <X className={iconClass} aria-hidden="true" /> : <Menu className={iconClass} aria-hidden="true" />}
         </motion.button>
