@@ -1,42 +1,222 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import HomePage from "./app/page";
-import LoadingSplash from "./components/LoadingSplash";
+import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+import { motion } from "framer-motion";
+import Experience from "./components/Experience";
+import Services from "./components/Services";
+import TechMarquee from "./components/TechMarquee";
+import FAQ from "./components/FAQ";
+import ContactForm from "./components/ContactForm";
+import Footer from "./components/Footer";
+import TextRotator from "./components/TextRotator";
+import About from "./components/About";
+import TopHeader from "./components/TopHeader";
+import SidebarNav from "./components/SidebarNav";
+import SelectedWorks from "./app/selectedworks";
+import { Download } from "lucide-react";
+import { socialLinks } from "./data/socialLinks";
 
-export default function RootPage() {
-  const [showSplash, setShowSplash] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+const HeroSpline = dynamic(() => import("./components/HeroSpline"), {
+  ssr: false,
+  loading: () => <div className="h-full w-full" />,
+});
+
+const VantaBackground = dynamic(() => import("./components/VantaBackground"), {
+  ssr: false,
+  loading: () => null,
+});
+
+const FooterSplineBackground = dynamic(() => import("./components/FooterSplineBackground"), {
+  ssr: false,
+  loading: () => null,
+});
+
+function DeferredRender({
+  children,
+  rootMargin = "300px",
+  placeholderClassName,
+}: {
+  children: React.ReactNode;
+  rootMargin?: string;
+  placeholderClassName?: string;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    // Check if this is a fresh page load
-    const navigationEntries = performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
-    const isReload = navigationEntries.length > 0 && 
-      (navigationEntries[0].type === "reload" || navigationEntries[0].type === "navigate");
-    
-    const hasNavigated = sessionStorage.getItem("hasNavigated");
-    
-    if (isReload || !hasNavigated) {
-      setShowSplash(true);
-      sessionStorage.setItem("hasNavigated", "true");
-      
-      // Hide splash and show content after animation completes
-      const timer = setTimeout(() => {
-        setShowSplash(false);
-        setShowContent(true);
-      }, 4500);
+    const el = containerRef.current;
+    if (!el) return;
 
-      return () => clearTimeout(timer);
-    } else {
-      // If already navigated, show content immediately
-      setShowContent(true);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [rootMargin]);
+
+  return <div ref={containerRef}>{shouldRender ? children : <div className={placeholderClassName} />}</div>;
+}
+
+export default function HomePage() {
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
     }
+
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    window.history.replaceState(null, "", `${window.location.pathname}#home`);
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, []);
 
   return (
     <>
-      {showSplash && <LoadingSplash />}
-      {showContent && <HomePage />}
+      <VantaBackground />
+      <TopHeader />
+      <SidebarNav />
+      <main className="relative z-10 w-full px-4 pt-2 md:px-10 lg:pr-24">
+        <section id="home" className="snap-start min-h-screen flex items-start pt-32">
+          <div className="mx-auto grid w-full max-w-7xl gap-6 sm:gap-8 lg:gap-10 md:grid-cols-12">
+            <div className="md:col-span-7 md:self-start md:mt-15 md:pl-8 text-center md:text-left px-2 sm:px-0">
+              <p className="mb-4 inline-flex items-center rounded-full border border-white/15 px-3 py-1 text-xs md:text-sm text-white/80">
+                Open to Hire
+              </p>
+              <h1 className="text-2xl font-bold leading-tight text-white md:text-6xl">
+                <span className="block">Hi, I am</span>
+                <span className="block">Wincel Crusit,</span>
+                <span className="block text-lg md:text-4xl">
+                  <TextRotator
+                    texts={[
+                      { prefix: "I am a ", title: "Web Designer" },
+                      { prefix: "I am a  ", title: "Frontend Developer" },
+                      { prefix: "I am a ", title: "Mobile App Developer" },
+                      { prefix: "I am a ", title: "Web Developer" },
+                      { prefix: "Soon to be ", title: "Machine Learning Engineer" },
+                      { prefix: "Soon to be ", title: "Data Engineer" },
+                    ]}
+                    titleClassName="text-[#ff5b1a]"
+                  />
+                  .
+                </span>
+              </h1>
+              <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
+                <motion.a
+                  href="/Resume/Crusit_Wincel_HARVARD_RESUME.pdf"
+                  download
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-semibold text-white transition hover:opacity-90"
+                >
+                  <Download className="h-4 w-4 md:h-5 md:w-5" />
+                  Download Resume
+                </motion.a>
+                <div className="flex justify-center gap-3">
+                  {socialLinks.map((social) => (
+                    <motion.a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.name}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/10 bg-black/40 md:bg-white/5 text-white/70 transition hover:border-[#ff5b1a] hover:bg-white/10 hover:text-[#ff5b1a]"
+                    >
+                      <span className="h-4 w-4 md:h-5 md:w-5 flex items-center justify-center">
+                        {social.icon === "tiktok" ? (
+                          <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} loading="lazy" className="h-full w-full" />
+                        ) : (
+                          social.icon
+                        )}
+                      </span>
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="md:col-span-5 md:self-start mt-2 md:mt-0 flex items-center justify-center md:justify-end px-2 sm:px-4 md:pr-8 lg:pr-4">
+              <div className="relative w-full max-w-md md:max-w-none h-[350px] sm:h-[400px] md:h-[500px] rounded-3xl overflow-hidden bg-gradient-to-b from-white/10 to-white/0">
+                <HeroSpline />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <DeferredRender placeholderClassName="h-[120vh]" rootMargin="450px">
+          <SelectedWorks />
+        </DeferredRender>
+
+        <section id="services" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
+          <div className="mx-auto w-full max-w-7xl">
+            <DeferredRender placeholderClassName="h-[40vh]" rootMargin="350px">
+              <Services />
+            </DeferredRender>
+          </div>
+        </section>
+
+        <section id="about" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
+          <div className="mx-auto w-full max-w-7xl">
+            <DeferredRender placeholderClassName="h-[40vh]" rootMargin="350px">
+              <About />
+            </DeferredRender>
+          </div>
+        </section>
+
+        <section id="experience" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
+          <div className="mx-auto w-full max-w-7xl">
+            <DeferredRender placeholderClassName="h-[40vh]" rootMargin="350px">
+              <Experience />
+            </DeferredRender>
+          </div>
+        </section>
+
+        <section id="tech" className="snap-start min-h-screen flex items-center">
+          <div className="mx-auto w-full max-w-7xl">
+            <DeferredRender placeholderClassName="h-[20vh]" rootMargin="350px">
+              <TechMarquee />
+            </DeferredRender>
+          </div>
+        </section>
+
+        <section id="faq" className="snap-start min-h-screen flex items-start pt-10 md:items-center md:pt-0">
+          <div className="mx-auto w-full max-w-7xl">
+            <DeferredRender placeholderClassName="h-[30vh]" rootMargin="300px">
+              <FAQ />
+            </DeferredRender>
+          </div>
+        </section>
+
+        <section id="contact" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
+          <div className="mx-auto w-full max-w-7xl">
+            <DeferredRender placeholderClassName="h-[30vh]" rootMargin="300px">
+              <ContactForm />
+            </DeferredRender>
+          </div>
+        </section>
+
+        <section id="footer" className="snap-start min-h-screen flex items-center relative overflow-hidden">
+          <DeferredRender rootMargin="300px">
+            <FooterSplineBackground />
+          </DeferredRender>
+          <div className="mx-auto w-full max-w-7xl relative z-10">
+            <DeferredRender placeholderClassName="h-[25vh]" rootMargin="300px">
+              <Footer />
+            </DeferredRender>
+          </div>
+        </section>
+      </main>
     </>
   );
 }

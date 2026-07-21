@@ -2,46 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Facebook, Instagram, Calendar, Youtube } from "lucide-react";
-
-type SocialLink = {
-  name: string;
-  href: string;
-  icon: React.ReactNode;
-};
-
-const socialLinks: SocialLink[] = [
-  {
-    name: "GitHub",
-    href: "https://github.com",
-    icon: <Github className="h-5 w-5" />,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://linkedin.com/in/wincel-crusit-284364305",
-    icon: <Linkedin className="h-5 w-5" />,
-  },
-  {
-    name: "Facebook",
-    href: "https://facebook.com/WincelCrusit",
-    icon: <Facebook className="h-5 w-5" />,
-  },
-  {
-    name: "Instagram",
-    href: "https://instagram.com/wnclasusual_",
-    icon: <Instagram className="h-5 w-5" />,
-  },
-  {
-    name: "YouTube",
-    href: "https://youtube.com/@wnclasusual",
-    icon: <Youtube className="h-5 w-5" />,
-  },
-  {
-    name: "TikTok",
-    href: "https://www.tiktok.com/@wiwotech",
-    icon: <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} loading="lazy" className="h-full w-full"/>,
-  },
-];
+import { Calendar } from "lucide-react";
+import { socialLinks } from "../data/socialLinks";
 
 export default function Footer() {
   return (
@@ -68,7 +30,6 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            onHoverStart={() => console.log('hover started!')}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
             className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-8 py-4 font-semibold text-black transition hover:opacity-90"
@@ -95,10 +56,15 @@ export default function Footer() {
               aria-label={social.name}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              onHoverStart={() => console.log('hover started!')}
               className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/40 md:bg-white/5 text-white/70 transition hover:border-[#ff5b1a] hover:bg-white/10 hover:text-[#ff5b1a]"
             >
-              <span className="h-5 w-5 flex items-center justify-center">{social.icon}</span>
+              <span className="h-5 w-5 flex items-center justify-center">
+                {social.icon === "tiktok" ? (
+                  <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} loading="lazy" className="h-full w-full" />
+                ) : (
+                  social.icon
+                )}
+              </span>
             </motion.a>
           ))}
         </motion.div>
