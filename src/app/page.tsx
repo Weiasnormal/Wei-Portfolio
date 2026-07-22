@@ -14,7 +14,7 @@ import TextRotator from "./components/TextRotator";
 import About from "./components/About";
 import TopHeader from "./components/TopHeader";
 import SidebarNav from "./components/SidebarNav";
-import SelectedWorks from "./app/selectedworks";
+import SelectedWorks from "./sections/selectedworks";
 import { Download } from "lucide-react";
 import { socialLinks } from "./data/socialLinks";
 
