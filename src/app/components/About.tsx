@@ -1,7 +1,7 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Users, HelpCircle, Sparkles, MessageCircle, Zap } from "lucide-react";
+import Card from "./common/Card";
+import SectionHeading from "./common/SectionHeading";
+import FadeInView from "./common/FadeInView";
 
 type AboutItem = {
   icon: React.ReactNode;
@@ -40,31 +40,26 @@ const aboutItems: AboutItem[] = [
 export default function About() {
   return (
     <section id="about" className="pb-16">
-      <div className="mb-12 text-center md:text-left">
-        <h2 className="mb-4 text-2xl font-bold text-white md:text-4xl">About Me</h2>
-        <p className="text-sm md:text-base text-white/70">
-          A passionate developer focused on creating innovative solutions and continuous learning.
-        </p>
-      </div>
+      <SectionHeading
+        title="About Me"
+        subtitle="A passionate developer focused on creating innovative solutions and continuous learning."
+      />
 
       <div className="grid grid-cols-2 gap-6 px-4 md:px-0 md:grid-cols-2 lg:grid-cols-3">
         {aboutItems.map((item, index) => (
-          <motion.div
+          <FadeInView
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 0.95 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.2, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className={`group rounded-2xl border border-white/10 bg-black/40 md:bg-white/5 p-4 md:p-6 transition hover:bg-white/10 flex flex-col items-center md:items-start text-center md:text-left ${index === 4 ? 'col-span-2 md:col-span-1' : ''}`}
+            delay={index * 0.1}
+            className={index === 4 ? "col-span-2 md:col-span-1" : ""}
           >
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#ff5b1a]/10 text-[#ff5b1a]">
-              {item.icon}
-            </div>
-            <h3 className="mb-2 text-lg md:text-xl font-semibold text-white">{item.title}</h3>
-            <p className="text-white/70 text-xs md:text-base leading-relaxed">{item.description}</p>
-          </motion.div>
+            <Card className="group h-full p-4 md:p-6 flex flex-col items-center md:items-start text-center md:text-left transition-transform duration-150 hover:scale-95 active:scale-95">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#ff5b1a]/10 text-[#ff5b1a]">
+                {item.icon}
+              </div>
+              <h3 className="mb-2 text-lg md:text-xl font-semibold text-white">{item.title}</h3>
+              <p className="text-white/70 text-xs md:text-base leading-relaxed">{item.description}</p>
+            </Card>
+          </FadeInView>
         ))}
       </div>
     </section>
