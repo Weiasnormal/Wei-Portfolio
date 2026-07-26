@@ -1,8 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import Card from "./common/Card";
+import SectionHeading from "./common/SectionHeading";
+import FadeInView from "./common/FadeInView";
 
 type FAQItem = {
   question: string;
@@ -45,57 +47,50 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="pb-16">
-      <div className="mb-12 text-center md:text-left">
-        <h2 className="mb-4 text-2xl font-bold text-white md:text-4xl">
-          Frequently Asked Questions
-        </h2>
-        <p className="text-sm md:text-base text-white/70">Everything you need to know about working with me</p>
-      </div>
-      
+      <SectionHeading
+        title="Frequently Asked Questions"
+        subtitle="Everything you need to know about working with me"
+      />
+
       <div className="space-y-3 md:space-y-4 px-4 md:px-0">
         {faqs.map((faq, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="overflow-hidden rounded-xl md:rounded-2xl border border-white/10 bg-black/40 md:bg-white/5"
-          >
-            <button
-              onClick={() => toggleFAQ(index)}
-              className="flex w-full items-center justify-between p-4 md:p-6 text-left transition hover:bg-white/5"
-              suppressHydrationWarning
-            >
-              <h3
-                className={`pr-3 md:pr-4 text-base md:text-xl font-semibold transition-[color,transform] duration-300 ease-out ${
-                  openIndex === index ? 'text-[#ff5b1a] translate-x-5' : 'text-white translate-x-0'
-                }`}
+          <FadeInView key={index} delay={index * 0.1}>
+            <Card hover={false} className="overflow-hidden rounded-xl md:rounded-2xl">
+              <button
+                onClick={() => toggleFAQ(index)}
+                className="flex w-full items-center justify-between p-4 md:p-6 text-left transition hover:bg-white/5"
+                suppressHydrationWarning
               >
-                {faq.question}
-              </h3>
-              
-              <div className="flex-shrink-0">
-                {openIndex === index ? (
-                  <Minus className="h-4 w-4 md:h-5 md:w-5 text-[#ff5b1a]" />
-                ) : (
-                  <Plus className="h-4 w-4 md:h-5 md:w-5 text-white/70" />
-                )}
+                <h3
+                  className={`pr-3 md:pr-4 text-base md:text-xl font-semibold transition-[color,transform] duration-300 ease-out ${
+                    openIndex === index ? "text-[#ff5b1a] translate-x-5" : "text-white translate-x-0"
+                  }`}
+                >
+                  {faq.question}
+                </h3>
+
+                <div className="flex-shrink-0">
+                  {openIndex === index ? (
+                    <Minus className="h-4 w-4 md:h-5 md:w-5 text-[#ff5b1a]" />
+                  ) : (
+                    <Plus className="h-4 w-4 md:h-5 md:w-5 text-white/70" />
+                  )}
+                </div>
+              </button>
+
+              <div
+                className="overflow-hidden transition-[max-height,opacity] duration-300 ease-out"
+                style={{
+                  maxHeight: openIndex === index ? "200px" : "0px",
+                  opacity: openIndex === index ? 1 : 0,
+                }}
+              >
+                <div className="border-t border-white/10 px-4 pb-4 pt-3 md:px-6 md:pb-6 md:pt-4">
+                  <p className="text-xs md:text-base text-white/70">{faq.answer}</p>
+                </div>
               </div>
-            </button>
-            
-            <div
-              className="overflow-hidden transition-[max-height,opacity] duration-300 ease-out"
-              style={{
-                maxHeight: openIndex === index ? "200px" : "0px",
-                opacity: openIndex === index ? 1 : 0,
-              }}
-            >
-              <div className="border-t border-white/10 px-4 pb-4 pt-3 md:px-6 md:pb-6 md:pt-4">
-                <p className="text-xs md:text-base text-white/70">{faq.answer}</p>
-              </div>
-            </div>
-          </motion.div>
+            </Card>
+          </FadeInView>
         ))}
       </div>
     </section>
