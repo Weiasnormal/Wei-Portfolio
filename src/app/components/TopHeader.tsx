@@ -1,5 +1,6 @@
 'use client';
 
+import { BASE } from "../lib/basePath";
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -68,7 +69,7 @@ const TopHeader: React.FC = () => {
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 md:w-14 md:h-14 rounded-full overflow-hidden">
             <Image
-              src="/WwhiteLogo.svg"
+              src={BASE + "/WwhiteLogo.svg"}
               alt="Wincel Logo"
               width={56}
               height={56}
