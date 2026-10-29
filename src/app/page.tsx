@@ -1,241 +1,175 @@
-"use client";
+import Link from "next/link";
+import { GitHubGraph } from "@/components/github/GitHubGraph";
+import { IntroReel } from "@/components/home/IntroReel";
+import { Block, BlockHead } from "@/components/Page";
+import { ProjectCard } from "@/components/ProjectCard";
+import { Rows } from "@/components/Rows";
+import { certifications } from "@/content/certifications";
+import { experience } from "@/content/experience";
+import { honors, projects } from "@/content/projects";
+import { stack } from "@/content/stack";
+import { posts } from "@/content/writing";
+import { pageMetadata, site } from "@/lib/site";
 
-import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
-import Experience from "./components/Experience";
-import Services from "./components/Services";
-import TechMarquee from "./components/TechMarquee";
-import FAQ from "./components/FAQ";
-import ContactForm from "./components/ContactForm";
-import Footer from "./components/Footer";
-import TextRotator from "./components/TextRotator";
-import About from "./components/About";
-import TopHeader from "./components/TopHeader";
-import SidebarNav from "./components/SidebarNav";
-import SelectedWorks from "./sections/selectedworks";
-import { Download } from "lucide-react";
-import { socialLinks } from "./data/socialLinks";
-import { RENDER_ALL_SECTIONS_EVENT, scrollToSection } from "./lib/scrollToSection";
+export const metadata = pageMetadata(null, site.description, "/");
 
-const HeroSpline = dynamic(() => import("./components/HeroSpline"), {
-  ssr: false,
-  loading: () => <div className="h-full w-full" />,
-});
+const credits = [
+  {
+    role: "Team lead",
+    what: "AVERA, ResQLine, DriveMinded",
+    note: "Splitting work across design, ML and backend, and keeping it moving",
+  },
+  {
+    role: "Developer",
+    what: "React Native, Next.js, Python",
+    note: "Mobile apps, web dashboards, ML models, Shopify stores",
+  },
+  {
+    role: "Building toward",
+    what: "AI orchestration",
+    note: "n8n workflows, agents and APIs that shorten idea to product",
+  },
+];
 
-const VantaBackground = dynamic(() => import("./components/VantaBackground"), {
-  ssr: false,
-  loading: () => null,
-});
+const startHere = [
+  { href: "/projects", label: "I'm reviewing for OJT" },
+  { href: "/community", label: "I want to build together" },
+  { href: "/outside", label: "Just looking around" },
+];
 
-const FooterSplineBackground = dynamic(() => import("./components/FooterSplineBackground"), {
-  ssr: false,
-  loading: () => null,
-});
-
-function DeferredRender({
-  children,
-  rootMargin = "300px",
-  placeholderClassName,
-}: {
-  children: React.ReactNode;
-  rootMargin?: string;
-  placeholderClassName?: string;
-}) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [shouldRender, setShouldRender] = useState(false);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldRender(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin }
-    );
-
-    observer.observe(el);
-
-    const renderNow = () => {
-      setShouldRender(true);
-      observer.disconnect();
-    };
-    window.addEventListener(RENDER_ALL_SECTIONS_EVENT, renderNow);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener(RENDER_ALL_SECTIONS_EVENT, renderNow);
-    };
-  }, [rootMargin]);
-
-  return <div ref={containerRef}>{shouldRender ? children : <div className={placeholderClassName} />}</div>;
-}
-
-export default function HomePage() {
-  useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    if ("scrollRestoration" in window.history) {
-      window.history.scrollRestoration = "manual";
-    }
-
-    // Honor shared links like /#contact; otherwise always start at the top
-    const { hash } = window.location;
-    if (hash && hash !== "#home" && scrollToSection(hash, "instant")) {
-      return;
-    }
-
-    window.history.replaceState(null, "", `${window.location.pathname}#home`);
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, []);
-
+export default function Home() {
   return (
     <>
-      <VantaBackground />
-      <TopHeader />
-      <SidebarNav />
-      <main className="relative z-10 w-full px-4 pt-2 md:px-10 lg:pr-24">
-        <section id="home" className="snap-start min-h-screen flex items-start pt-32">
-          <div className="mx-auto grid w-full max-w-7xl gap-6 sm:gap-8 lg:gap-10 md:grid-cols-12">
-            <div className="md:col-span-7 md:self-start md:mt-15 md:pl-8 text-center md:text-left px-2 sm:px-0">
-              <p className="mb-4 inline-flex items-center rounded-full border border-white/15 px-3 py-1 text-xs md:text-sm text-white/80">
-                Open to Hire
-              </p>
-              <h1 className="text-2xl font-bold leading-tight text-white md:text-6xl">
-                <span className="block">Hi, I am</span>
-                <span className="block">Wincel Crusit,</span>
-                <span className="block text-lg md:text-4xl">
-                  <TextRotator
-                    texts={[
-                      { prefix: "I am a ", title: "Web Designer" },
-                      { prefix: "I am a ", title: "Frontend Developer" },
-                      { prefix: "I am a ", title: "Mobile App Developer" },
-                      { prefix: "I am a ", title: "Web Developer" },
-                      { prefix: "Soon to be ", title: "Machine Learning Engineer" },
-                      { prefix: "Soon to be ", title: "Data Engineer" },
-                    ]}
-                    titleClassName="text-[#ff5b1a]"
-                  />
-                  .
+      <div className="grid grid-cols-1 items-center gap-7 sm:grid-cols-[auto_minmax(0,1fr)]">
+        <IntroReel photo={site.photo} video={site.introVideo} name={site.name} />
+        <div>
+          <p className="mb-3.5 inline-flex items-center gap-2 text-sm text-muted">
+            <span className="dot" aria-hidden="true" />
+            {site.statusLong}
+          </p>
+          <h1 className="text-[clamp(42px,6.4vw,64px)] leading-[.95] font-extrabold tracking-[-0.03em] font-stretch-125%">
+            {site.name}
+          </h1>
+          <p className="mt-4 max-w-[40ch] text-lg leading-normal">
+            I lead small teams that build web and mobile apps.{" "}
+            <span className="text-muted">Right now I&apos;m learning to build faster with AI workflows and automation.</span>
+          </p>
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            <Link className="btn btn-primary" href="/projects">
+              See projects
+            </Link>
+            <a className="btn" href={site.resume} target="_blank" rel="noopener noreferrer">
+              Resume (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <dl
+        aria-label="Roles at a glance"
+        className="mt-10 grid grid-cols-1 overflow-hidden rounded-lg border border-line bg-raised sm:grid-cols-3"
+      >
+        {credits.map((c, i) => (
+          <div
+            key={c.role}
+            className="roll border-line px-5 py-[18px] not-first:border-t sm:not-first:border-t-0 sm:not-first:border-l"
+            style={{ animationDelay: `${i * 70}ms` }}
+          >
+            <dt className="text-[13.5px] text-muted">{c.role}</dt>
+            <dd className="mt-1 leading-[1.35] font-[650]">
+              {c.what}
+              <small className="mt-1.5 block text-sm leading-[1.45] font-normal text-muted">{c.note}</small>
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      <nav aria-label="Start here" className="mt-5 flex flex-wrap items-center gap-2">
+        <p className="mr-1 text-sm text-muted">Start here:</p>
+        {startHere.map((s) => (
+          <Link key={s.href} className="chip" href={s.href}>
+            {s.label}
+          </Link>
+        ))}
+      </nav>
+
+      <Block title="Projects" all={{ href: "/projects", label: "All projects" }}>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {projects.map((p) => (
+            <ProjectCard key={p.slug} project={p} meta={p.role} />
+          ))}
+        </div>
+        <ul className="mt-5 grid list-none grid-cols-1 p-0 sm:grid-cols-3">
+          {honors.map((h) => (
+            <li
+              key={h.title}
+              className="border-line py-2.5 not-first:border-t sm:py-1 sm:pr-[18px] sm:not-first:border-t-0 sm:not-first:border-l sm:not-first:pl-[18px]"
+            >
+              <b className="block text-base font-stretch-110%">{h.title}</b>
+              <span className="text-[13.5px] text-muted">{h.detail}</span>
+            </li>
+          ))}
+        </ul>
+      </Block>
+
+      <Block title="Writing" all={{ href: "/writing", label: "All posts" }}>
+        <Rows
+          items={posts.slice(0, 2).map((p) => ({
+            title: p.title,
+            when: p.dateLabel,
+            sub: p.summary,
+            href: `/writing/${p.slug}`,
+          }))}
+        />
+      </Block>
+
+      <Block title="Experience" all={{ href: "/experience", label: "Full history" }}>
+        <Rows
+          items={experience.slice(0, 3).map((e) => ({
+            title: e.title,
+            when: e.when,
+            sub: e.summary ?? e.detail,
+            led: e.led,
+          }))}
+        />
+      </Block>
+
+      <section aria-label="Skills and certifications" className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="panel">
+          <h2 className="mb-3.5 text-base font-bold">What I build with</h2>
+          {stack.map((g) => (
+            <div key={g.name} className="not-first:mt-3.5">
+              <h3 className="mb-2 text-[13px] font-medium text-muted">{g.name}</h3>
+              <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
+                {g.items.map((t) => (
+                  <li key={t} className="rounded-full border border-line px-2.5 py-1 text-[13px] whitespace-nowrap">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="panel">
+          <BlockHead
+            as="h2"
+            title={<span className="text-base">Certifications</span>}
+            all={{ href: "/certifications", label: `All ${certifications.length}` }}
+          />
+          <ul className="m-0 -mt-1 list-none p-0">
+            {certifications.slice(0, 3).map((c) => (
+              <li key={c.title} className="border-line py-[11px] first:pt-0 not-first:border-t">
+                <b className="block text-[15px] leading-[1.35] font-semibold">{c.title}</b>
+                <span className="text-[13.5px] text-muted">
+                  {c.issuerShort ?? c.issuer}, {c.date}
                 </span>
-              </h1>
-              <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
-                <motion.a
-                  href="/Resume/Crusit_Wincel_HARVARD_RESUME.pdf"
-                  download
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center gap-2 rounded-full bg-[#ff5b1a] px-4 py-2 text-sm md:px-6 md:py-3 md:text-base font-semibold text-white transition hover:opacity-90"
-                >
-                  <Download className="h-4 w-4 md:h-5 md:w-5" />
-                  Download Resume
-                </motion.a>
-                <div className="flex justify-center gap-3">
-                  {socialLinks.map((social) => (
-                    <motion.a
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.name}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/10 bg-black/40 md:bg-white/5 text-white/70 transition hover:border-[#ff5b1a] hover:bg-white/10 hover:text-[#ff5b1a]"
-                    >
-                      <span className="h-4 w-4 md:h-5 md:w-5 flex items-center justify-center">
-                        {social.icon === "tiktok" ? (
-                          <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} loading="lazy" className="h-full w-full" />
-                        ) : (
-                          social.icon
-                        )}
-                      </span>
-                    </motion.a>
-                  ))}
-                </div>
-              </div>
-            </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-            <div className="md:col-span-5 md:self-start mt-2 md:mt-0 flex items-center justify-center md:justify-end px-2 sm:px-4 md:pr-8 lg:pr-4">
-              <div className="relative w-full max-w-md md:max-w-none h-[350px] sm:h-[400px] md:h-[500px] rounded-3xl overflow-hidden bg-gradient-to-b from-white/10 to-white/0">
-                <HeroSpline />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="works" className="snap-start">
-          <DeferredRender placeholderClassName="h-[120vh]" rootMargin="450px">
-            <SelectedWorks />
-          </DeferredRender>
-        </section>
-
-        <section id="services" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
-          <div className="mx-auto w-full max-w-7xl">
-            <DeferredRender placeholderClassName="h-[40vh]" rootMargin="350px">
-              <Services />
-            </DeferredRender>
-          </div>
-        </section>
-
-        <section id="about" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
-          <div className="mx-auto w-full max-w-7xl">
-            <DeferredRender placeholderClassName="h-[40vh]" rootMargin="350px">
-              <About />
-            </DeferredRender>
-          </div>
-        </section>
-
-        <section id="experience" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
-          <div className="mx-auto w-full max-w-7xl">
-            <DeferredRender placeholderClassName="h-[40vh]" rootMargin="350px">
-              <Experience />
-            </DeferredRender>
-          </div>
-        </section>
-
-        <section id="tech" className="snap-start min-h-screen flex items-center">
-          <div className="mx-auto w-full max-w-7xl">
-            <DeferredRender placeholderClassName="h-[20vh]" rootMargin="350px">
-              <TechMarquee />
-            </DeferredRender>
-          </div>
-        </section>
-
-        <section id="faq" className="snap-start min-h-screen flex items-start pt-10 md:items-center md:pt-0">
-          <div className="mx-auto w-full max-w-7xl">
-            <DeferredRender placeholderClassName="h-[30vh]" rootMargin="300px">
-              <FAQ />
-            </DeferredRender>
-          </div>
-        </section>
-
-        <section id="contact" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
-          <div className="mx-auto w-full max-w-7xl">
-            <DeferredRender placeholderClassName="h-[30vh]" rootMargin="300px">
-              <ContactForm />
-            </DeferredRender>
-          </div>
-        </section>
-
-        <section id="footer" className="snap-start min-h-screen flex items-center relative overflow-hidden">
-          <DeferredRender rootMargin="300px">
-            <FooterSplineBackground />
-          </DeferredRender>
-          <div className="mx-auto w-full max-w-7xl relative z-10">
-            <DeferredRender placeholderClassName="h-[25vh]" rootMargin="300px">
-              <Footer />
-            </DeferredRender>
-          </div>
-        </section>
-      </main>
+      <GitHubGraph />
     </>
   );
 }
