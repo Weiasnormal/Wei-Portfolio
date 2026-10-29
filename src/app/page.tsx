@@ -17,6 +17,7 @@ import SidebarNav from "./components/SidebarNav";
 import SelectedWorks from "./sections/selectedworks";
 import { Download } from "lucide-react";
 import { socialLinks } from "./data/socialLinks";
+import { RENDER_ALL_SECTIONS_EVENT, scrollToSection } from "./lib/scrollToSection";
 
 const HeroSpline = dynamic(() => import("./components/HeroSpline"), {
   ssr: false,
@@ -60,7 +61,17 @@ function DeferredRender({
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+
+    const renderNow = () => {
+      setShouldRender(true);
+      observer.disconnect();
+    };
+    window.addEventListener(RENDER_ALL_SECTIONS_EVENT, renderNow);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener(RENDER_ALL_SECTIONS_EVENT, renderNow);
+    };
   }, [rootMargin]);
 
   return <div ref={containerRef}>{shouldRender ? children : <div className={placeholderClassName} />}</div>;
@@ -74,6 +85,12 @@ export default function HomePage() {
 
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
+    }
+
+    // Honor shared links like /#contact; otherwise always start at the top
+    const { hash } = window.location;
+    if (hash && hash !== "#home" && scrollToSection(hash, "instant")) {
+      return;
     }
 
     window.history.replaceState(null, "", `${window.location.pathname}#home`);
@@ -99,7 +116,7 @@ export default function HomePage() {
                   <TextRotator
                     texts={[
                       { prefix: "I am a ", title: "Web Designer" },
-                      { prefix: "I am a  ", title: "Frontend Developer" },
+                      { prefix: "I am a ", title: "Frontend Developer" },
                       { prefix: "I am a ", title: "Mobile App Developer" },
                       { prefix: "I am a ", title: "Web Developer" },
                       { prefix: "Soon to be ", title: "Machine Learning Engineer" },
@@ -154,9 +171,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        <DeferredRender placeholderClassName="h-[120vh]" rootMargin="450px">
-          <SelectedWorks />
-        </DeferredRender>
+        <section id="works" className="snap-start">
+          <DeferredRender placeholderClassName="h-[120vh]" rootMargin="450px">
+            <SelectedWorks />
+          </DeferredRender>
+        </section>
 
         <section id="services" className="snap-start min-h-screen flex items-start pt-16 md:items-center md:pt-0">
           <div className="mx-auto w-full max-w-7xl">

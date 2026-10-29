@@ -28,6 +28,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Without JS the splash would never dismiss */}
+        <noscript>
+          <style>{`.loading-splash { display: none !important; }`}</style>
+        </noscript>
         <LoadingSplashWave />
         {children}
       </body>
