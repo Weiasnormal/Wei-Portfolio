@@ -8,6 +8,11 @@ export function normalizePhInput(raw: string): string {
     return `+63${digits}`;
   }
 
+  // Country code typed without the plus, e.g. 639171234567
+  if (/^639\d{0,9}$/.test(cleaned)) {
+    return `+${cleaned}`;
+  }
+
   if (cleaned.startsWith("+63")) {
     return cleaned;
   }
