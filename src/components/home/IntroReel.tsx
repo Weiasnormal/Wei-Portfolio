@@ -65,7 +65,7 @@ export function IntroReel({ photo, video, name }: Props) {
           src={video}
           playsInline
           preload="auto"
-          className="absolute inset-0 size-full object-cover"
+          className="absolute inset-0 size-full object-cover transition-opacity duration-200 ease-out starting:opacity-0"
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
           onEnded={end}
@@ -86,7 +86,7 @@ export function IntroReel({ photo, video, name }: Props) {
             <span>{!active ? "30-sec intro" : playing ? "Pause" : "Resume"}</span>
           </button>
           <div className="absolute inset-x-0 bottom-0 h-0.5" aria-hidden="true">
-            <i className="block h-full bg-accent" style={{ width: `${time.progress * 100}%` }} />
+            <i className="block h-full origin-left bg-accent" style={{ transform: `scaleX(${time.progress})` }} />
           </div>
         </>
       )}

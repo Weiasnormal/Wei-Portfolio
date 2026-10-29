@@ -8,7 +8,7 @@ export function ProjectCard({ project, meta }: { project: Project; meta: string 
       href={`/projects/${project.slug}`}
       className="card flex flex-col overflow-hidden rounded-lg border border-line bg-raised no-underline transition-colors duration-200"
     >
-      <div className="frame-dash relative grid aspect-[2.39/1] max-w-full place-content-center border-b border-line bg-sunk p-2 text-center text-[13px] text-faint">
+      <div className="frame-dash relative grid aspect-[2.39/1] max-w-full place-content-center border-b border-line bg-sunk p-2 text-center text-[13px] text-muted">
         {project.cover ? (
           <Image src={project.cover} alt="" fill sizes="(min-width: 768px) 380px, 100vw" className="object-cover" />
         ) : (

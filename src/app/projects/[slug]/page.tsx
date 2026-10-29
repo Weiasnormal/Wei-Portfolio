@@ -54,7 +54,7 @@ export default async function ProjectPage({ params }: Props) {
         {project.gallery.map((g, i) => (
           <div
             key={i}
-            className={`grid max-w-full place-content-center rounded-md border border-line bg-sunk p-2 text-center text-[13px] text-faint ${
+            className={`grid max-w-full place-content-center rounded-md border border-line bg-sunk p-2 text-center text-[13px] text-muted ${
               g.wide ? "col-span-2 aspect-video md:col-span-3" : "aspect-[9/16]"
             }`}
           >

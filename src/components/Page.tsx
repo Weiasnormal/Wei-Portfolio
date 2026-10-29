@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Icon } from "./Icon";
 
 export function PageHead({ title, intro, tight }: { title: ReactNode; intro?: ReactNode; tight?: boolean }) {
   return (
@@ -16,7 +17,8 @@ export function Crumb({ href, children }: { href: string; children: ReactNode })
       href={href}
       className="mb-5 inline-flex items-center gap-1.5 text-sm text-muted no-underline transition-colors hover:text-fg"
     >
-      <span aria-hidden="true">←</span> {children}
+      <Icon name="back" className="size-3.5" />
+      {children}
     </Link>
   );
 }

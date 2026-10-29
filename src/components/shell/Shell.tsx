@@ -95,8 +95,8 @@ export function Shell({ children }: { children: ReactNode }) {
       <div
         aria-hidden="true"
         onClick={() => close("menu")}
-        className={`fixed inset-0 z-[39] bg-[rgba(4,5,7,.55)] transition-opacity duration-300 lg:hidden ${
-          drawerOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        className={`fixed inset-0 z-[39] bg-[rgba(4,5,7,.55)] transition-opacity lg:hidden ${
+          drawerOpen ? "opacity-100 duration-300" : "pointer-events-none opacity-0 duration-200"
         }`}
       />
 
@@ -105,8 +105,9 @@ export function Shell({ children }: { children: ReactNode }) {
         id="side"
         aria-label="Site"
         inert={isMobile && !open}
-        className={`fixed inset-y-0 left-0 z-40 flex w-[min(300px,86vw)] flex-col gap-6 overflow-y-auto border-r border-line bg-bg pt-[calc(env(safe-area-inset-top,0px)+28px)] pr-5 pb-[calc(env(safe-area-inset-bottom,0px)+20px)] pl-[max(20px,calc(env(safe-area-inset-left,0px)+12px))] transition-[transform,box-shadow] duration-[380ms] ease-drawer lg:w-(--side) lg:translate-x-0 lg:shadow-none ${
-          drawerOpen ? "translate-x-0 shadow-[20px_0_60px_-20px_rgba(0,0,0,.6)]" : "-translate-x-full"
+        className={`fixed inset-y-0 left-0 z-40 flex w-[min(300px,86vw)] flex-col gap-6 overflow-y-auto border-r border-line bg-bg pt-[calc(env(safe-area-inset-top,0px)+28px)] pr-5 pb-[calc(env(safe-area-inset-bottom,0px)+20px)] pl-[max(20px,calc(env(safe-area-inset-left,0px)+12px))] transition-[transform,box-shadow] ease-drawer lg:w-(--side) lg:translate-x-0 lg:shadow-none ${
+          // Closing is quicker than opening so dismissing never drags.
+          drawerOpen ? "translate-x-0 shadow-[20px_0_60px_-20px_rgba(0,0,0,.6)] duration-[380ms]" : "-translate-x-full duration-[240ms]"
         }`}
       >
         <button

@@ -60,15 +60,15 @@ export function ProjectReel({ name, views }: { name: string; views: ReelView[] }
             ref={ref}
             src={view.src}
             playsInline
-            className="absolute inset-0 size-full object-cover"
+            className="absolute inset-0 size-full object-cover transition-opacity duration-200 ease-out starting:opacity-0"
             onPlay={() => setPlaying(true)}
             onPause={() => setPlaying(false)}
             onEnded={() => setPlaying(false)}
           />
         )}
         {!view.poster && !view.src && (
-          <div className="absolute inset-0 grid place-content-center gap-1 p-4 text-center text-sm text-faint">
-            <b className="font-semibold text-muted">{name}</b>
+          <div className="absolute inset-0 grid place-content-center gap-1 p-4 text-center text-sm text-muted">
+            <b className="font-semibold text-fg">{name}</b>
             <span>{view.placeholder}</span>
           </div>
         )}
@@ -83,7 +83,7 @@ export function ProjectReel({ name, views }: { name: string; views: ReelView[] }
             <Icon name={playing ? "pause" : "play"} className="size-3.5" />
           </button>
           <div className="h-0.5 flex-1 overflow-hidden rounded-sm bg-fg/18">
-            <i className="block h-full bg-accent" style={{ width: `${time.progress * 100}%` }} />
+            <i className="block h-full origin-left bg-accent" style={{ transform: `scaleX(${time.progress})` }} />
           </div>
           <span className="tc text-fg">{timecode(time.at)}</span>
         </div>

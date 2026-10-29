@@ -16,7 +16,7 @@ export default function OutsidePage() {
         {outside.map((t) => (
           <div key={t.title} className={`flex min-w-0 flex-col gap-2.5 ${t.lead ? "md:row-span-2" : ""}`}>
             <div
-              className={`relative grid max-w-full place-content-center overflow-hidden rounded-md border border-line bg-sunk p-3 text-center text-[13.5px] text-faint ${
+              className={`relative grid max-w-full place-content-center overflow-hidden rounded-md border border-line bg-sunk p-3 text-center text-[13.5px] text-muted ${
                 t.lead ? "aspect-[16/10] md:aspect-auto md:min-h-[260px] md:flex-1" : "aspect-[4/3]"
               }`}
             >

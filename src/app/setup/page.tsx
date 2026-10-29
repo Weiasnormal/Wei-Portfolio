@@ -11,8 +11,8 @@ export default function SetupPage() {
   return (
     <>
       <PageHead title="Setup" intro={intro} />
-      <div className="frame-dash relative grid aspect-video max-w-full place-content-center gap-1 overflow-hidden rounded-md border border-line bg-sunk p-4 text-center text-sm text-faint">
-        <b className="font-semibold text-muted">Desk photo</b>
+      <div className="frame-dash relative grid aspect-video max-w-full place-content-center gap-1 overflow-hidden rounded-md border border-line bg-sunk p-4 text-center text-sm text-muted">
+        <b className="font-semibold text-fg">Desk photo</b>
         <span>One wide shot of the setup. A 3D model can replace this later.</span>
       </div>
       <dl className="mt-6 border-t border-line">

@@ -49,44 +49,47 @@ export function Guestbook() {
         aria-describedby="gb-note"
         onSubmit={(e) => e.preventDefault()}
       >
-        <div role="group" aria-label="Add a reaction" className="flex flex-wrap gap-1.5">
-          {reactions.map((r) => (
-            <button
-              key={r}
-              type="button"
-              aria-pressed={react === r}
-              onClick={() => setReact(react === r ? "" : r)}
-              className="chip !min-h-[34px] !text-[13px]"
-            >
-              {r}
+        {/* Disabled as a group so nothing invites typing a message that can't be sent yet. */}
+        <fieldset disabled className="m-0 grid min-w-0 gap-2.5 border-0 p-0">
+          <div role="group" aria-label="Add a reaction" className="flex flex-wrap gap-1.5">
+            {reactions.map((r) => (
+              <button
+                key={r}
+                type="button"
+                aria-pressed={react === r}
+                onClick={() => setReact(react === r ? "" : r)}
+                className="chip !min-h-[34px] !text-[13px] disabled:cursor-not-allowed"
+              >
+                {r}
+              </button>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,2.2fr)_auto]">
+            <label className="sr-only" htmlFor="gb-name">
+              Name
+            </label>
+            <input
+              id="gb-name"
+              maxLength={32}
+              placeholder="Name (optional)"
+              autoComplete="off"
+              className="min-h-11 w-full min-w-0 rounded-sm border border-line bg-bg px-3 text-base text-fg placeholder:text-faint focus:border-accent disabled:cursor-not-allowed disabled:opacity-60 sm:text-[15px]"
+            />
+            <label className="sr-only" htmlFor="gb-msg">
+              Message
+            </label>
+            <input
+              id="gb-msg"
+              maxLength={200}
+              placeholder="Leave a short message"
+              autoComplete="off"
+              className="min-h-11 w-full min-w-0 rounded-sm border border-line bg-bg px-3 text-base text-fg placeholder:text-faint focus:border-accent disabled:cursor-not-allowed disabled:opacity-60 sm:text-[15px]"
+            />
+            <button className="btn btn-primary" type="submit">
+              Post
             </button>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,2.2fr)_auto]">
-          <label className="sr-only" htmlFor="gb-name">
-            Name
-          </label>
-          <input
-            id="gb-name"
-            maxLength={32}
-            placeholder="Name (optional)"
-            autoComplete="off"
-            className="min-h-11 w-full min-w-0 rounded-sm border border-line bg-bg px-3 text-base text-fg focus:border-accent sm:text-[15px]"
-          />
-          <label className="sr-only" htmlFor="gb-msg">
-            Message
-          </label>
-          <input
-            id="gb-msg"
-            maxLength={200}
-            placeholder="Leave a short message"
-            autoComplete="off"
-            className="min-h-11 w-full min-w-0 rounded-sm border border-line bg-bg px-3 text-base text-fg focus:border-accent sm:text-[15px]"
-          />
-          <button className="btn btn-primary" type="submit" disabled>
-            Post
-          </button>
-        </div>
+          </div>
+        </fieldset>
         <p id="gb-note" className="min-h-[1.4em] text-[13px] text-muted">
           Coming soon. Posting opens once moderation is set up.
         </p>
