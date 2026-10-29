@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
-import DOMPurify from "dompurify";
 import { normalizePhInput, isValidPhPhone } from "../lib/phone";
 
 export default function ContactForm() {
@@ -44,7 +43,7 @@ export default function ContactForm() {
       newErrors.email = "Don't forget your email so I can reach you!";
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Please include @ in your email address";
+      newErrors.email = "Please enter a valid email address (e.g. name@example.com)";
       isValid = false;
     }
 
@@ -77,15 +76,16 @@ export default function ContactForm() {
       const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
-      const sanitizedData = {
-        from_name: DOMPurify.sanitize(formData.name.trim()),
-        from_email: DOMPurify.sanitize(formData.email.trim()),
-        phone: DOMPurify.sanitize(formData.phone.trim() || "Not provided"),
-        message: DOMPurify.sanitize(formData.message.trim()),
+      // Sent as plain text; EmailJS escapes {{variables}} when rendering the template
+      const templateParams = {
+        from_name: formData.name.trim(),
+        from_email: formData.email.trim(),
+        phone: formData.phone.trim() || "Not provided",
+        message: formData.message.trim(),
         to_name: "Wincel Crusit",
       };
 
-      await emailjs.send(serviceID, templateID, sanitizedData, publicKey);
+      await emailjs.send(serviceID, templateID, templateParams, publicKey);
 
       setStatus({
         type: "success",
@@ -125,7 +125,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" className="pb-12 md:pb-16">
+    <div className="pb-12 md:pb-16">
       <div className="grid gap-8 px-4 md:px-0 md:grid-cols-2 md:gap-16">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -296,6 +296,6 @@ export default function ContactForm() {
           </motion.button>
         </motion.form>
       </div>
-    </section>
+    </div>
   );
 }

@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
 import { socialLinks } from "../data/socialLinks";
 
+// Set NEXT_PUBLIC_CALENDLY_URL to your booking page; until then the button points to the contact form
+const bookingUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
+
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 py-12">
@@ -18,14 +21,13 @@ export default function Footer() {
             viewport={{ once: true }}
             className="text-center md:text-left"
           >
-            <h3 className="mb-2 text-2xl font-bold text-white">Lets Work Together</h3>
+            <h3 className="mb-2 text-2xl font-bold text-white">Let&apos;s Work Together</h3>
             <p className="text-white/70">Ready to start your next project?</p>
           </motion.div>
 
           <motion.a
-            href="https://calendly.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={bookingUrl || "#contact"}
+            {...(bookingUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.1 }}

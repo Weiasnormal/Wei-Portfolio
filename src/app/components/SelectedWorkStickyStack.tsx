@@ -27,16 +27,17 @@ function StickyProjectCard({
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isCardHovered, setIsCardHovered] = useState(false);
-  const topClass = ["top-14 md:top-20", "top-16 md:top-24", "top-20 md:top-28", "top-24 md:top-32"][index] ?? "top-14 md:top-20";
 
   const displayImage = isCardHovered && project.hoverImage ? project.hoverImage : project.image;
 
   return (
     <article
-      className={`sticky ${topClass} mx-auto mb-[18vh] md:mb-[40vh] h-[35vh] md:h-[68vh] w-full max-w-5xl overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl`}
+      className={`sticky top-[calc(3.5rem+var(--stack-index)*0.75rem)] md:top-[calc(5rem+var(--stack-index)*1rem)] mx-auto mb-[18vh] md:mb-[40vh] h-[35vh] md:h-[68vh] w-full max-w-5xl overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl`}
       style={{
         zIndex: index + 1,
-      }}
+        // Each card sticks a little lower than the previous one so the stack stays visible
+        "--stack-index": index,
+      } as React.CSSProperties}
       onMouseEnter={() => setIsCardHovered(true)}
       onMouseLeave={() => setIsCardHovered(false)}
     >
@@ -85,7 +86,7 @@ function StickyProjectCard({
           }}
           transition={{ duration: 0.3 }}
           className="grid h-12 w-12 md:h-28 md:w-28 place-items-center rounded-2xl md:rounded-3xl border overflow-hidden relative"
-          aria-label="View project"
+          aria-label={`View ${project.title} (opens in a new tab)`}
           suppressHydrationWarning
         >
           <AnimatePresence mode="wait">

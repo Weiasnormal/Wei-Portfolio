@@ -13,7 +13,11 @@ type TextRotatorProps = {
   titleClassName?: string;
 };
 
-export default function TextRotator({ 
+function getFullText(item: TextItem) {
+  return typeof item === 'string' ? item : item.prefix + item.title;
+}
+
+export default function TextRotator({
   texts, 
   typingSpeed = 100,
   deletingSpeed = 50,
@@ -21,23 +25,15 @@ export default function TextRotator({
   className = "",
   titleClassName = ""
 }: TextRotatorProps) {
-  const [mounted, setMounted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
+  // Start on the first full text (paused) so server and client render the same markup
+  const [currentText, setCurrentText] = useState(() => getFullText(texts[0]));
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-
-  // Handle mounting to avoid hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const [isPaused, setIsPaused] = useState(true);
 
   useEffect(() => {
-    if (!mounted) return;
     const currentItem = texts[currentIndex];
-    const currentFullText = typeof currentItem === 'string' 
-      ? currentItem 
-      : currentItem.prefix + currentItem.title;
+    const currentFullText = getFullText(currentItem);
 
     // Get next item to check if prefixes match
     const nextIndex = (currentIndex + 1) % texts.length;
@@ -58,51 +54,31 @@ export default function TextRotator({
       return () => clearTimeout(pauseTimer);
     }
 
-    if (!isDeleting && currentText === currentFullText) {
-      setIsPaused(true);
-      return;
-    }
-
-    if (isDeleting && currentText.length === minLength) {
-      setIsDeleting(false);
-      setCurrentIndex(nextIndex);
-      return;
-    }
-
     const timeout = setTimeout(
       () => {
         if (isDeleting) {
-          setCurrentText(currentFullText.substring(0, currentText.length - 1));
+          const nextText = currentFullText.substring(0, currentText.length - 1);
+          setCurrentText(nextText);
+          if (nextText.length <= minLength) {
+            setIsDeleting(false);
+            setCurrentIndex(nextIndex);
+          }
         } else {
-          setCurrentText(currentFullText.substring(0, currentText.length + 1));
+          const nextText = currentFullText.substring(0, currentText.length + 1);
+          setCurrentText(nextText);
+          if (nextText === currentFullText) {
+            setIsPaused(true);
+          }
         }
       },
       isDeleting ? deletingSpeed : typingSpeed
     );
 
     return () => clearTimeout(timeout);
-  }, [mounted, currentText, isDeleting, isPaused, currentIndex, texts, typingSpeed, deletingSpeed, pauseDuration]);
+  }, [currentText, isDeleting, isPaused, currentIndex, texts, typingSpeed, deletingSpeed, pauseDuration]);
 
   const currentItem = texts[currentIndex];
-  
-  // Show the first full text during SSR to avoid hydration mismatch
-  if (!mounted) {
-    const firstItem = texts[0];
-    if (typeof firstItem === 'string') {
-      return (
-        <span className={`inline-block ${className}`}>
-          {firstItem}
-        </span>
-      );
-    }
-    return (
-      <span className={`inline-block ${className}`}>
-        <span>{firstItem.prefix}</span>
-        <span className={titleClassName}>{firstItem.title}</span>
-      </span>
-    );
-  }
-  
+
   if (typeof currentItem === 'string') {
     return (
       <span className={`inline-block ${className}`}>

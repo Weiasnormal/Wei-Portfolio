@@ -83,7 +83,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="pb-16">
+    <div className="pb-16">
       <SectionHeading title="Services" />
 
       <div className="space-y-4 px-4 md:px-0">
@@ -168,6 +168,6 @@ export default function Services() {
           </FadeInView>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

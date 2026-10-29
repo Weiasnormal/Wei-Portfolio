@@ -39,7 +39,7 @@ const aboutItems: AboutItem[] = [
 
 export default function About() {
   return (
-    <section id="about" className="pb-16">
+    <div className="pb-16">
       <SectionHeading
         title="About Me"
         subtitle="A passionate developer focused on creating innovative solutions and continuous learning."
@@ -62,6 +62,6 @@ export default function About() {
           </FadeInView>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

@@ -43,7 +43,7 @@ const experiences: ExperienceItem[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="pb-8 md:pb-16">
+    <div className="pb-8 md:pb-16">
       <SectionHeading title="Experience" />
 
       <div className="relative px-4 md:px-0">
@@ -71,6 +71,6 @@ export default function Experience() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

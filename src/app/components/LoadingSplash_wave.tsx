@@ -18,30 +18,23 @@ const WAVE_SWAY_DURATION = 2.8;
 //const PROGRESS_DELAY = 3.8;
 //const PROGRESS_DURATION = 1;
 
+function isBackForwardNavigation() {
+  const [entry] = performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
+  return entry?.type === "back_forward";
+}
+
 export default function LoadingSplashWave() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [shouldRender, setShouldRender] = useState(false);
+  // Visible in the server HTML so the page never flashes before the splash covers it
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const navEntries = performance.getEntriesByType(
-      "navigation"
-    ) as PerformanceNavigationTiming[];
-    const isFirstLoad =
-      navEntries.length === 0 ||
-      navEntries[0].type === "navigate" ||
-      navEntries[0].type === "reload";
-    const hasNavigated = sessionStorage.getItem("hasNavigated");
-
-    if (isFirstLoad || !hasNavigated) {
-      setShouldRender(true);
-      setIsVisible(true);
-      sessionStorage.setItem("hasNavigated", "true");
-      const timer = setTimeout(() => setIsVisible(false), SPLASH_VISIBLE_MS);
-      return () => clearTimeout(timer);
-    }
+    // Skip the splash when coming back via history; hide it on the next frame
+    const timer = setTimeout(
+      () => setIsVisible(false),
+      isBackForwardNavigation() ? 0 : SPLASH_VISIBLE_MS
+    );
+    return () => clearTimeout(timer);
   }, []);
-
-  if (!shouldRender) return null;
 
   return (
     <AnimatePresence>
@@ -53,7 +46,7 @@ export default function LoadingSplashWave() {
             scale: 1.15,
             transition: { duration: 0.8, ease: "easeIn" },
           }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black overflow-hidden px-4"
+          className="loading-splash fixed inset-0 z-[9999] flex items-center justify-center bg-black overflow-hidden px-4"
         >
       
           <motion.div

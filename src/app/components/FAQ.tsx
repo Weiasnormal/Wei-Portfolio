@@ -46,53 +46,72 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="pb-16">
+    <div className="pb-16">
       <SectionHeading
         title="Frequently Asked Questions"
         subtitle="Everything you need to know about working with me"
       />
 
       <div className="space-y-3 md:space-y-4 px-4 md:px-0">
-        {faqs.map((faq, index) => (
-          <FadeInView key={index} delay={index * 0.1}>
-            <Card hover={false} className="overflow-hidden rounded-xl md:rounded-2xl">
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="flex w-full items-center justify-between p-4 md:p-6 text-left transition hover:bg-white/5"
-                suppressHydrationWarning
-              >
-                <h3
-                  className={`pr-3 md:pr-4 text-base md:text-xl font-semibold transition-[color,transform] duration-300 ease-out ${
-                    openIndex === index ? "text-[#ff5b1a] translate-x-5" : "text-white translate-x-0"
-                  }`}
-                >
-                  {faq.question}
+        {faqs.map((faq, index) => {
+          const isOpen = openIndex === index;
+          const buttonId = `faq-question-${index}`;
+          const panelId = `faq-answer-${index}`;
+
+          return (
+            <FadeInView key={index} delay={index * 0.1}>
+              <Card hover={false} className="overflow-hidden rounded-xl md:rounded-2xl">
+                <h3>
+                  <button
+                    id={buttonId}
+                    onClick={() => toggleFAQ(index)}
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    className="flex w-full items-center justify-between p-4 md:p-6 text-left transition hover:bg-white/5"
+                    suppressHydrationWarning
+                  >
+                    {/* Indent with padding rather than translate so the text never runs under the icon */}
+                    <span
+                      className={`pr-3 md:pr-4 text-base md:text-xl font-semibold transition-[color,padding] duration-300 ease-out ${
+                        isOpen ? "text-[#ff5b1a] pl-5" : "text-white pl-0"
+                      }`}
+                    >
+                      {faq.question}
+                    </span>
+
+                    <span className="flex-shrink-0" aria-hidden="true">
+                      {isOpen ? (
+                        <Minus className="h-4 w-4 md:h-5 md:w-5 text-[#ff5b1a]" />
+                      ) : (
+                        <Plus className="h-4 w-4 md:h-5 md:w-5 text-white/70" />
+                      )}
+                    </span>
+                  </button>
                 </h3>
 
-                <div className="flex-shrink-0">
-                  {openIndex === index ? (
-                    <Minus className="h-4 w-4 md:h-5 md:w-5 text-[#ff5b1a]" />
-                  ) : (
-                    <Plus className="h-4 w-4 md:h-5 md:w-5 text-white/70" />
-                  )}
+                {/* Animating grid rows from 0fr to 1fr fits any answer length, unlike a fixed max-height */}
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  inert={!isOpen}
+                  className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
+                  style={{
+                    gridTemplateRows: isOpen ? "1fr" : "0fr",
+                    opacity: isOpen ? 1 : 0,
+                  }}
+                >
+                  <div className="min-h-0 overflow-hidden">
+                    <div className="border-t border-white/10 px-4 pb-4 pt-3 md:px-6 md:pb-6 md:pt-4">
+                      <p className="text-xs md:text-base text-white/70">{faq.answer}</p>
+                    </div>
+                  </div>
                 </div>
-              </button>
-
-              <div
-                className="overflow-hidden transition-[max-height,opacity] duration-300 ease-out"
-                style={{
-                  maxHeight: openIndex === index ? "200px" : "0px",
-                  opacity: openIndex === index ? 1 : 0,
-                }}
-              >
-                <div className="border-t border-white/10 px-4 pb-4 pt-3 md:px-6 md:pb-6 md:pt-4">
-                  <p className="text-xs md:text-base text-white/70">{faq.answer}</p>
-                </div>
-              </div>
-            </Card>
-          </FadeInView>
-        ))}
+              </Card>
+            </FadeInView>
+          );
+        })}
       </div>
-    </section>
+    </div>
   );
 }
