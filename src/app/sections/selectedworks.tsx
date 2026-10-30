@@ -1,3 +1,4 @@
+import { BASE } from "../lib/basePath";
 import SelectedWorkStickyStack from "../components/SelectedWorkStickyStack";
 
 const selectedWork = [
@@ -5,7 +6,7 @@ const selectedWork = [
     category: "Mobile App Platform (React + Expo)",
     title: "ResqLine",
     date: "Dec 2025",
-    image: "/Works/ResqLine.svg",
+    image: BASE + "/Works/ResqLine.svg",
     link: "https://github.com/Weiasnormal/ResqLine_Frontend.git",
   },
   {
@@ -13,7 +14,7 @@ const selectedWork = [
     title: "Statera",
     date: "Feb 2026",
     image:
-      "/Works/Statera.svg",
+      BASE + "/Works/Statera.svg",
     link: "https://github.com/Weiasnormal/Statera_App.git",
   },
   {
@@ -21,8 +22,8 @@ const selectedWork = [
     title: "Sona Music",
     date: "June 2025",
     image:
-      "/Works/SonaB.svg",
-    hoverImage: "/Works/SonaW.svg",
+      BASE + "/Works/SonaB.svg",
+    hoverImage: BASE + "/Works/SonaW.svg",
     link: "https://sona-ten.vercel.app/mbti-selection",
   },
   {
@@ -30,22 +31,22 @@ const selectedWork = [
     title: "OCTA Organization",
     date: "Nov 2025",
     image:
-      "/Works/octaB.svg",
-    hoverImage: "/Works/octaW.svg",
+      BASE + "/Works/octaB.svg",
+    hoverImage: BASE + "/Works/octaW.svg",
     link: "https://ccs-octa.com/home",
   },
   {
     category: "WinForms Desktop App (C#)",
     title: "WorkHive",
     date: "June 2024",
-    image: "/Works/WorkHive.svg",
+    image: BASE + "/Works/WorkHive.svg",
     link: "https://github.com/recca383/WorkHive.git",
   },
   {
     category: "WinForms Desktop App (JAVA)",
     title: "LEARN",
     date: "Jan 2026",
-    image: "/Works/LEARN.svg",
+    image: BASE + "/Works/LEARN.svg",
     link: "https://github.com/Joko2005/L.E.A.R.N.-An-Interactive-Java-Based-Learning-System.git",
   },
 ];

@@ -1,5 +1,6 @@
 "use client";
 
+import { BASE } from "../lib/basePath";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
@@ -62,7 +63,7 @@ export default function Footer() {
             >
               <span className="h-5 w-5 flex items-center justify-center">
                 {social.icon === "tiktok" ? (
-                  <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} loading="lazy" className="h-full w-full" />
+                  <Image src={BASE + "/tiktok.svg"} alt="TikTok" width={20} height={20} loading="lazy" className="h-full w-full" />
                 ) : (
                   social.icon
                 )}

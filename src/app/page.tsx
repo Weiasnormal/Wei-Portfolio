@@ -1,5 +1,6 @@
 "use client";
 
+import { BASE } from "./lib/basePath";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -129,7 +130,7 @@ export default function HomePage() {
               </h1>
               <div className="mt-8 flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
                 <motion.a
-                  href="/Resume/Crusit_Wincel_HARVARD_RESUME.pdf"
+                  href={BASE + "/Resume/Crusit_Wincel_HARVARD_RESUME.pdf"}
                   download
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -152,7 +153,7 @@ export default function HomePage() {
                     >
                       <span className="h-4 w-4 md:h-5 md:w-5 flex items-center justify-center">
                         {social.icon === "tiktok" ? (
-                          <Image src="/tiktok.svg" alt="TikTok" width={20} height={20} loading="lazy" className="h-full w-full" />
+                          <Image src={BASE + "/tiktok.svg"} alt="TikTok" width={20} height={20} loading="lazy" className="h-full w-full" />
                         ) : (
                           social.icon
                         )}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import LoadingSplashWave from "./components/LoadingSplash_wave";
+import BackToCurrent from "./components/BackToCurrent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         </noscript>
         <LoadingSplashWave />
         {children}
+        <BackToCurrent />
       </body>
     </html>
   );
