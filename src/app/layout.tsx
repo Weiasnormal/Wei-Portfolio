@@ -1,41 +1,50 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Archivo, JetBrains_Mono } from "next/font/google";
+import { Shell } from "@/components/shell/Shell";
+import { site, siteUrl } from "@/lib/site";
 import "./globals.css";
-import LoadingSplashWave from "./components/LoadingSplash_wave";
-import BackToCurrent from "./components/BackToCurrent";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const archivo = Archivo({
   subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--font-archivo",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jbmono = JetBrains_Mono({
   subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jbmono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Wei Portfolio",
-  description: "Personal portfolio website",
+  metadataBase: siteUrl,
+  title: { default: site.name, template: `%s · ${site.name}` },
+  description: site.description,
+  openGraph: { type: "website", siteName: site.name, title: site.name, description: site.description },
+  twitter: { card: "summary_large_image" },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0B0D11" },
+    { media: "(prefers-color-scheme: light)", color: "#F3F4F6" },
+  ],
+};
+
+// Runs before paint so a saved light/dark choice never flashes the other theme.
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`;
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* Without JS the splash would never dismiss */}
-        <noscript>
-          <style>{`.loading-splash { display: none !important; }`}</style>
-        </noscript>
-        <LoadingSplashWave />
-        {children}
-        <BackToCurrent />
+    <html lang="en" suppressHydrationWarning className={`${archivo.variable} ${jbmono.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body>
+        <Shell>{children}</Shell>
       </body>
     </html>
   );
