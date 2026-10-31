@@ -45,6 +45,7 @@ const paths = {
     </>
   ),
   guestbook: <path d="M5 5h14v10H9l-4 4z" />,
+  pointer: <path d="M5 4l6 16 2.4-6.6L20 11z" />,
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   back: <path d="M19 12H5M11 6l-6 6 6 6" />,
   close: <path d="M6 6l12 12M18 6L6 18" />,

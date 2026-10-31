@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { site } from "@/lib/site";
 import { Icon } from "../Icon";
+import { GuideCursor } from "../live/GuideCursor";
+import { Live } from "../live/Live";
 import { CopyEmail } from "./CopyEmail";
 import { isActive, navGroups } from "./nav";
 import { ThemeToggle } from "./ThemeToggle";
@@ -141,6 +143,7 @@ export function Shell({ children }: { children: ReactNode }) {
                 <Link
                   key={item.href}
                   href={item.href}
+                  data-guide={`nav-${item.href}`}
                   onClick={onNavigate}
                   aria-current={on ? "page" : undefined}
                   className={`flex min-h-[38px] items-center gap-2.5 rounded-sm px-2.5 text-[15px] no-underline transition-colors duration-150 hover:bg-raised hover:text-fg ${
@@ -158,7 +161,9 @@ export function Shell({ children }: { children: ReactNode }) {
 
         <div className="mt-auto grid gap-3 border-t border-line pt-4">
           <ThemeToggle />
-          <CopyEmail />
+          <div data-guide="email" className="w-max max-w-full">
+            <CopyEmail />
+          </div>
           <V1Link />
         </div>
       </aside>
@@ -171,6 +176,9 @@ export function Shell({ children }: { children: ReactNode }) {
           {children}
         </div>
       </main>
+
+      <Live hidden={drawerOpen} />
+      <GuideCursor />
     </>
   );
 }

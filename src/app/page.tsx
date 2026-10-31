@@ -47,7 +47,7 @@ export default function Home() {
             <span className="dot" aria-hidden="true" />
             {site.statusLong}
           </p>
-          <h1 className="text-[clamp(42px,6.4vw,64px)] leading-[.95] font-extrabold tracking-[-0.03em] font-stretch-125%">
+          <h1 data-guide="name" className="text-[clamp(42px,6.4vw,64px)] leading-[.95] font-extrabold tracking-[-0.03em] font-stretch-125%">
             {site.name}
           </h1>
           <p className="mt-4 max-w-[40ch] text-lg leading-normal">
@@ -55,10 +55,10 @@ export default function Home() {
             <span className="text-muted">Right now I&apos;m learning to build faster with AI workflows and automation.</span>
           </p>
           <div className="mt-6 flex flex-wrap gap-2.5">
-            <Link className="btn btn-primary" href="/projects">
+            <Link data-guide="projects-cta" className="btn btn-primary" href="/projects">
               See projects
             </Link>
-            <a className="btn" href={site.resume} target="_blank" rel="noopener noreferrer">
+            <a data-guide="resume" className="btn" href={site.resume} target="_blank" rel="noopener noreferrer">
               Resume (PDF)
             </a>
           </div>
