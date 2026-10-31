@@ -1,0 +1,48 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "presence": {
+      ".read": true,
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid",
+        "$tab": {
+          ".validate": "$tab.matches(/^[A-Za-z0-9-]{1,24}$/) && newData.hasChildren(['name', 'path', 'at'])",
+          "name": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 24" },
+          "path": { ".validate": "newData.isString() && newData.val().beginsWith('/') && newData.val().length <= 120" },
+          "at": { ".validate": "newData.isNumber() && newData.val() <= now" },
+          "cursor": {
+            ".validate": "newData.hasChildren(['x', 'y'])",
+            "x": { ".validate": "newData.isNumber() && newData.val() >= -1 && newData.val() <= 2" },
+            "y": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1" },
+            "$other": { ".validate": false }
+          },
+          "$other": { ".validate": false }
+        }
+      }
+    },
+    "chat": {
+      ".read": true,
+      ".indexOn": ["at"],
+      "$id": {
+        ".write": "auth != null && !data.exists() && newData.exists() && !root.child('banned').child(auth.uid).exists()",
+        ".validate": "newData.hasChildren(['uid', 'name', 'text', 'at']) && (!root.child('chatRate').child(auth.uid).exists() || root.child('chatRate').child(auth.uid).val() < now - 2000) && newData.parent().parent().child('chatRate').child(auth.uid).val() === now",
+        "uid": { ".validate": "newData.val() === auth.uid" },
+        "name": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 24 && !newData.val().matches(/.*(wincel|crusit|admin|owner|moderator).*/i)"
+        },
+        "text": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 280 && newData.val().replace(' ', '').length >= 1 && !newData.val().matches(/.*(https?:|www\\.).*/i)"
+        },
+        "at": { ".validate": "newData.val() === now" },
+        "$other": { ".validate": false }
+      }
+    },
+    "chatRate": {
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "newData.val() === now"
+      }
+    }
+  }
+}
