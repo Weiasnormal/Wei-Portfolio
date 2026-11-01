@@ -22,7 +22,7 @@ export const projects: Project[] = [
     facts: [
       { label: "My role", value: "Project lead, ML and frontend" },
       { label: "Team", value: "[team size]" },
-      { label: "Timeline", value: "Apr 2026 to now" },
+      { label: "Timeline", value: "Apr to Nov 2026" },
       { label: "Built with", value: "React Native, PyTorch, TensorFlow" },
     ],
     sections: [
@@ -91,7 +91,48 @@ export const projects: Project[] = [
     ],
     footer: [
       { label: "Previous: AVERA", href: "/projects/avera" },
-      { label: "Read the story", href: "/writing/resqline-batang-techno" },
+      { label: "Next: Cryolipo", href: "/projects/cryolipo" },
+    ],
+  },
+  {
+    slug: "cryolipo",
+    title: "Cryolipo",
+    badge: "Client",
+    summary: "Client Shopify website built from a partner's Figma designs, with custom Liquid theme sections.",
+    role: "Shopify developer",
+    platforms: "Web, Shopify",
+    intro:
+      "A client Shopify website, built with a UI/UX design partner. I turned the Figma designs into a working store with custom theme sections and responsive components.",
+    description: "Client Shopify website built from Figma designs, with custom Liquid theme sections.",
+    reelName: "Cryolipo reel",
+    views: [
+      { id: "desktop", label: "Desktop", placeholder: "Desktop walkthrough goes here (video, 2.39:1)" },
+      { id: "mobile", label: "Mobile", placeholder: "Mobile walkthrough goes here" },
+    ],
+    facts: [
+      { label: "My role", value: "Shopify developer" },
+      { label: "Team", value: "With a UI/UX design partner" },
+      { label: "Timeline", value: "Sep to Nov 2026" },
+      { label: "Built with", value: "Shopify Liquid, HTML, CSS, JavaScript" },
+    ],
+    sections: [
+      { heading: "The client", body: "[Who Cryolipo is and what the store needed to do]" },
+      {
+        heading: "What we built",
+        body: "Custom theme sections and responsive components in Shopify Liquid, plus the store structure, product collections and site navigation.",
+      },
+      { heading: "How I led it", body: "[How you worked with the design partner and the client]" },
+      { heading: "Results", body: "[Launch status, live link, or client feedback]" },
+    ],
+    gallery: [
+      { label: "Store page" },
+      { label: "Store page" },
+      { label: "Store page" },
+      { label: "Desktop screen", wide: true },
+    ],
+    footer: [
+      { label: "Previous: ResQLine", href: "/projects/resqline" },
+      { label: "All projects", href: "/projects" },
     ],
   },
 ];
@@ -107,11 +148,6 @@ export const alsoBuilt: AlsoBuilt[] = [
     description:
       "n8n workflow that drafts three posts per car listing and sends them to the owner on Telegram for one-tap approval. First Runner-Up, iSITE.",
     href: "/writing/driveminded-isite",
-  },
-  {
-    title: "Client Shopify store",
-    year: "2026",
-    description: "A partner's Figma designs turned into a working storefront with custom Liquid sections.",
   },
   {
     title: "Statera",

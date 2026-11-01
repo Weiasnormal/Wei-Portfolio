@@ -3,13 +3,15 @@ import type { Metadata } from "next";
 export const site = {
   name: "Wincel Crusit",
   email: "crusitwincel@gmail.com",
-  status: "Open for OJT",
-  statusLong: "Open for OJT placement, BS Computer Science at LSPU",
+  status: "Quezon, PH",
+  availability: "Open for Work",
+  statusLong: "AI/ML and frontend developer · Quezon, PH",
   description:
-    "Wincel Crusit leads small teams that build web and mobile apps, and is learning to build faster with AI workflows and automation.",
+    "Wincel Crusit is an AI/ML and frontend developer building web and mobile apps with React Native, Next.js, Python, PyTorch and TensorFlow.",
   githubUser: "Weiasnormal",
-  resume: "/Resume/Crusit_Wincel_HARVARD_RESUME.pdf",
-  photo: "/profile.jpg",
+  cv: "/Resume/Crusit_CV.pdf",
+  /** Background-free cutout with a sticker outline, made for the dark portrait card. */
+  photo: "/profile-cutout.webp",
   /** 30-second intro clip. The intro button stays hidden until this is set. */
   introVideo: undefined as string | undefined,
   v1Path: "/v1",

@@ -7,8 +7,8 @@ export const posts: Post[] = [
     title: "Leading ResQLine to the Batang Techno finals",
     date: "2026-04",
     dateLabel: "Apr 2026",
-    summary: "Four people, one deadline, and a mobile app plus a dashboard to ship.",
-    readTime: "[x] min read",
+    summary: "My first hackathon: leading a team to the finals with a civic emergency platform for SDG 16.",
+    readTime: "2 min read",
     project: { label: "See the project", href: "/projects/resqline" },
   },
   {
@@ -16,8 +16,8 @@ export const posts: Post[] = [
     title: "How DriveMinded placed First Runner-Up at iSITE",
     date: "2026-04",
     dateLabel: "Apr 2026",
-    summary: "Designing an AI workflow a car seller can approve with one tap.",
-    readTime: "[x] min read",
+    summary: "Three days learning n8n, five days building, and an automated content workflow on free tools.",
+    readTime: "2 min read",
   },
 ];
 
