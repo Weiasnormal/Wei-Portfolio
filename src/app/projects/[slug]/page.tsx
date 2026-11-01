@@ -43,7 +43,7 @@ export default async function ProjectPage({ params }: Props) {
 
       {project.sections.map((s) => (
         <section key={s.heading}>
-          <h2 className="mt-10 mb-2.5 text-[22px] font-bold font-stretch-110%">{s.heading}</h2>
+          <h2 className="mt-10 mb-2.5 text-[22px] font-bold">{s.heading}</h2>
           <p className="max-w-[64ch] text-muted">
             <Rich text={s.body} />
           </p>

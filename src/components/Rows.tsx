@@ -14,12 +14,12 @@ export type RowItem = {
 };
 
 const rowClass =
-  "-mx-3 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 rounded-sm px-3 py-4 no-underline";
+  "-mx-3 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 rounded-sm px-3 py-3 no-underline";
 
 function RowBody({ item }: { item: RowItem }) {
   return (
     <>
-      <b className="font-[650]">
+      <b className="text-sm font-semibold">
         {item.title}
         {item.led && (
           <span className="ml-2 inline-block rounded-full border border-accent/45 px-2 py-px align-[2px] text-xs font-medium">
@@ -27,8 +27,8 @@ function RowBody({ item }: { item: RowItem }) {
           </span>
         )}
       </b>
-      <span className="text-sm whitespace-nowrap text-faint tabular-nums">{item.when}</span>
-      <span className="col-span-full text-[14.5px] text-muted">
+      <span className="font-mono text-xs whitespace-nowrap text-faint tabular-nums">{item.when}</span>
+      <span className="col-span-full text-[13px] leading-snug text-muted">
         <Rich text={item.sub} />
         {item.extra}
       </span>

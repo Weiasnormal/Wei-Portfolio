@@ -20,7 +20,7 @@ type Step = { target?: string; at?: Anchor; text: string };
 const steps: Step[] = [
   { target: "name", at: "above", text: `Hi, I'm ${ownerName}. Welcome to my portfolio!` },
   { target: "projects-cta", at: "below", text: "Start here to see what my teams have built." },
-  { target: "resume", at: "below", text: "My resume, if you're reviewing me for OJT." },
+  { target: "cv", at: "below", text: "My CV, if you're reviewing me for OJT." },
   { target: "nav-/writing", text: "Write-ups on how those projects actually went." },
   { target: "nav-/outside", text: "And who I am away from the IDE." },
   { target: "chat", at: "above", text: "This one's live. It shows who's here right now, and you can say hi to them." },

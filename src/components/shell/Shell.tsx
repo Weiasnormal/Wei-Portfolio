@@ -79,7 +79,7 @@ export function Shell({ children }: { children: ReactNode }) {
       >
         <Link href="/" className="flex items-center gap-3 no-underline">
           <span className="wlogo h-7 w-[30px]" aria-hidden="true" />
-          <b className="text-base leading-tight font-bold font-stretch-112%">{site.name}</b>
+          <b className="text-base leading-tight font-bold font-display">{site.name}</b>
         </Link>
         <button
           ref={menuBtn}
@@ -124,17 +124,14 @@ export function Shell({ children }: { children: ReactNode }) {
         <Link href="/" onClick={onNavigate} className="flex items-center gap-3 no-underline">
           <span className="wlogo h-7 w-[30px]" aria-hidden="true" />
           <span className="block">
-            <b className="block text-base leading-tight font-bold font-stretch-112%">{site.name}</b>
-            <span className="flex items-center gap-1.5 text-[13px] text-muted">
-              <i className="dot" aria-hidden="true" />
-              {site.status}
-            </span>
+            <b className="block text-base leading-tight font-bold font-display">{site.name}</b>
+            <span className="block text-[13px] text-muted">{site.status}</span>
           </span>
         </Link>
 
         {navGroups.map((g) => (
           <nav key={g.title} aria-labelledby={`ng-${g.title}`} className="grid gap-0.5">
-            <h2 id={`ng-${g.title}`} className="mb-1 ml-2.5 text-[12.5px] font-medium tracking-normal text-faint">
+            <h2 id={`ng-${g.title}`} className="micro mb-1 ml-2.5 !font-mono">
               {g.title}
             </h2>
             {g.items.map((item) => {
@@ -146,7 +143,7 @@ export function Shell({ children }: { children: ReactNode }) {
                   data-guide={`nav-${item.href}`}
                   onClick={onNavigate}
                   aria-current={on ? "page" : undefined}
-                  className={`flex min-h-[38px] items-center gap-2.5 rounded-sm px-2.5 text-[15px] no-underline transition-colors duration-150 hover:bg-raised hover:text-fg ${
+                  className={`flex min-h-9 items-center gap-2.5 rounded-sm px-2.5 text-sm no-underline transition-colors duration-150 hover:bg-raised hover:text-fg ${
                     on ? "bg-raised text-fg" : "text-muted"
                   }`}
                 >
@@ -171,7 +168,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <main ref={main} id="main" tabIndex={-1} inert={drawerOpen} className="min-h-screen outline-none lg:ml-(--side)">
         <div
           key={pathname}
-          className="page-in mx-auto max-w-[800px] pt-8 pr-[max(16px,env(safe-area-inset-right))] pb-20 pl-[max(16px,env(safe-area-inset-left))] lg:pt-14 lg:pr-[max(20px,env(safe-area-inset-right))] lg:pb-24 lg:pl-[max(20px,env(safe-area-inset-left))]"
+          className="page-in mx-auto max-w-[1152px] pt-8 pr-[max(24px,env(safe-area-inset-right))] pb-20 pl-[max(24px,env(safe-area-inset-left))] lg:pt-14 lg:pb-24"
         >
           {children}
         </div>

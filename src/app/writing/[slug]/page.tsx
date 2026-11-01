@@ -28,7 +28,7 @@ export default async function PostPage({ params }: Props) {
   return (
     <article>
       <Crumb href="/writing">Writing</Crumb>
-      <h1 className="text-[clamp(30px,4.6vw,42px)] leading-[1.1] font-bold font-stretch-115%">{post.title}</h1>
+      <h1 className="text-[clamp(30px,4.6vw,42px)] leading-[1.1] font-bold">{post.title}</h1>
       <div className="mt-3.5 flex flex-wrap gap-x-4 gap-y-1.5 text-sm text-muted">
         <time dateTime={post.date}>{post.dateLabel}</time>
         <span>
@@ -40,7 +40,7 @@ export default async function PostPage({ params }: Props) {
           </Link>
         )}
       </div>
-      <div className="max-w-[64ch]">
+      <div className="mt-7 max-w-[64ch]">
         <Body />
       </div>
     </article>

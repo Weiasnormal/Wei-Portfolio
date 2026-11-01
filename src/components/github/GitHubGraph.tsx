@@ -15,9 +15,37 @@ const LEVEL: Record<string, number> = {
   FOURTH_QUARTILE: 4,
 };
 
+const LEVEL_NAMES = Object.keys(LEVEL);
+
+/** Public contribution data, needs no token. Doesn't include private work, unlike the token route. */
+async function fetchPublicCalendar(): Promise<Calendar | null> {
+  try {
+    const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${site.githubUser}?y=last`, {
+      next: { revalidate: 86400 },
+    });
+    if (!res.ok) return null;
+    const json: { total: { lastYear: number }; contributions: { date: string; count: number; level: number }[] } =
+      await res.json();
+    const weeks: Calendar["weeks"] = [];
+    for (const c of json.contributions) {
+      const weekday = new Date(c.date + "T00:00:00Z").getUTCDay();
+      if (weekday === 0 || !weeks.length) weeks.push({ contributionDays: [] });
+      weeks[weeks.length - 1].contributionDays.push({
+        date: c.date,
+        contributionCount: c.count,
+        contributionLevel: LEVEL_NAMES[c.level] ?? "NONE",
+        weekday,
+      });
+    }
+    return { totalContributions: json.total.lastYear, weeks };
+  } catch {
+    return null;
+  }
+}
+
 async function fetchCalendar(): Promise<Calendar | null> {
   const token = process.env.GITHUB_TOKEN;
-  if (!token) return null;
+  if (!token) return fetchPublicCalendar();
   try {
     const res = await fetch("https://api.github.com/graphql", {
       method: "POST",
@@ -25,12 +53,12 @@ async function fetchCalendar(): Promise<Calendar | null> {
       body: JSON.stringify({ query: QUERY, variables: { login: site.githubUser } }),
       next: { revalidate: 86400 },
     });
-    if (!res.ok) return null;
+    if (!res.ok) return fetchPublicCalendar();
     const json = await res.json();
-    if (json.errors) return null;
-    return json.data?.user?.contributionsCollection?.contributionCalendar ?? null;
+    if (json.errors) return fetchPublicCalendar();
+    return json.data?.user?.contributionsCollection?.contributionCalendar ?? fetchPublicCalendar();
   } catch {
-    return null;
+    return fetchPublicCalendar();
   }
 }
 
@@ -49,7 +77,7 @@ function dayLabel(iso: string) {
   });
 }
 
-/** Renders nothing when the token is missing or GitHub fails, so the home page never shows fake data. */
+/** Renders nothing when no contribution data can be fetched, so the home page never shows fake data. */
 export async function GitHubGraph() {
   const cal = await fetchCalendar();
   if (!cal || !cal.weeks.length) return null;
@@ -82,22 +110,22 @@ export async function GitHubGraph() {
   const H = TOP + 7 * STEP;
 
   return (
-    <section className="mt-16">
+    <section className="mt-10 border-t border-line pt-10">
       <BlockHead
         title="GitHub"
         all={{ href: `https://github.com/${site.githubUser}`, label: `@${site.githubUser}`, external: true }}
       />
       <div className="panel">
-        <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-[minmax(0,120px)_minmax(0,1fr)]">
-          <dl className="m-0 grid grid-cols-3 gap-4 md:grid-cols-1">
+        <div className="grid grid-cols-1 items-start gap-6 xl:grid-cols-[minmax(0,120px)_minmax(0,1fr)]">
+          <dl className="m-0 grid grid-cols-3 gap-4 xl:grid-cols-1">
             {[
               ["Last 12 months", cal.totalContributions.toLocaleString("en")],
               ["Longest streak", `${streak} days`],
               ["Active days", `${Math.round((active / days.length) * 100)}%`],
             ].map(([k, v]) => (
               <div key={k}>
-                <dt className="text-[13px] text-muted">{k}</dt>
-                <dd className="mt-0.5 text-[22px] leading-[1.1] font-bold tabular-nums font-stretch-115% md:text-[28px]">
+                <dt className="micro">{k}</dt>
+                <dd className="mt-1 font-display text-xl leading-[1.1] font-bold tabular-nums xl:text-2xl">
                   {v}
                 </dd>
               </div>
@@ -105,10 +133,8 @@ export async function GitHubGraph() {
           </dl>
           <GraphSweep>
             <svg
-              className="graph block"
+              className="graph block w-full min-w-[640px]"
               viewBox={`0 0 ${W} ${H}`}
-              width={W}
-              height={H}
               role="img"
               aria-label={`${cal.totalContributions} contributions in the last 12 months`}
             >

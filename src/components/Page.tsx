@@ -5,7 +5,7 @@ import { Icon } from "./Icon";
 export function PageHead({ title, intro, tight }: { title: ReactNode; intro?: ReactNode; tight?: boolean }) {
   return (
     <div className={tight ? "mb-6" : "mb-9"}>
-      <h1 className="text-[clamp(34px,5vw,48px)] leading-[1.05] font-[750] font-stretch-120%">{title}</h1>
+      <h1 className="text-4xl font-bold tracking-[-0.025em] md:text-5xl">{title}</h1>
       {intro && <p className="mt-3 max-w-[56ch] text-muted">{intro}</p>}
     </div>
   );
@@ -35,7 +35,7 @@ export function Block({
   className?: string;
 }) {
   return (
-    <section className={`mt-16 ${className}`}>
+    <section className={`mt-10 border-t border-line pt-10 ${className}`}>
       <BlockHead title={title} all={all} />
       {children}
     </section>
@@ -52,20 +52,20 @@ export function BlockHead({
   as?: "h2" | "h3";
 }) {
   return (
-    <div className="mb-[18px] flex items-baseline justify-between gap-4">
-      <H className={H === "h2" ? "text-[22px] font-bold font-stretch-112%" : "text-base font-bold"}>{title}</H>
+    <div className="mb-4 flex items-baseline justify-between gap-4">
+      <H className="micro !font-mono">{title}</H>
       {all &&
         (all.external ? (
           <a
             href={all.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm whitespace-nowrap text-muted no-underline transition-colors hover:text-fg"
+            className="font-mono text-xs whitespace-nowrap text-muted no-underline transition-colors hover:text-fg"
           >
             {all.label}
           </a>
         ) : (
-          <Link href={all.href} className="text-sm whitespace-nowrap text-muted no-underline transition-colors hover:text-fg">
+          <Link href={all.href} className="font-mono text-xs whitespace-nowrap text-muted no-underline transition-colors hover:text-fg">
             {all.label}
           </Link>
         ))}
