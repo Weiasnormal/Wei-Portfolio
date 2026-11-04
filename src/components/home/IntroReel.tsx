@@ -79,12 +79,12 @@ export function IntroReel({ photo, video, name, handle, status }: Props) {
         <div className="portrait-layer portrait-person absolute inset-0">
           <Image src={photo} alt={`Portrait of ${name}`} fill priority sizes="(min-width: 768px) 288px, 256px" className="object-cover object-bottom" />
         </div>
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[42%] bg-linear-to-t from-[#07080b] via-[#07080b]/80 to-transparent" />
+        <div aria-hidden="true" className="portrait-fade absolute inset-x-0 bottom-0 h-[42%]" />
         {!active && (
-          <div className="absolute inset-x-2.5 bottom-2.5 flex items-center justify-between gap-2 rounded-md border border-white/12 bg-[#101218]/85 px-3 py-2 backdrop-blur-sm">
+          <div className="absolute inset-x-2.5 bottom-2.5 flex items-center justify-between gap-2 portrait-bar rounded-md px-3 py-2 backdrop-blur-sm">
             <span className="min-w-0 text-left text-[13px] leading-tight">
-              <b className="block truncate font-semibold text-[#e9ecf1]">@{handle}</b>
-              <span className="block truncate text-[#9aa2b0]">{status}</span>
+              <b className="block truncate font-semibold text-(--pc-bar-fg)">@{handle}</b>
+              <span className="block truncate text-(--pc-bar-muted)">{status}</span>
             </span>
           </div>
         )}

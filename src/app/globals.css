@@ -332,13 +332,59 @@
 }
 
 /* ===== portrait card ===== */
-/* Stays dark in both themes: the cutout and its outline are made for a dark backdrop. */
+/* Its own colors per theme, set the same way as the page tokens at the top. */
+:root,
+:root[data-theme="dark"] {
+  --pc-bg: #0b0d11;
+  --pc-glow: #2a2f3a;
+  --pc-border: rgba(255, 255, 255, 0.16);
+  --pc-shadow: rgba(0, 0, 0, 0.75);
+  --pc-code: rgba(255, 255, 255, 0.13);
+  --pc-fade: #07080b;
+  --pc-bar-bg: rgba(16, 18, 24, 0.85);
+  --pc-bar-border: rgba(255, 255, 255, 0.12);
+  --pc-bar-fg: #e9ecf1;
+  --pc-bar-muted: #9aa2b0;
+  /* Dark: gray at rest, color on hover. Light flips it. */
+  --pc-gray: 1;
+  --pc-gray-hover: 0;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --pc-bg: #ffffff;
+    --pc-glow: #ffffff;
+    --pc-border: rgba(15, 18, 23, 0.1);
+    --pc-shadow: rgba(15, 18, 23, 0.22);
+    --pc-code: rgba(15, 18, 23, 0.1);
+    --pc-fade: #ffffff;
+    --pc-bar-bg: rgba(255, 255, 255, 0.82);
+    --pc-bar-border: rgba(15, 18, 23, 0.1);
+    --pc-bar-fg: #0f1217;
+    --pc-bar-muted: #4f5866;
+    --pc-gray: 0;
+    --pc-gray-hover: 1;
+  }
+}
+:root[data-theme="light"] {
+  --pc-bg: #ffffff;
+  --pc-glow: #ffffff;
+  --pc-border: rgba(15, 18, 23, 0.1);
+  --pc-shadow: rgba(15, 18, 23, 0.22);
+  --pc-code: rgba(15, 18, 23, 0.1);
+  --pc-fade: #ffffff;
+  --pc-bar-bg: rgba(255, 255, 255, 0.82);
+  --pc-bar-border: rgba(15, 18, 23, 0.1);
+  --pc-bar-fg: #0f1217;
+  --pc-bar-muted: #4f5866;
+  --pc-gray: 0;
+  --pc-gray-hover: 1;
+}
 .portrait-card {
   --tilt-x: 0;
   --tilt-y: 0;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: #0b0d11;
-  box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.75);
+  border: 1px solid var(--pc-border);
+  background: var(--pc-bg);
+  box-shadow: 0 24px 48px -28px var(--pc-shadow);
   transform: rotateX(calc(var(--tilt-y) * -10deg)) rotateY(calc(var(--tilt-x) * 10deg));
   transition: transform 0.35s var(--ease-out);
   will-change: transform;
@@ -349,7 +395,7 @@
 }
 .portrait-back {
   inset: -6%;
-  background: radial-gradient(75% 60% at 50% 35%, #2a2f3a, #0b0d11 75%);
+  background: radial-gradient(75% 60% at 50% 35%, var(--pc-glow), var(--pc-bg) 75%);
   transform: translate(calc(var(--tilt-x) * -10px), calc(var(--tilt-y) * -10px));
 }
 .portrait-person {
@@ -357,21 +403,29 @@
   transform-origin: bottom center;
 }
 .portrait-person img {
-  filter: grayscale(1);
+  filter: grayscale(var(--pc-gray));
   transition: filter 0.7s var(--ease-out);
 }
 @media (hover: hover) {
   .portrait-card:hover .portrait-person img {
-    filter: grayscale(0.4);
+    filter: grayscale(var(--pc-gray-hover));
   }
 }
 .portrait-code {
   position: absolute;
-  color: rgba(255, 255, 255, 0.13);
+  color: var(--pc-code);
   font-family: var(--font-mono);
   font-size: 26px;
   font-weight: 500;
   rotate: -8deg;
+}
+
+.portrait-fade {
+  background: linear-gradient(to top, var(--pc-fade), color-mix(in srgb, var(--pc-fade) 80%, transparent), transparent);
+}
+.portrait-bar {
+  border: 1px solid var(--pc-bar-border);
+  background: var(--pc-bar-bg);
 }
 
 /* ===== live visitors + guide cursor ===== */
