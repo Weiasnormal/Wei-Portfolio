@@ -348,36 +348,45 @@
   /* Dark: gray at rest, color on hover. Light flips it. */
   --pc-gray: 1;
   --pc-gray-hover: 0;
+  --pc-sheen: rgba(255, 255, 255, 0.07);
+  --pc-light: rgba(255, 255, 255, 0.16);
+  --pc-ring: rgba(0, 0, 0, 0.22);
 }
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
-    --pc-bg: #ffffff;
+    --pc-bg: #e6e9ee;
     --pc-glow: #ffffff;
     --pc-border: rgba(15, 18, 23, 0.1);
     --pc-shadow: rgba(15, 18, 23, 0.22);
     --pc-code: rgba(15, 18, 23, 0.1);
-    --pc-fade: #ffffff;
+    --pc-fade: #e6e9ee;
     --pc-bar-bg: rgba(255, 255, 255, 0.82);
     --pc-bar-border: rgba(15, 18, 23, 0.1);
     --pc-bar-fg: #0f1217;
     --pc-bar-muted: #4f5866;
     --pc-gray: 0;
     --pc-gray-hover: 1;
+    --pc-sheen: rgba(255, 255, 255, 0.8);
+    --pc-light: rgba(255, 255, 255, 0.7);
+    --pc-ring: rgba(15, 18, 23, 0.09);
   }
 }
 :root[data-theme="light"] {
-  --pc-bg: #ffffff;
+  --pc-bg: #e6e9ee;
   --pc-glow: #ffffff;
   --pc-border: rgba(15, 18, 23, 0.1);
   --pc-shadow: rgba(15, 18, 23, 0.22);
   --pc-code: rgba(15, 18, 23, 0.1);
-  --pc-fade: #ffffff;
+  --pc-fade: #e6e9ee;
   --pc-bar-bg: rgba(255, 255, 255, 0.82);
   --pc-bar-border: rgba(15, 18, 23, 0.1);
   --pc-bar-fg: #0f1217;
   --pc-bar-muted: #4f5866;
   --pc-gray: 0;
   --pc-gray-hover: 1;
+  --pc-sheen: rgba(255, 255, 255, 0.8);
+  --pc-light: rgba(255, 255, 255, 0.7);
+  --pc-ring: rgba(15, 18, 23, 0.09);
 }
 .portrait-card {
   --tilt-x: 0;
@@ -395,7 +404,9 @@
 }
 .portrait-back {
   inset: -6%;
-  background: radial-gradient(75% 60% at 50% 35%, var(--pc-glow), var(--pc-bg) 75%);
+  background:
+    linear-gradient(180deg, var(--pc-sheen), transparent 34%),
+    radial-gradient(75% 60% at 50% 35%, var(--pc-glow), var(--pc-bg) 75%);
   transform: translate(calc(var(--tilt-x) * -10px), calc(var(--tilt-y) * -10px));
 }
 .portrait-person {
@@ -422,6 +433,21 @@
 
 .portrait-fade {
   background: linear-gradient(to top, var(--pc-fade), color-mix(in srgb, var(--pc-fade) 80%, transparent), transparent);
+}
+/* A soft light that follows the mouse, driven by the same tilt values. */
+.portrait-shine {
+  --spot: calc((var(--tilt-x) + 0.5) * 100%) calc((var(--tilt-y) + 0.5) * 100%);
+  background:
+    radial-gradient(circle at var(--spot), var(--pc-light), transparent 38%),
+    radial-gradient(circle at var(--spot), transparent, var(--pc-ring) 22%, transparent 46%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out);
+}
+@media (hover: hover) {
+  .portrait-card:hover .portrait-shine {
+    opacity: 1;
+  }
 }
 .portrait-bar {
   border: 1px solid var(--pc-bar-border);

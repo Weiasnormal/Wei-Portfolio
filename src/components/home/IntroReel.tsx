@@ -80,6 +80,7 @@ export function IntroReel({ photo, video, name, handle, status }: Props) {
           <Image src={photo} alt={`Portrait of ${name}`} fill priority sizes="(min-width: 768px) 288px, 256px" className="object-cover object-bottom" />
         </div>
         <div aria-hidden="true" className="portrait-fade absolute inset-x-0 bottom-0 h-[42%]" />
+        <div aria-hidden="true" className="portrait-shine absolute inset-0" />
         {!active && (
           <div className="absolute inset-x-2.5 bottom-2.5 flex items-center justify-between gap-2 portrait-bar rounded-md px-3 py-2 backdrop-blur-sm">
             <span className="min-w-0 text-left text-[13px] leading-tight">
