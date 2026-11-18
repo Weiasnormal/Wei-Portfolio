@@ -5,6 +5,13 @@ const credly = (id: string) => `https://www.credly.com/badges/${id}/public_url`;
 // Newest first. Add verifyUrl to any credential that has a public verification page.
 export const certifications: Certification[] = [
   {
+    title: "IT Specialist: Artificial Intelligence",
+    issuer: "Certiport, a Pearson VUE business",
+    issuerShort: "Certiport",
+    date: "Nov 2026",
+    verifyUrl: credly("422f0545-4515-4d44-b217-90bf0b44b83c"),
+  },
+  {
     title: "User Experience Design Fundamentals",
     issuer: "IBM SkillsBuild",
     date: "May 2026",
