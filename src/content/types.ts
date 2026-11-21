@@ -11,6 +11,10 @@ export type ReelView = {
   placeholder: string;
   src?: string;
   poster?: string;
+  /** WebVTT file; adds a CC toggle to the reel. */
+  captions?: string;
+  /** The video's width / height, e.g. "16/9". The reel frame takes this shape (2.39:1 when no view has one). */
+  ratio?: string;
 };
 
 export type Fact = { label: string; value: string };
@@ -31,11 +35,24 @@ export type Project = {
   reelName: string;
   /** Card thumbnail; the dashed placeholder frame shows while it's undefined. */
   cover?: string;
+  /** Live site or app links, shown beside the reel's view tabs. */
+  links?: Link[];
   views: ReelView[];
   facts: Fact[];
   sections: Section[];
   gallery: { label: string; wide?: boolean; src?: string }[];
   footer: [Link, Link];
+};
+
+/** A small tool I built and shipped on my own, shown with its demo video and live link. */
+export type MiniProject = {
+  title: string;
+  year: string;
+  summary: string;
+  stack: string[];
+  /** The deployed site. */
+  href: string;
+  video: { src: string; poster: string; captions?: string };
 };
 
 export type AlsoBuilt = {

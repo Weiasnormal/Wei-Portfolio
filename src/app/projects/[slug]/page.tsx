@@ -28,7 +28,7 @@ export default async function ProjectPage({ params }: Props) {
     <>
       <Crumb href="/projects">Projects</Crumb>
       <PageHead title={project.title} intro={project.intro} tight />
-      <ProjectReel name={project.reelName} views={project.views} />
+      <ProjectReel name={project.reelName} views={project.views} links={project.links} />
 
       <dl className="mt-7 mb-2 grid grid-cols-2 gap-4 border-y border-line py-[18px] md:grid-cols-4">
         {project.facts.map((f) => (
