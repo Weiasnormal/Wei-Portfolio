@@ -1,4 +1,4 @@
-import type { AlsoBuilt, Honor, Project } from "./types";
+import type { AlsoBuilt, Honor, MiniProject, Project } from "./types";
 
 export const projects: Project[] = [
   {
@@ -14,8 +14,18 @@ export const projects: Project[] = [
     description:
       "Android app that verifies handwritten signatures with a Siamese network and explainable AI.",
     reelName: "AVERA reel",
+    cover: "/projects/avera-poster.jpg",
+    links: [{ label: "Web app", href: "https://avera-seven.vercel.app/sign-in" }],
     views: [
-      { id: "mobile", label: "Mobile", placeholder: "Mobile app walkthrough goes here (video, 2.39:1)" },
+      {
+        id: "mobile",
+        label: "Mobile",
+        placeholder: "Mobile app walkthrough goes here (video, 16:9)",
+        src: "/videos/Avera_ad_58s_3D_Mark_v2.mp4",
+        poster: "/projects/avera-poster.jpg",
+        captions: "/projects/avera-demo-captions.vtt",
+        ratio: "16/9",
+      },
       { id: "web", label: "Web", placeholder: "Web side goes here (screenshots or video)" },
       { id: "model", label: "Model", placeholder: "Model results and explainability visuals go here" },
     ],
@@ -60,8 +70,19 @@ export const projects: Project[] = [
     description:
       "Emergency reporting system: verified citizen reports with photo and GPS, plus a responder dashboard.",
     reelName: "ResQLine reel",
+    cover: "/projects/resqline-poster.jpg",
     views: [
-      { id: "mobile", label: "Mobile", placeholder: "Citizen app walkthrough goes here (video, 2.39:1)" },
+      {
+        // The ad covers both the citizen app and the responder dashboard. Its captions are burned in,
+        // so it has no separate captions file.
+        id: "overview",
+        label: "Overview",
+        placeholder: "Overview video goes here",
+        src: "/projects/resqline-demo.mp4",
+        poster: "/projects/resqline-poster.jpg",
+        ratio: "16/9",
+      },
+      { id: "mobile", label: "Mobile", placeholder: "Citizen app walkthrough goes here (video, 16:9)" },
       { id: "web", label: "Web dashboard", placeholder: "Admin dashboard walkthrough goes here" },
       { id: "pitch", label: "Pitch", placeholder: "Pitch video goes here" },
     ],
@@ -105,8 +126,18 @@ export const projects: Project[] = [
       "A client Shopify website, built with a UI/UX design partner. I turned the Figma designs into a working store with custom theme sections and responsive components.",
     description: "Client Shopify website built from Figma designs, with custom Liquid theme sections.",
     reelName: "Cryolipo reel",
+    cover: "/projects/cryolipo-poster.jpg",
+    links: [{ label: "Live store", href: "https://akqjxh-j6.myshopify.com/" }],
     views: [
-      { id: "desktop", label: "Desktop", placeholder: "Desktop walkthrough goes here (video, 2.39:1)" },
+      {
+        id: "desktop",
+        label: "Desktop",
+        placeholder: "Desktop walkthrough goes here (video, 16:9)",
+        src: "/projects/cryolipo-demo.mp4",
+        poster: "/projects/cryolipo-poster.jpg",
+        captions: "/projects/cryolipo-demo-captions.vtt",
+        ratio: "16/9",
+      },
       { id: "mobile", label: "Mobile", placeholder: "Mobile walkthrough goes here" },
     ],
     facts: [
@@ -140,6 +171,31 @@ export const projects: Project[] = [
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
+
+export const miniProjects: MiniProject[] = [
+  {
+    title: "Sheetquo",
+    year: "2026",
+    summary:
+      "Turns a customer's chat message into an editable Excel quotation that keeps the business's own template layout. Paste the request, review the items, download the .xlsx. Runs in the browser and works offline, with no account or server.",
+    stack: ["React", "TypeScript", "ExcelJS", "IndexedDB", "PWA"],
+    href: "https://sheetquo.vercel.app/",
+    video: { src: "/mini/sheetquo-demo.mp4", poster: "/mini/sheetquo-poster.jpg" },
+  },
+  {
+    title: "Pixmora",
+    year: "2026",
+    summary:
+      "Packs ID and photo prints onto shared paper at their exact physical size, so a print shop can fit several orders on one sheet. Crop, edit and remove backgrounds, then export a print-ready PDF. Photos never leave the browser.",
+    stack: ["Next.js", "TypeScript", "Transformers.js", "pdf-lib"],
+    href: "https://pixmora.vercel.app/",
+    video: {
+      src: "/mini/pixmora-demo.mp4",
+      poster: "/mini/pixmora-poster.jpg",
+      captions: "/mini/pixmora-demo-captions.vtt",
+    },
+  },
+];
 
 export const alsoBuilt: AlsoBuilt[] = [
   {

@@ -1,11 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRef, useState } from "react";
 import type { Project } from "@/content/types";
+import { useHoverPreview } from "./useHoverPreview";
 
+/** Project card. With a reel video, hovering plays a muted preview over the cover. */
 export function ProjectCard({ project, meta }: { project: Project; meta: string }) {
+  const preview = project.views.find((v) => v.src)?.src;
+  const ref = useRef<HTMLVideoElement>(null);
+  const [showing, setShowing] = useState(false);
+  const { cardProps, videoProps } = useHoverPreview(ref);
+
   return (
     <Link
       href={`/projects/${project.slug}`}
+      {...(preview ? cardProps : {})}
       className="card flex flex-col overflow-hidden rounded-lg border border-line bg-raised no-underline transition-colors duration-200"
     >
       <div className="frame-dash relative grid aspect-video max-w-full place-content-center border-b border-line bg-sunk p-2 text-center text-[13px] text-muted">
@@ -13,6 +24,21 @@ export function ProjectCard({ project, meta }: { project: Project; meta: string 
           <Image src={project.cover} alt="" fill sizes="(min-width: 768px) 373px, 100vw" className="object-cover" />
         ) : (
           <span>{project.title} cover frame</span>
+        )}
+        {preview && (
+          <video
+            ref={ref}
+            src={preview}
+            muted
+            loop
+            playsInline
+            preload="none"
+            aria-hidden="true"
+            className={`absolute inset-0 size-full object-cover transition-opacity duration-300 ease-out ${showing ? "opacity-100" : "opacity-0"}`}
+            {...videoProps}
+            onPlaying={() => setShowing(true)}
+            onPause={() => setShowing(false)}
+          />
         )}
       </div>
       <div className="grid gap-1 px-3.5 py-3">

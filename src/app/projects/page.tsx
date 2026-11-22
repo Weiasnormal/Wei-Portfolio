@@ -1,10 +1,12 @@
 import { Block, PageHead } from "@/components/Page";
+import { MiniProjectCard } from "@/components/MiniProjectCard";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Rows } from "@/components/Rows";
-import { alsoBuilt, projects } from "@/content/projects";
+import { alsoBuilt, miniProjects, projects } from "@/content/projects";
 import { pageMetadata } from "@/lib/site";
 
-const intro = "Three projects I led from idea to working build, and the other things I've made along the way.";
+const intro =
+  "Three projects I led from idea to working build, small tools I shipped on my own, and the other things I've made along the way.";
 
 export const metadata = pageMetadata("Projects", intro, "/projects");
 
@@ -17,7 +19,14 @@ export default function ProjectsPage() {
           <ProjectCard key={p.slug} project={p} meta={p.platforms} />
         ))}
       </div>
-      <Block title="Also built" className="!mt-12">
+      <Block title="Mini projects" className="!mt-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {miniProjects.map((m) => (
+            <MiniProjectCard key={m.title} project={m} />
+          ))}
+        </div>
+      </Block>
+      <Block title="Also built">
         <Rows
           items={alsoBuilt.map((a) => ({
             title: a.title,
