@@ -584,7 +584,9 @@
 }
 @keyframes page-in {
   from {
-    opacity: 0;
+    /* Not 0: Chrome leaves anything painted at opacity 0 out of Largest Contentful Paint, which made every page's
+       hero image (the home portrait, the /setup poster) count as painted seconds late. 0.01 looks the same. */
+    opacity: 0.01;
   }
 }
 .roll {
@@ -632,5 +634,26 @@
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* ===== 3D setup (/setup) ===== */
+.setup-card {
+  animation: setup-card-in 0.32s var(--ease-out);
+}
+@keyframes setup-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .setup-card {
+    animation-name: setup-fade-in;
+  }
+  @keyframes setup-fade-in {
+    from {
+      opacity: 0;
+    }
   }
 }

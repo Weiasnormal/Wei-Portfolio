@@ -1,4 +1,4 @@
-import type { OutsideTile, Spec } from "./types";
+import type { OutsideTile } from "./types";
 
 export const outside: OutsideTile[] = [
   {
@@ -13,13 +13,4 @@ export const outside: OutsideTile[] = [
     body: "Shot events for campus orgs, and made my school's official promo video.",
     shot: "One of your event photos",
   },
-];
-
-export const setup: Spec[] = [
-  { label: "CPU", value: "[model]", video: "[video link]" },
-  { label: "GPU", value: "[model]", video: "[video link]" },
-  { label: "Memory", value: "[size and speed]" },
-  { label: "Storage", value: "[drives]" },
-  { label: "Display", value: "[model]" },
-  { label: "Camera and mic", value: "[models]" },
 ];
