@@ -10,6 +10,16 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  // The 3D setup's model, video and posters are fetched with a ?v= version (SetupExplorer.tsx), so browsers can
+  // keep them for a year. Only files under /setup/, never the /setup page itself.
+  async headers() {
+    return [
+      {
+        source: "/setup/:file(.+\\.(?:glb|mp4|webp))",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
+  },
   async rewrites() {
     if (!v1Origin) return [];
     return [
